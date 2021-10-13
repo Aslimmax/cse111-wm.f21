@@ -7,6 +7,8 @@
 #include <iostream>
 #include <limits>
 #include <utility>
+#include <vector>
+#include <cstdint>
 using namespace std;
 
 #include "debug.h"
@@ -14,12 +16,12 @@ using namespace std;
 class ubigint {
    friend ostream& operator<< (ostream&, const ubigint&);
    private:
-        using ubigvalue_t = vector<uint8_t>
+        using ubigvalue_t = vector<uint8_t>;
         ubigvalue_t ubig_value;
    public:
         void multiply_by_2();
         void divide_by_2();
-
+ 
         ubigint() = default; // Need default ctor as well.
         ubigint (unsigned long);
         ubigint (const string&);
