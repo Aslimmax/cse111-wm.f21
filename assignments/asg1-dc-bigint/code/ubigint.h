@@ -28,7 +28,7 @@ class ubigint {
 
         ubigint operator+ (const ubigint&) const;
         ubigint operator- (const ubigint&) const;
-        // ubigint operator* (const ubigint&) const;
+        ubigint operator* (const ubigint&) const;
         // ubigint operator/ (const ubigint&) const;
         // ubigint operator% (const ubigint&) const;
 

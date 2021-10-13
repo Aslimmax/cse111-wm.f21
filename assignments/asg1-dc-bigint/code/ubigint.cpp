@@ -168,9 +168,39 @@ ubigint ubigint::operator- (const ubigint& that) const {
    // return ubigint (uvalue - that.uvalue);
 }
 
-// ubigint ubigint::operator* (const ubigint& that) const {
-//    return ubigint (uvalue * that.uvalue);
-// }
+ubigint ubigint::operator* (const ubigint& that) const {
+   // Get the sizes of the leftVec and rightVec
+   int leftVecSize = ubig_value.size();
+   int rightVecSize = that.ubig_value.size();
+   // store the carryover value from intermediate multiplication between
+   // 2 digits
+   int carryover = 0; 
+   int pairwiseDigit = 0; // store the pairwise product of 2 digits
+   
+   ubigint result; // initialize new ubigint object to store the product
+   // Resize the vector to be able to hold the entire product of the 
+   // leftVec and rightVec
+   result.ubig_value.resize(leftVecSize * rightVecSize);
+
+   // Multiplication algorithm
+   for (int i = 0; i < leftVecSize; i++) {
+      carryover = 0; 
+      for (int j = 0; j < rightVecSize; j++) {
+         // perform the pairwise multiplication
+         pairwiseDigit = result.ubig_value[i + j] + ubig_value[i] * 
+         that.ubig_value[j] + carryover; 
+         // Get the last digit of the pairwise digit multiplication
+         result.ubig_value[i + j] = pairwiseDigit % 10; 
+         // Use integer division to get the carryover value from the
+         // pairwise digit multiplication
+         carryover = pairwiseDigit / 10;
+      }
+      // Set the next product result to the carryover value
+      result.ubig_value[i + rightVecSize] = carryover;
+   }
+
+   return result;
+}
 
 // void ubigint::multiply_by_2() {
 //    uvalue *= 2;
