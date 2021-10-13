@@ -215,9 +215,24 @@ ubigint ubigint::operator- (const ubigint& that) const {
 //    return udivide (*this, that).remainder;
 // }
 
-// bool ubigint::operator== (const ubigint& that) const {
-//    return uvalue == that.uvalue;
-// }
+bool ubigint::operator== (const ubigint& that) const {
+   // Validate that the size of the vectors are the same
+   if(ubig_value.size() != that.ubig_value.size()) {
+      return false;
+   }
+
+   // At this point, both vectors have the same size
+   int vecSize = ubig_value.size(); // get the size of one vector
+   // Loop through both vectors and compare each digit
+   for (int i = 0; i < vecSize; i++) {
+      if (ubig_value[i] != that.ubig_value[i]) {
+         return false;
+      }
+   }
+
+   // Each digit in both vectors are the same
+   return true;
+}
 
 // bool ubigint::operator< (const ubigint& that) const {
 //    return uvalue < that.uvalue;
