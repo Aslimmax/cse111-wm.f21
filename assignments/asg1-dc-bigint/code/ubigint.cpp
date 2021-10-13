@@ -59,6 +59,7 @@ ubigint ubigint::operator+ (const ubigint& that) const {
 
    // Loop through vectors and add each digit pairwise
    for (int i = 0; i < smallerVec; i++) {
+      pairwiseSum = 0; // reset the sum
       pairwiseSum = ubig_value[i] + that.ubig_value[i] + carryover;
 
       // check if carryover is needed
@@ -120,17 +121,18 @@ ubigint ubigint::operator- (const ubigint& that) const {
    int leftVecSize = ubig_value.size();
    int rightVecSize = that.ubig_value.size();
    
-   // Determine smaller vector
-   if (leftVecSize < rightVecSize) {
-      smallerVec = leftVecSize;
-   } else if (leftVecSize > rightVecSize) {
-      smallerVec = rightVecSize;
-   } else { // the sizes are equal, doesn't matter which one is set
-      smallerVec = leftVecSize;
-   }
+//    // Determine smaller vector
+//    if (leftVecSize < rightVecSize) {
+//       smallerVec = leftVecSize;
+//    } else if (leftVecSize > rightVecSize) {
+//       smallerVec = rightVecSize;
+//    } else { // the sizes are equal, doesn't matter which one is set
+//       smallerVec = leftVecSize;
+//    }
 
    // Loop through vectors and add each digit pairwise
-   for (int i = 0; i < smallerVec; i++) {
+   for (int i = 0; i < rightVecSize; i++) {
+      pairwiseDiff = 0; // reset the difference
       // if the left digit is less than the right digit, borrowing will
       // occur. Set pairwiseDiff to 10 to mimic adding 10 to the left
       // digit
@@ -138,7 +140,7 @@ ubigint ubigint::operator- (const ubigint& that) const {
          pairwiseDiff = 10;
       }
       
-      pairwiseDiff = ubig_value[i] - that.ubig_value[i] - carryover;
+      pairwiseDiff -= ubig_value[i] - that.ubig_value[i] - carryover;
 
       // check if carryover is needed
       carryover = (ubig_value[i] < that.ubig_value[i]) ? (1) : (0);
@@ -147,7 +149,22 @@ ubigint ubigint::operator- (const ubigint& that) const {
       result.ubig_value.push_back(pairwiseDiff);
    }
 
-   // Loop through the rest of the 
+   // Loop through the rest of the digits remaining in this ubig_value
+   for (int i = rightVecSize; i < leftVecSize; i++) {
+      int largerVecDigit = largerVec.ubig_value[i];
+      // check if the digit from the previous loop produced a carryover
+      if (carryover == 1) {
+         largerVecDigit--;
+         carryover = 0;
+      }
+      // pushback the remaining digits in largerVec
+      result.ubig_value.push_back(largerVecDigit);
+   }
+   while (result.ubig_value.size() > 0 &&
+    result.ubig_value.back() == 0) {
+      result.ubig_value.pop_back();
+   }
+   return result;
    // return ubigint (uvalue - that.uvalue);
 }
 
