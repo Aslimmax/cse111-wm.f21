@@ -26,13 +26,13 @@ bigint::bigint (const string& that) {
    uvalue = ubigint (that.substr (is_negative ? 1 : 0));
 }
 
-// bigint bigint::operator+ () const {
-//    return *this;
-// }
+bigint bigint::operator+ () const {
+   return *this;
+}
 
-// bigint bigint::operator- () const {
-//    return {uvalue, not is_negative};
-// }
+bigint bigint::operator- () const {
+   return {uvalue, not is_negative};
+}
 
 // bigint bigint::operator+ (const bigint& that) const {
 //    ubigint result {uvalue + that.uvalue};
