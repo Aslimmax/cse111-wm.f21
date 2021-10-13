@@ -245,7 +245,7 @@ void ubigint::divide_by_2() {
       // Check if the next higher digit is odd. If it is, add 5 to the
       // current digit
       if (ubig_value[i + 1] % 2 == 1) {
-         pairwiseDigitQuotient + 5;
+         pairwiseDigitQuotient += 5;
       }
 
       // Update the ith digit in ubig_value
