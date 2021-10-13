@@ -231,9 +231,32 @@ void ubigint::multiply_by_2() {
    }
 }
 
-// void ubigint::divide_by_2() {
-//    uvalue /= 2;
-// }
+void ubigint::divide_by_2() {
+   // Store the integer division of the two digits
+   int pairwiseDigitQuotient = 0;
+   // Get the length of the vector
+   int vecLength = ubig_value.size();
+
+   // Loop through the vector starting from the low order digit
+   for (int i = 0; i < vecLength; i++) {
+      // Divide the digit by 2
+      pairwiseDigitQuotient /= 2;
+
+      // Check if the next higher digit is odd. If it is, add 5 to the
+      // current digit
+      if (ubig_value[i + 1] % 2 == 1) {
+         pairwiseDigitQuotient + 5;
+      }
+
+      // Update the ith digit in ubig_value
+      ubig_value[i] = pairwiseDigitQuotient;
+   }
+
+   // pop_back any remaining high order zeros
+   while (ubig_value.size() > 0 && ubig_value.back() == 0) {
+      ubig_value.pop_back();
+   }
+}
 
 // 
 // struct quo_rem { ubigint quotient; ubigint remainder; };
