@@ -114,7 +114,7 @@ ubigint ubigint::operator- (const ubigint& that) const {
    // smaller one runs out of digits
    ubigint largerVec;
    int pairwiseDiff = 0; // store the pairwise difference of the digits
-   int smallerVec = 0; // store the length of the smaller vector
+//    int smallerVec = 0; // store the length of the smaller vector
    int carryover = 0; // store the carryover value (0 or 1)
    
    // Get the sizes of each vector
@@ -202,9 +202,34 @@ ubigint ubigint::operator* (const ubigint& that) const {
    return result;
 }
 
-// void ubigint::multiply_by_2() {
-//    uvalue *= 2;
-// }
+void ubigint::multiply_by_2() {
+   // Store the carry value from the previous pairwise product
+   int carryover = 0;
+   // Store the product of the two digits
+   int pairwiseDigitProduct = 0;
+   // Get the length of the vector
+   int vecLength = ubig_value.size();
+
+   // Loop through the vector and multiply each digit by 2
+   // (remainder 10), carrying over to the next digit
+   for(int i = 0; i < vecLength; i++) {
+      // Multiply each digit by 2 and add previous carryover
+      pairwiseDigitProduct = ubig_value[i] * 2 + carryover;
+
+      // Check if there is carryover required
+      carryover = (pairwiseDigitProduct >= 10) ? (1) : (0);
+
+      // Save product in proper index
+      ubig_value[i] = pairwiseDigitProduct % 10;
+   }
+
+   // Check if the carryover value is 1 after the loop has finished,
+   // will need to push_back 1 to the end to complete the multiplication
+   // process
+   if (carryover == 1) {
+      ubig_value.push_back(1);
+   }
+}
 
 // void ubigint::divide_by_2() {
 //    uvalue /= 2;
@@ -215,7 +240,7 @@ ubigint ubigint::operator* (const ubigint& that) const {
 // quo_rem udivide (const ubigint& dividend, const ubigint& divisor_) {
 //    // NOTE: udivide is a non-member function.
 //    ubigint divisor {divisor_};
-//    ubigint zero {0};
+//    ubigint zero {0}; 
 //    if (divisor == zero) throw domain_error ("udivide by zero");
 //    ubigint power_of_2 {1};
 //    ubigint quotient {0};
