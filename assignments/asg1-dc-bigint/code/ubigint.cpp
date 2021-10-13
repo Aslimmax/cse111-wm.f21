@@ -217,7 +217,7 @@ ubigint ubigint::operator- (const ubigint& that) const {
 
 bool ubigint::operator== (const ubigint& that) const {
    // Validate that the size of the vectors are the same
-   if(ubig_value.size() != that.ubig_value.size()) {
+   if (ubig_value.size() != that.ubig_value.size()) {
       return false;
    }
 
@@ -234,9 +234,40 @@ bool ubigint::operator== (const ubigint& that) const {
    return true;
 }
 
-// bool ubigint::operator< (const ubigint& that) const {
-//    return uvalue < that.uvalue;
-// }
+bool ubigint::operator< (const ubigint& that) const {
+   // Store the sizes of each vector
+   int leftVecSize = ubig_value.size();
+   int rightVecSize = that.ubig_value.size();
+
+   // Validate that the size of the vectors are the same
+   if (leftVecSize < rightVecSize) {
+      // the left vec has more digits
+      return true;
+   } else if (leftVecSize > rightVecSize) { 
+      // the right vec has more digits
+      return false;
+   }
+
+   // Both vectors have the same size, so compare each digits starting
+   // from the high order end to the low order end
+   for (int i = 0; i < leftVecSize; i++) {
+      // if any digit in the leftVec is less than the rightVec, then
+      // leftVec < rightVec
+      if (ubig_value[leftVecSize - i - 1] < 
+      that.ubig_value[leftVecSize - i - 1]) {
+         return true;
+      }
+      // if any digit in the leftVec is greater than the rightVec, then
+      // leftVec > rightVec 
+      else if (ubig_value[leftVecSize - i - 1] > 
+      that.ubig_value[leftVecSize - i - 1]) {
+         return false;
+      }
+   }
+
+   // At this point, no difference was found between the two vectors
+   return false;
+}
 
 // ostream& operator<< (ostream& out, const ubigint& that) { 
 //    return out << "ubigint(" << that.uvalue << ")";
