@@ -1,0 +1,54 @@
+head	1.2;
+access;
+symbols;
+locks;
+comment	@ * @;
+
+
+1.2
+date	2021.10.07.00.23.17;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2019.12.13.02.19.23;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@-
+@
+text
+@// $Id: libfns.h,v 1.1 2019-12-12 18:19:23-08 - - $
+
+// Library functions not members of any class.
+
+#ifndef __LIBFNS_H__
+#define __LIBFNS_H__
+
+#include "bigint.h"
+
+bigint pow (const bigint& base, const bigint& exponent);
+
+#endif
+
+@
+
+
+1.1
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: libfns.h,v 1.2 2015-07-02 16:03:36-07 - - $
+d5 3
+d11 2
+@

@@ -1,0 +1,492 @@
+head	1.21;
+access;
+symbols;
+locks;
+comment	@// @;
+
+
+1.21
+date	2021.04.12.23.07.23;	author -;	state -;
+branches;
+next	1.20;
+
+1.20
+date	2021.04.12.23.06.28;	author -;	state -;
+branches;
+next	1.19;
+
+1.19
+date	2021.04.12.23.05.54;	author -;	state -;
+branches;
+next	1.18;
+
+1.18
+date	2021.04.12.23.04.52;	author -;	state -;
+branches;
+next	1.17;
+
+1.17
+date	2021.04.12.23.03.47;	author -;	state -;
+branches;
+next	1.16;
+
+1.16
+date	2021.04.12.23.02.52;	author -;	state -;
+branches;
+next	1.15;
+
+1.15
+date	2021.04.12.23.02.08;	author -;	state -;
+branches;
+next	1.14;
+
+1.14
+date	2021.04.12.23.01.44;	author -;	state -;
+branches;
+next	1.13;
+
+1.13
+date	2021.04.12.22.59.53;	author -;	state -;
+branches;
+next	1.12;
+
+1.12
+date	2021.04.12.22.59.42;	author -;	state -;
+branches;
+next	1.11;
+
+1.11
+date	2021.04.12.22.57.15;	author -;	state -;
+branches;
+next	1.10;
+
+1.10
+date	2021.04.12.22.54.48;	author -;	state -;
+branches;
+next	1.9;
+
+1.9
+date	2021.04.12.22.43.36;	author -;	state -;
+branches;
+next	1.8;
+
+1.8
+date	2021.04.12.22.42.51;	author -;	state -;
+branches;
+next	1.7;
+
+1.7
+date	2021.04.12.22.41.27;	author -;	state -;
+branches;
+next	1.6;
+
+1.6
+date	2021.04.12.22.40.00;	author -;	state -;
+branches;
+next	1.5;
+
+1.5
+date	2021.04.12.22.39.04;	author -;	state -;
+branches;
+next	1.4;
+
+1.4
+date	2021.04.12.22.35.11;	author -;	state -;
+branches;
+next	1.3;
+
+1.3
+date	2021.04.12.22.33.07;	author -;	state -;
+branches;
+next	1.2;
+
+1.2
+date	2021.04.12.22.11.05;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2021.04.12.22.09.25;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.21
+log
+@-
+@
+text
+@// $Id: print-uint8.cpp,v 1.20 2021-04-12 16:06:28-07 - - $
+
+// Show how to print a uint8_t as a number.
+// Options:
+// -c as characters
+// -n as numbers
+
+#include <iostream>
+#include <memory>
+#include <string>
+#include <unordered_map>
+using namespace std;
+
+#ifdef __GNUG__
+
+   #include <cxxabi.h>
+   string demangle (const char* name) {
+      int status = 0;
+      unique_ptr<char,void(*)(void*)> result {
+         abi::__cxa_demangle (name, nullptr, nullptr, &status),
+         std::free,
+      };
+      return status == 0 ? result.get() : name; 
+   }
+
+#else
+
+   string demangle (const char* name) {
+      return name;
+   }
+
+#endif
+
+string basename (const string &name) {
+   return name.substr (name.rfind ('/') + 1);
+}
+
+template <typename T>
+void print() {
+   const char* type = typeid(T).name();
+   cout << "Printing as " << type << " = " << demangle (type) << endl;
+   cout << "[";
+   for (uint8_t n = 0; n <= 9; ++n) cout << T(n);
+   cout << "]" << endl;
+}
+
+unordered_map<string,void(*)()> fns {
+   {"-8", print<uint8_t>},
+   {"-i", print<int>},
+   {"-u", print<unsigned>},
+};
+
+int main (int argc, char** argv) {
+   string opt = argc == 1 ? "" : argv[1];
+   auto fn = fns.find (opt);
+   if (fn == fns.end()) print<uint8_t>();
+                   else fn->second();
+}
+
+@
+
+
+1.20
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.19 2021-04-12 16:05:54-07 - - $
+d16 9
+a24 9
+#include <cxxabi.h>
+string demangle (const char* name) {
+   int status = 0;
+   unique_ptr<char,void(*)(void*)> result {
+      abi::__cxa_demangle (name, nullptr, nullptr, &status),
+      std::free,
+   };
+   return status == 0 ? result.get() : name; 
+}
+d28 3
+a30 3
+string demangle (const char* name) {
+   return name;
+}
+@
+
+
+1.19
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.18 2021-04-12 16:04:52-07 - - $
+d48 1
+a48 1
+   {"-c", print<uint8_t>},
+@
+
+
+1.18
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.17 2021-04-12 16:03:47-07 - - $
+d49 1
+a49 1
+   {"-n", print<int>},
+@
+
+
+1.17
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.16 2021-04-12 16:02:52-07 - - $
+d42 1
+d44 1
+a44 1
+   cout << endl;
+@
+
+
+1.16
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.15 2021-04-12 16:02:08-07 - - $
+d55 2
+a56 6
+   if (fn == fns.end()) {
+      cerr << basename (argv[0]) << ": invalid option \""
+           << opt << "\"" << endl;
+   }else {
+      fn->second();
+   }
+@
+
+
+1.15
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.14 2021-04-12 16:01:44-07 - - $
+d49 1
+@
+
+
+1.14
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.13 2021-04-12 15:59:53-07 - - $
+d40 1
+a40 1
+   string type = typeid(T).name();
+@
+
+
+1.13
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.11 2021-04-12 15:57:15-07 - - $
+d40 2
+a41 1
+   cout << "Printing as " << demangle (typeid(T).name()) << endl;
+@
+
+
+1.12
+log
+@-
+@
+text
+@d19 4
+a22 5
+//   unique_ptr<char,void(*)(void*)> result {
+//      abi::__cxa_demangle (name, nullptr, nullptr, &status),
+//      std::free,
+//   };
+   unique_ptr<char[]> result = abi::__cxa_demangle (name, nullptr, nullptr, &status);
+@
+
+
+1.11
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.10 2021-04-12 15:54:48-07 - - $
+d23 1
+a23 1
+   unique_ptr<char> result = abi::__cxa_demangle (name, nullptr, nullptr, &status);
+@
+
+
+1.10
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.9 2021-04-12 15:43:36-07 - - $
+d19 5
+a23 4
+   unique_ptr<char,void(*)(void*)> result {
+      abi::__cxa_demangle (name, nullptr, nullptr, &status),
+      std::free,
+   };
+@
+
+
+1.9
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.8 2021-04-12 15:42:51-07 - - $
+d17 1
+a17 3
+template <typename type>
+string demangle (const type &object) {
+   const char *const name = typeid (object).name();
+d28 2
+a29 3
+template <typename type>
+string demangle (const type& object) {
+   return typeid (object).name();
+@
+
+
+1.8
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.7 2021-04-12 15:41:27-07 - - $
+d60 1
+a60 1
+      else fn->second();
+@
+
+
+1.7
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.6 2021-04-12 15:40:00-07 - - $
+d37 3
+@
+
+
+1.6
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.5 2021-04-12 15:39:04-07 - - $
+d53 6
+a58 2
+   if (fn == fns.end()) cout << "invalid option " << opt << endl;
+                   else fn->second();
+@
+
+
+1.5
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.4 2021-04-12 15:35:11-07 - - $
+d9 1
+@
+
+
+1.4
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.3 2021-04-12 15:33:07-07 - - $
+d13 24
+d39 1
+a39 1
+   cout << "Printing as " << typeid(T).name() << endl;
+d55 1
+@
+
+
+1.3
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.2 2021-04-12 15:11:05-07 - - $
+d29 1
+a29 1
+                   else fn();
+@
+
+
+1.2
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: print-uint8.cpp,v 1.1 2021-04-12 15:09:25-07 - - $
+d10 1
+d13 12
+d26 4
+a29 2
+   string opt = argc > 1 ? argv[1] : "";
+   cout << opt << endl;
+@
+
+
+1.1
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id$
+d13 1
+a13 1
+   string opt {argv[1]};
+@

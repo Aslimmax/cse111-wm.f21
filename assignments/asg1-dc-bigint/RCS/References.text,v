@@ -1,0 +1,46 @@
+head	1.2;
+access;
+symbols;
+locks;
+comment	@# @;
+
+
+1.2
+date	2021.09.02.18.55.31;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2019.12.17.23.17.06;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@-
+@
+text
+@REFERENCERS.
+
+Egyptian division - Rosetta Code
+https://rosettacode.org/wiki/Egyptian_division
+
+$Id: References.text,v 1.1 2019-12-17 15:17:06-08 - - $
+@
+
+
+1.1
+log
+@-
+@
+text
+@d1 2
+d6 1
+a6 1
+$Id$
+@

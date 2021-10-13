@@ -1,0 +1,10 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ mkc: starting division.cpp
+$Id: division.cpp,v 1.13 2016-06-13 13:44:52-07 - - $
+checksource division.cpp
+checksource: TOTAL COMPLAINTS: 0
+division.cpp: $Id: division.cpp,v 1.13 2016-06-13 13:44:52-07 - - $
+cpplint.py.perl division.cpp
+Done processing division.cpp
+g++ -Wall -Wextra -Wpedantic -Wshadow -fdiagnostics-color=never -std=gnu++2a -Wold-style-cast -pthread -g -O0 division.cpp -o division -lm
+rm -f division.o
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ mkc: finished division.cpp

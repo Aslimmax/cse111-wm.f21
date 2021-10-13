@@ -1,0 +1,6049 @@
+head	1.233;
+access;
+symbols;
+locks;
+comment	@.\" @;
+
+
+1.233
+date	2021.10.11.23.03.11;	author -;	state -;
+branches;
+next	1.232;
+
+1.232
+date	2021.10.09.07.00.56;	author -;	state -;
+branches;
+next	1.231;
+
+1.231
+date	2021.10.09.06.51.47;	author -;	state -;
+branches;
+next	1.230;
+
+1.230
+date	2021.10.09.06.51.13;	author -;	state -;
+branches;
+next	1.229;
+
+1.229
+date	2021.10.05.06.55.33;	author -;	state -;
+branches;
+next	1.228;
+
+1.228
+date	2021.10.04.23.53.14;	author -;	state -;
+branches;
+next	1.227;
+
+1.227
+date	2021.10.04.23.52.47;	author -;	state -;
+branches;
+next	1.226;
+
+1.226
+date	2021.10.04.23.52.21;	author -;	state -;
+branches;
+next	1.225;
+
+1.225
+date	2021.10.04.23.51.12;	author -;	state -;
+branches;
+next	1.224;
+
+1.224
+date	2021.10.04.23.50.06;	author -;	state -;
+branches;
+next	1.223;
+
+1.223
+date	2021.10.04.23.49.27;	author -;	state -;
+branches;
+next	1.222;
+
+1.222
+date	2021.10.04.23.48.35;	author -;	state -;
+branches;
+next	1.221;
+
+1.221
+date	2021.10.04.02.19.27;	author -;	state -;
+branches;
+next	1.220;
+
+1.220
+date	2021.10.04.02.18.38;	author -;	state -;
+branches;
+next	1.219;
+
+1.219
+date	2021.10.04.02.18.16;	author -;	state -;
+branches;
+next	1.218;
+
+1.218
+date	2021.10.04.02.17.35;	author -;	state -;
+branches;
+next	1.217;
+
+1.217
+date	2021.09.29.20.29.06;	author -;	state -;
+branches;
+next	1.216;
+
+1.216
+date	2021.09.29.20.26.45;	author -;	state -;
+branches;
+next	1.215;
+
+1.215
+date	2021.09.29.20.22.55;	author -;	state -;
+branches;
+next	1.214;
+
+1.214
+date	2021.09.29.20.22.38;	author -;	state -;
+branches;
+next	1.213;
+
+1.213
+date	2021.09.29.20.21.05;	author -;	state -;
+branches;
+next	1.212;
+
+1.212
+date	2021.09.29.20.20.01;	author -;	state -;
+branches;
+next	1.211;
+
+1.211
+date	2021.09.29.20.19.04;	author -;	state -;
+branches;
+next	1.210;
+
+1.210
+date	2021.09.29.20.17.51;	author -;	state -;
+branches;
+next	1.209;
+
+1.209
+date	2021.09.29.20.07.42;	author -;	state -;
+branches;
+next	1.208;
+
+1.208
+date	2021.09.29.20.06.19;	author -;	state -;
+branches;
+next	1.207;
+
+1.207
+date	2021.09.29.20.04.13;	author -;	state -;
+branches;
+next	1.206;
+
+1.206
+date	2021.09.29.20.02.26;	author -;	state -;
+branches;
+next	1.205;
+
+1.205
+date	2021.09.29.20.01.50;	author -;	state -;
+branches;
+next	1.204;
+
+1.204
+date	2021.09.29.20.00.09;	author -;	state -;
+branches;
+next	1.203;
+
+1.203
+date	2021.09.29.19.59.40;	author -;	state -;
+branches;
+next	1.202;
+
+1.202
+date	2021.09.29.19.59.13;	author -;	state -;
+branches;
+next	1.201;
+
+1.201
+date	2021.09.29.19.58.54;	author -;	state -;
+branches;
+next	1.200;
+
+1.200
+date	2021.09.29.19.58.35;	author -;	state -;
+branches;
+next	1.199;
+
+1.199
+date	2021.09.29.19.57.37;	author -;	state -;
+branches;
+next	1.198;
+
+1.198
+date	2021.09.29.19.56.09;	author -;	state -;
+branches;
+next	1.197;
+
+1.197
+date	2021.09.29.19.52.44;	author -;	state -;
+branches;
+next	1.196;
+
+1.196
+date	2021.09.29.19.51.18;	author -;	state -;
+branches;
+next	1.195;
+
+1.195
+date	2021.09.29.19.50.56;	author -;	state -;
+branches;
+next	1.194;
+
+1.194
+date	2021.09.29.19.50.17;	author -;	state -;
+branches;
+next	1.193;
+
+1.193
+date	2021.09.29.19.49.31;	author -;	state -;
+branches;
+next	1.192;
+
+1.192
+date	2021.09.29.19.47.53;	author -;	state -;
+branches;
+next	1.191;
+
+1.191
+date	2021.09.29.19.43.34;	author -;	state -;
+branches;
+next	1.190;
+
+1.190
+date	2021.09.29.19.42.38;	author -;	state -;
+branches;
+next	1.189;
+
+1.189
+date	2021.09.29.19.41.19;	author -;	state -;
+branches;
+next	1.188;
+
+1.188
+date	2021.09.29.19.39.52;	author -;	state -;
+branches;
+next	1.187;
+
+1.187
+date	2021.09.29.19.33.52;	author -;	state -;
+branches;
+next	1.186;
+
+1.186
+date	2021.09.29.19.31.35;	author -;	state -;
+branches;
+next	1.185;
+
+1.185
+date	2021.09.29.19.31.00;	author -;	state -;
+branches;
+next	1.184;
+
+1.184
+date	2021.09.29.19.29.15;	author -;	state -;
+branches;
+next	1.183;
+
+1.183
+date	2021.09.29.19.23.50;	author -;	state -;
+branches;
+next	1.182;
+
+1.182
+date	2021.09.29.19.21.33;	author -;	state -;
+branches;
+next	1.181;
+
+1.181
+date	2021.09.29.19.20.26;	author -;	state -;
+branches;
+next	1.180;
+
+1.180
+date	2021.09.29.19.19.44;	author -;	state -;
+branches;
+next	1.179;
+
+1.179
+date	2021.09.29.19.15.15;	author -;	state -;
+branches;
+next	1.178;
+
+1.178
+date	2021.09.29.19.14.02;	author -;	state -;
+branches;
+next	1.177;
+
+1.177
+date	2021.09.29.19.12.38;	author -;	state -;
+branches;
+next	1.176;
+
+1.176
+date	2021.09.29.19.10.06;	author -;	state -;
+branches;
+next	1.175;
+
+1.175
+date	2021.09.29.15.31.54;	author -;	state -;
+branches;
+next	1.174;
+
+1.174
+date	2021.09.29.15.30.58;	author -;	state -;
+branches;
+next	1.173;
+
+1.173
+date	2021.09.29.15.30.34;	author -;	state -;
+branches;
+next	1.172;
+
+1.172
+date	2021.09.29.15.28.44;	author -;	state -;
+branches;
+next	1.171;
+
+1.171
+date	2021.09.29.15.24.43;	author -;	state -;
+branches;
+next	1.170;
+
+1.170
+date	2021.09.29.15.24.30;	author -;	state -;
+branches;
+next	1.169;
+
+1.169
+date	2021.09.29.15.23.54;	author -;	state -;
+branches;
+next	1.168;
+
+1.168
+date	2021.09.29.15.22.56;	author -;	state -;
+branches;
+next	1.167;
+
+1.167
+date	2021.09.29.15.22.10;	author -;	state -;
+branches;
+next	1.166;
+
+1.166
+date	2021.09.29.15.21.28;	author -;	state -;
+branches;
+next	1.165;
+
+1.165
+date	2021.09.29.15.18.48;	author -;	state -;
+branches;
+next	1.164;
+
+1.164
+date	2021.09.29.15.18.22;	author -;	state -;
+branches;
+next	1.163;
+
+1.163
+date	2021.09.29.15.16.38;	author -;	state -;
+branches;
+next	1.162;
+
+1.162
+date	2021.09.29.15.14.36;	author -;	state -;
+branches;
+next	1.161;
+
+1.161
+date	2021.09.29.15.13.03;	author -;	state -;
+branches;
+next	1.160;
+
+1.160
+date	2021.09.29.15.12.38;	author -;	state -;
+branches;
+next	1.159;
+
+1.159
+date	2021.09.29.06.38.41;	author -;	state -;
+branches;
+next	1.158;
+
+1.158
+date	2021.09.29.06.34.41;	author -;	state -;
+branches;
+next	1.157;
+
+1.157
+date	2021.09.29.06.34.24;	author -;	state -;
+branches;
+next	1.156;
+
+1.156
+date	2021.09.29.06.33.57;	author -;	state -;
+branches;
+next	1.155;
+
+1.155
+date	2021.09.29.06.33.19;	author -;	state -;
+branches;
+next	1.154;
+
+1.154
+date	2021.09.29.06.33.04;	author -;	state -;
+branches;
+next	1.153;
+
+1.153
+date	2021.09.29.06.32.22;	author -;	state -;
+branches;
+next	1.152;
+
+1.152
+date	2021.09.29.06.32.03;	author -;	state -;
+branches;
+next	1.151;
+
+1.151
+date	2021.09.29.06.31.18;	author -;	state -;
+branches;
+next	1.150;
+
+1.150
+date	2021.09.29.06.28.50;	author -;	state -;
+branches;
+next	1.149;
+
+1.149
+date	2021.09.29.06.19.35;	author -;	state -;
+branches;
+next	1.148;
+
+1.148
+date	2021.09.29.06.18.02;	author -;	state -;
+branches;
+next	1.147;
+
+1.147
+date	2021.09.29.06.17.09;	author -;	state -;
+branches;
+next	1.146;
+
+1.146
+date	2021.09.29.06.16.33;	author -;	state -;
+branches;
+next	1.145;
+
+1.145
+date	2021.09.29.06.15.28;	author -;	state -;
+branches;
+next	1.144;
+
+1.144
+date	2021.09.29.06.15.11;	author -;	state -;
+branches;
+next	1.143;
+
+1.143
+date	2021.09.29.06.13.38;	author -;	state -;
+branches;
+next	1.142;
+
+1.142
+date	2021.09.29.06.11.32;	author -;	state -;
+branches;
+next	1.141;
+
+1.141
+date	2021.09.29.06.08.38;	author -;	state -;
+branches;
+next	1.140;
+
+1.140
+date	2021.09.29.06.07.57;	author -;	state -;
+branches;
+next	1.139;
+
+1.139
+date	2021.09.29.06.07.32;	author -;	state -;
+branches;
+next	1.138;
+
+1.138
+date	2021.09.29.06.05.28;	author -;	state -;
+branches;
+next	1.137;
+
+1.137
+date	2021.09.29.06.03.14;	author -;	state -;
+branches;
+next	1.136;
+
+1.136
+date	2021.09.29.06.02.36;	author -;	state -;
+branches;
+next	1.135;
+
+1.135
+date	2021.09.29.05.52.12;	author -;	state -;
+branches;
+next	1.134;
+
+1.134
+date	2021.09.29.05.50.15;	author -;	state -;
+branches;
+next	1.133;
+
+1.133
+date	2021.09.29.05.47.31;	author -;	state -;
+branches;
+next	1.132;
+
+1.132
+date	2021.09.29.05.46.28;	author -;	state -;
+branches;
+next	1.131;
+
+1.131
+date	2021.09.29.05.37.16;	author -;	state -;
+branches;
+next	1.130;
+
+1.130
+date	2021.09.29.05.34.59;	author -;	state -;
+branches;
+next	1.129;
+
+1.129
+date	2021.09.29.05.25.08;	author -;	state -;
+branches;
+next	1.128;
+
+1.128
+date	2021.09.29.05.24.49;	author -;	state -;
+branches;
+next	1.127;
+
+1.127
+date	2021.09.29.05.18.31;	author -;	state -;
+branches;
+next	1.126;
+
+1.126
+date	2021.09.29.05.17.55;	author -;	state -;
+branches;
+next	1.125;
+
+1.125
+date	2021.09.29.04.57.53;	author -;	state -;
+branches;
+next	1.124;
+
+1.124
+date	2021.09.29.04.57.35;	author -;	state -;
+branches;
+next	1.123;
+
+1.123
+date	2021.09.29.04.57.15;	author -;	state -;
+branches;
+next	1.122;
+
+1.122
+date	2021.09.29.04.56.50;	author -;	state -;
+branches;
+next	1.121;
+
+1.121
+date	2021.09.29.04.48.32;	author -;	state -;
+branches;
+next	1.120;
+
+1.120
+date	2021.09.29.04.47.37;	author -;	state -;
+branches;
+next	1.119;
+
+1.119
+date	2021.09.04.22.50.00;	author -;	state -;
+branches;
+next	1.118;
+
+1.118
+date	2021.09.04.22.49.10;	author -;	state -;
+branches;
+next	1.117;
+
+1.117
+date	2021.09.04.22.48.07;	author -;	state -;
+branches;
+next	1.116;
+
+1.116
+date	2021.09.04.22.47.42;	author -;	state -;
+branches;
+next	1.115;
+
+1.115
+date	2021.09.04.22.13.18;	author -;	state -;
+branches;
+next	1.114;
+
+1.114
+date	2021.09.04.22.12.23;	author -;	state -;
+branches;
+next	1.113;
+
+1.113
+date	2021.09.04.22.11.39;	author -;	state -;
+branches;
+next	1.112;
+
+1.112
+date	2021.09.04.22.10.52;	author -;	state -;
+branches;
+next	1.111;
+
+1.111
+date	2021.09.04.21.26.54;	author -;	state -;
+branches;
+next	1.110;
+
+1.110
+date	2021.09.04.21.26.16;	author -;	state -;
+branches;
+next	1.109;
+
+1.109
+date	2021.09.04.21.25.02;	author -;	state -;
+branches;
+next	1.108;
+
+1.108
+date	2021.09.04.21.23.46;	author -;	state -;
+branches;
+next	1.107;
+
+1.107
+date	2021.09.04.21.22.54;	author -;	state -;
+branches;
+next	1.106;
+
+1.106
+date	2021.09.04.21.21.08;	author -;	state -;
+branches;
+next	1.105;
+
+1.105
+date	2021.09.04.21.20.16;	author -;	state -;
+branches;
+next	1.104;
+
+1.104
+date	2021.09.04.21.06.22;	author -;	state -;
+branches;
+next	1.103;
+
+1.103
+date	2021.09.04.21.05.59;	author -;	state -;
+branches;
+next	1.102;
+
+1.102
+date	2021.09.04.20.59.07;	author -;	state -;
+branches;
+next	1.101;
+
+1.101
+date	2021.09.04.20.58.07;	author -;	state -;
+branches;
+next	1.100;
+
+1.100
+date	2021.09.04.20.57.09;	author -;	state -;
+branches;
+next	1.99;
+
+1.99
+date	2021.09.04.20.53.15;	author -;	state -;
+branches;
+next	1.98;
+
+1.98
+date	2021.09.04.20.52.43;	author -;	state -;
+branches;
+next	1.97;
+
+1.97
+date	2021.09.02.20.18.33;	author -;	state -;
+branches;
+next	1.96;
+
+1.96
+date	2021.09.02.20.17.40;	author -;	state -;
+branches;
+next	1.95;
+
+1.95
+date	2021.09.02.20.16.36;	author -;	state -;
+branches;
+next	1.94;
+
+1.94
+date	2021.09.02.20.15.16;	author -;	state -;
+branches;
+next	1.93;
+
+1.93
+date	2021.09.02.20.14.00;	author -;	state -;
+branches;
+next	1.92;
+
+1.92
+date	2021.09.02.18.35.00;	author -;	state -;
+branches;
+next	1.91;
+
+1.91
+date	2021.09.02.18.27.50;	author -;	state -;
+branches;
+next	1.90;
+
+1.90
+date	2021.09.02.18.26.47;	author -;	state -;
+branches;
+next	1.89;
+
+1.89
+date	2021.09.02.18.25.36;	author -;	state -;
+branches;
+next	1.88;
+
+1.88
+date	2021.09.02.18.24.45;	author -;	state -;
+branches;
+next	1.87;
+
+1.87
+date	2021.09.02.18.23.38;	author -;	state -;
+branches;
+next	1.86;
+
+1.86
+date	2021.09.02.18.20.17;	author -;	state -;
+branches;
+next	1.85;
+
+1.85
+date	2021.09.02.18.20.03;	author -;	state -;
+branches;
+next	1.84;
+
+1.84
+date	2021.09.02.18.16.43;	author -;	state -;
+branches;
+next	1.83;
+
+1.83
+date	2021.09.02.18.13.56;	author -;	state -;
+branches;
+next	1.82;
+
+1.82
+date	2021.09.02.18.12.42;	author -;	state -;
+branches;
+next	1.81;
+
+1.81
+date	2021.09.02.18.09.49;	author -;	state -;
+branches;
+next	1.80;
+
+1.80
+date	2021.09.02.18.06.08;	author -;	state -;
+branches;
+next	1.79;
+
+1.79
+date	2021.09.02.18.05.38;	author -;	state -;
+branches;
+next	1.78;
+
+1.78
+date	2021.09.02.18.04.40;	author -;	state -;
+branches;
+next	1.77;
+
+1.77
+date	2021.09.02.18.00.05;	author -;	state -;
+branches;
+next	1.76;
+
+1.76
+date	2021.09.02.17.59.30;	author -;	state -;
+branches;
+next	1.75;
+
+1.75
+date	2021.09.02.17.58.50;	author -;	state -;
+branches;
+next	1.74;
+
+1.74
+date	2021.09.02.17.56.31;	author -;	state -;
+branches;
+next	1.73;
+
+1.73
+date	2021.09.02.17.51.44;	author -;	state -;
+branches;
+next	1.72;
+
+1.72
+date	2021.09.02.17.51.13;	author -;	state -;
+branches;
+next	1.71;
+
+1.71
+date	2021.03.26.07.01.01;	author -;	state -;
+branches;
+next	1.70;
+
+1.70
+date	2020.12.28.03.14.43;	author -;	state -;
+branches;
+next	1.69;
+
+1.69
+date	2020.12.28.03.13.07;	author -;	state -;
+branches;
+next	1.68;
+
+1.68
+date	2020.12.28.03.10.56;	author -;	state -;
+branches;
+next	1.67;
+
+1.67
+date	2020.12.28.02.59.05;	author -;	state -;
+branches;
+next	1.66;
+
+1.66
+date	2020.12.28.02.57.26;	author -;	state -;
+branches;
+next	1.65;
+
+1.65
+date	2020.12.28.02.57.12;	author -;	state -;
+branches;
+next	1.64;
+
+1.64
+date	2020.12.28.02.56.09;	author -;	state -;
+branches;
+next	1.63;
+
+1.63
+date	2020.12.28.02.55.17;	author -;	state -;
+branches;
+next	1.62;
+
+1.62
+date	2020.12.28.02.54.06;	author -;	state -;
+branches;
+next	1.61;
+
+1.61
+date	2020.12.28.02.52.31;	author -;	state -;
+branches;
+next	1.60;
+
+1.60
+date	2020.11.25.23.06.56;	author -;	state -;
+branches;
+next	1.59;
+
+1.59
+date	2020.11.25.23.06.04;	author -;	state -;
+branches;
+next	1.58;
+
+1.58
+date	2020.11.25.23.04.52;	author -;	state -;
+branches;
+next	1.57;
+
+1.57
+date	2020.11.25.23.00.37;	author -;	state -;
+branches;
+next	1.56;
+
+1.56
+date	2020.09.20.21.06.26;	author -;	state -;
+branches;
+next	1.55;
+
+1.55
+date	2020.09.20.21.05.43;	author -;	state -;
+branches;
+next	1.54;
+
+1.54
+date	2020.09.20.21.04.32;	author -;	state -;
+branches;
+next	1.53;
+
+1.53
+date	2020.06.29.00.22.16;	author -;	state -;
+branches;
+next	1.52;
+
+1.52
+date	2020.06.21.23.04.56;	author -;	state -;
+branches;
+next	1.51;
+
+1.51
+date	2020.03.13.22.27.49;	author -;	state -;
+branches;
+next	1.50;
+
+1.50
+date	2020.01.06.21.20.33;	author -;	state -;
+branches;
+next	1.49;
+
+1.49
+date	2019.12.14.00.35.54;	author -;	state -;
+branches;
+next	1.48;
+
+1.48
+date	2019.12.14.00.34.21;	author -;	state -;
+branches;
+next	1.47;
+
+1.47
+date	2019.12.14.00.33.50;	author -;	state -;
+branches;
+next	1.46;
+
+1.46
+date	2019.12.14.00.30.28;	author -;	state -;
+branches;
+next	1.45;
+
+1.45
+date	2019.12.14.00.29.47;	author -;	state -;
+branches;
+next	1.44;
+
+1.44
+date	2019.12.14.00.29.12;	author -;	state -;
+branches;
+next	1.43;
+
+1.43
+date	2019.12.13.23.51.23;	author -;	state -;
+branches;
+next	1.42;
+
+1.42
+date	2019.12.13.23.49.19;	author -;	state -;
+branches;
+next	1.41;
+
+1.41
+date	2019.12.13.23.48.41;	author -;	state -;
+branches;
+next	1.40;
+
+1.40
+date	2019.12.13.02.30.23;	author -;	state -;
+branches;
+next	1.39;
+
+1.39
+date	2019.12.13.02.30.04;	author -;	state -;
+branches;
+next	1.38;
+
+1.38
+date	2019.12.13.02.29.43;	author -;	state -;
+branches;
+next	1.37;
+
+1.37
+date	2019.12.13.02.28.13;	author -;	state -;
+branches;
+next	1.36;
+
+1.36
+date	2019.12.13.02.27.44;	author -;	state -;
+branches;
+next	1.35;
+
+1.35
+date	2019.12.13.02.25.58;	author -;	state -;
+branches;
+next	1.34;
+
+1.34
+date	2019.12.13.02.23.47;	author -;	state -;
+branches;
+next	1.33;
+
+1.33
+date	2019.12.13.02.21.32;	author -;	state -;
+branches;
+next	1.32;
+
+1.32
+date	2019.09.18.23.33.52;	author -;	state -;
+branches;
+next	1.31;
+
+1.31
+date	2019.09.10.21.43.19;	author -;	state -;
+branches;
+next	1.30;
+
+1.30
+date	2019.06.15.01.31.49;	author -;	state -;
+branches;
+next	1.29;
+
+1.29
+date	2019.04.24.20.28.52;	author -;	state -;
+branches;
+next	1.28;
+
+1.28
+date	2019.04.08.19.00.12;	author -;	state -;
+branches;
+next	1.27;
+
+1.27
+date	2019.04.08.18.59.38;	author -;	state -;
+branches;
+next	1.26;
+
+1.26
+date	2019.04.01.20.49.25;	author -;	state -;
+branches;
+next	1.25;
+
+1.25
+date	2018.12.13.18.56.18;	author -;	state -;
+branches;
+next	1.24;
+
+1.24
+date	2018.12.13.18.54.18;	author -;	state -;
+branches;
+next	1.23;
+
+1.23
+date	2018.12.13.18.53.31;	author -;	state -;
+branches;
+next	1.22;
+
+1.22
+date	2018.12.13.18.51.48;	author -;	state -;
+branches;
+next	1.21;
+
+1.21
+date	2018.12.13.18.51.05;	author -;	state -;
+branches;
+next	1.20;
+
+1.20
+date	2018.12.13.18.50.07;	author -;	state -;
+branches;
+next	1.19;
+
+1.19
+date	2018.12.13.18.48.17;	author -;	state -;
+branches;
+next	1.18;
+
+1.18
+date	2018.12.13.18.44.52;	author -;	state -;
+branches;
+next	1.17;
+
+1.17
+date	2018.06.11.23.34.28;	author -;	state -;
+branches;
+next	1.16;
+
+1.16
+date	2018.01.16.20.35.23;	author -;	state -;
+branches;
+next	1.15;
+
+1.15
+date	2018.01.06.00.52.14;	author -;	state -;
+branches;
+next	1.14;
+
+1.14
+date	2018.01.06.00.51.31;	author -;	state -;
+branches;
+next	1.13;
+
+1.13
+date	2017.12.14.19.32.29;	author -;	state -;
+branches;
+next	1.12;
+
+1.12
+date	2017.12.14.19.31.16;	author -;	state -;
+branches;
+next	1.11;
+
+1.11
+date	2017.12.14.19.28.00;	author -;	state -;
+branches;
+next	1.10;
+
+1.10
+date	2017.12.13.01.20.42;	author -;	state -;
+branches;
+next	1.9;
+
+1.9
+date	2017.12.13.01.20.24;	author -;	state -;
+branches;
+next	1.8;
+
+1.8
+date	2017.12.13.01.19.35;	author -;	state -;
+branches;
+next	1.7;
+
+1.7
+date	2017.12.13.01.18.59;	author -;	state -;
+branches;
+next	1.6;
+
+1.6
+date	2017.12.13.01.18.32;	author -;	state -;
+branches;
+next	1.5;
+
+1.5
+date	2017.12.05.22.15.44;	author -;	state -;
+branches;
+next	1.4;
+
+1.4
+date	2017.06.16.22.09.35;	author -;	state -;
+branches;
+next	1.3;
+
+1.3
+date	2016.07.01.00.16.18;	author -;	state -;
+branches;
+next	1.2;
+
+1.2
+date	2016.06.13.20.45.48;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2016.03.25.02.11.57;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.233
+log
+@-
+@
+text
+@.so Tmac.mm-etc
+.if t .Newcentury-fonts
+.INITR* \n[.F]
+.SIZE 12 14
+.ds Quarter Fall\~2021
+.TITLE CSE-111 \*[Quarter] Program\~1 "Overloading and operators"
+.RCS "$Id: asg1-dc-bigint.mm,v 1.232 2021-10-09 00:00:56-07 - - $"
+.PWD
+.URL
+.if t .nr VCODENWIDTH \w'\f[CB]\0\0\0\fR'
+.if n .nr VCODENWIDTH \w'\0\0\0'
+.nr SHELLCNT 0 1
+.de COMMAND
+.   br
+.   ft CR
+.   nop -bash-\\n+[SHELLCNT]$
+.   ft CB
+.   nop \\$*
+.   ft CR
+.   br
+.   nf
+.   tm \\$*
+.   pso \\$* | expand
+.   br
+.   ft R
+.   fi
+..
+.H 1 "Using C++11/14/17 (\f[CB]g++ -std=gnu++2a\f[P])"
+All programming in this course will be done C++ style,
+not C style.
+.DS
+.TS
+center tab(|); |le |le |.
+_
+Do not use\(::|Instead, use\(::
+_
+\f[CB]char*\fP strings|\f[CB]<string>\fP
+C arrays|\f[CB]<vector>\fP
+T{
+\f[CB]<stdio.h>\fP, \f[CB]<cstdio>\fP
+T}|T{
+\f[CB]<iostream>\fP, \f[CB]<iomanip>\fP
+T}
+pointers|\f[CB]<shared_ptr>\fP
+\f[CB]union\fP|inheritance
+\f[CB]<\fP\fIheader\fP\f[CB].h>\fP|\f[CB]<c\fP\fIheader\fP\f[CB]>\fP
+_
+.TE
+.DE
+Include only C++ header files and use the declaration
+.V= "using namespace std;"
+Include
+.VI <c header >
+files only when C++ header files do not provide a necessary facility.
+Include
+.VI < header \&.h>
+files from C only when an appropriate
+.VI <c header >
+file does not exist.
+Use the script
+.V= cpplint.py.perl
+(a wrapper for
+.V= cpplint.py )
+to check style.
+.P
+The production system for all work is
+.V= unix.ucsc.edu 
+using
+.V= g++ .
+Compile with
+.ds G++OPTS -Wall -Wextra -Wpedantic -Wshadow -Wold-style-cast
+.VTCODE* 1 "g++ -std=gnu++2a -g -O0 \*[G++OPTS]"
+Following is a description of these options\(::
+.ALX-BL
+.LI
+.V= -std=gnu++2a
+specifies the experimental Gnu dialect of C++20,
+still experimental,
+beyond the current C++17 standard.
+.LI
+.V= -g
+produces debugging information into object files and the binary
+executable.
+This is necessary for
+.V= gdb
+and
+.V= valgrind
+to use symbolic names.
+.LI
+.V= -O0
+reduces compilation time and makes debugging produce more expected
+results.
+Optimization may rearrange bugs in code in unexpected ways.
+.LI
+.V= -Wall
+enables all the warnngs about questionable constructions.
+.LI
+.V= -Wextra
+enables extra warnings that are not enabled with
+.V= -Wall .
+.LI
+.V= -Wpedantic
+issues all warnings required by strict ISO C++ and rejects
+all programs that do not conform to ISO C++.
+.LI
+.V= -Wshadow
+warns whenever a local variable or declaration
+shadows another variable, parameter, or class member.
+.LI
+.V= -Wold-style-cast
+warns about the use of any old-style (C-style) cast.
+Instead,
+use
+.V= static_cast ,
+.V= dynamic_cast ,
+.V= const_cast ,
+or
+.V= reinterpret_cast  .
+.LI
+.V= -fdiagnostics-color=never 
+prevents the compiler from using those silly annoying colors
+in diagnostics.
+.LE
+.P
+The particular
+.V= g++
+compiler we will be using is
+.in +\n[VCODENWIDTH]u
+.COMMAND which g++
+.COMMAND g++ --version | grep -i g++
+.COMMAND uname -npo
+.in -\n[VCODENWIDTH]u
+.P
+If you develop on your personal system,
+be sure to port and test your code on the Linux timeshares.
+If it compiles and runs on your system, but not on the timeshares,
+.ft BI
+then it does not work.
+.ft P
+.H 1 "Overview"
+This assignment will involve overloading basic integer operators
+to perform arbitrary precision integer arithmetic in the style of
+.V= dc (1).
+Your class
+.V= bigint
+will intermix arbitrarily with simple integer arithmetic.
+.P
+To begin read the
+.V= man (1)
+page for the command
+.V= dc (1)\(::
+.VCODE* 1 "man -s 1 dc"
+A copy of that page is also in this directory.
+Your program will use the standard
+.V= dc
+as a reference  implemention and must produce exactly
+the same output for the commands you have to implement\(::
+.VCODE* 1 "+\0 -\0 *\0 /\0 %\0 \[ha]\0 c\0 d\0 f\0 p\0 q\0"
+.P
+If you have any questions as to the exact format of your output,
+just run
+.V= dc (1)
+and make sure that, for the operators specified above,
+your program produces exactly the same output.
+A useful program to compare output from your program with that of
+.V= dc (1)
+is
+.V= diff (1),
+which compares the contents of two files and prints only the
+differences.
+Also look in the subdirectory
+.V= misc/
+for some examples.
+.P
+See also\(::
+.ALX-BL
+.LI
+dc (computer program)
+.br
+.V= https://en.wikipedia.org/wiki/Dc_(computer_program)
+.LI
+dc, an arbitrary precision calculator
+.br
+.V= https://www.gnu.org/software/bc/manual/dc-1.05/html_mono/dc.html
+.LE
+.H 1 "Implementation strategy"
+As before, you have been given starter code.
+.ALX a ()
+.LI
+.V= Makefile ,
+.V= debug ,
+and
+.V= util
+If you find you need a function which does not properly belong to
+a given module, you may add it to
+.V= util .
+.LI
+The module
+.V= scanner
+reads in tokens, namely a
+.V= NUMBER ,
+an
+.V= OPERATOR ,
+or
+.V= SCANEOF .
+Each token returns a
+.V= token_t ,
+which indicates what kind of token it is
+(the
+.V= "terminal_symbol symbol" ),
+and the
+.V= "string lexinfo"
+associated
+with the token.
+Only in the case of a number is there more than one character.
+Note that on input, an underscore
+.=V ( _ )
+indicates a negative number.
+The minus sign
+.=V ( - )
+is reserved only as a binary operator.
+The scanner also has defined a couple of
+.V= operator<<
+for printing out scanner results in debug mode.
+.LI
+The main program
+.V= main.cpp ,
+has been implemented for you.
+For the six binary arithmetic functions,
+the right operand is popped from the stack,
+then the left operand,
+then the result is pushed onto the stack.
+.LI
+The module
+.V= iterstack
+can not just be the STL
+.V= stack ,
+since we want to iterate from top to bottom,
+and the STL
+.V= stack
+does not have an iterator.
+A stack depends on the operations
+.V= back() ,
+.V= push_back() ,
+and
+.V= pop_back()
+in the underlying container.
+We could use a
+.V= vector ,
+a
+.V= deque ,
+or just a
+.V= list ,
+as long as the requisite operations are available.
+.LE
+.H 1 "Class \f[CB]bigint\f[P]"
+Then we come to the most complex part of the assignment,
+namely the class
+.V= bigint .
+Operators in this class are heavily overloaded.
+.ALX a ()
+.LI
+Most of the functions take a arguments of type
+.V= "const bigint&" ,
+i.e.,
+a constant reference,
+for the sake of efficiency.
+But they have to return the result by value.
+.LI
+The
+.V= operator<<
+can't be a member since its left operand is an
+.V= ostream ,
+so we make it a
+.V= friend ,
+so that it can see the innards of a
+.V= bigint .
+Note now
+.V= dc
+prints really big numbers.
+.LI
+The relational operators
+.V= ==
+and
+.V= <
+are coded individually as member functions.
+The others,
+.V= != ,
+.V= <= ,
+.V= > ,
+and
+.V= >=
+are defined in terms of the essential two.
+.LI
+All of the functions of
+.V= bigint
+only work with the sign,
+using
+.V= ubigint
+to do the actual computations.
+So
+.V= bigint::operator+
+and
+.V= bigint::operator-
+will check the signs of the two operands then call
+.V= ubigint::operator+
+or
+.V= ubigint::operator- ,
+as appropriate,
+depending on the relative signs and magnitudes.
+The multiplication and division operators just call the corresponding
+.V= ubigint
+operators,
+then adjust the resulting sign according to the rule of signs.
+.H 1 "Class \f[CB]ubigint\f[P]"
+Class
+.V= ubigint
+implements unsigned large integers and is where the computational
+work takes place.
+Class
+.V= bigint
+takes care of the sign.
+Now we turn to the representation of a
+.V= ubigint ,
+which will be represented by vector of bytes.
+.ALX a ()
+.LI
+Replace the declaration
+.VCODE* 1 "using unumber = unsigned long;"
+.VCODE* 1 "unumber uvalue {};
+with
+.VCODE* 1 "using ubigvalue_t = vector<uint8_t>;"
+.VCODE* 1 "ubigvalue_t ubig_value;"
+in the header file
+.V= <ubigint.h> .
+The type
+.V= uint8_t
+is an unsigned 8-bit integer defined in
+.V= <cstdint> .
+.LI
+In storing the big integer, each digit is kept as an integer in
+the range 0 to 9 in an element of the vector.
+Since the arithmetic operators add and subtract work from least
+significant digit to most significant digit,
+store the elements of the vector in the same order.
+That means, for example, that the number 4629 would be stored in
+a vector
+.V= v
+as\(::
+.V= v[3]==4 ,
+.V= v[2]==6 ,
+.V= v[1]==2 ,
+.V= v[0]==9 .
+In other words,
+if a digit's place value is
+.V= "d*pow(10,k)"
+then
+.V= v[k]==d .
+.LI
+In order for the comparisons to work correctly,
+always store numbers in a canonical form\(::
+After computing a value from any one of the six arithmetic operators,
+always trim the vector by removing all high-order zeros\(::
+.VTCODE* 1 "while (size() > 0 and back() == 0) pop_back();"
+.LI
+Canonical form.
+.ALX-ITEMS
+.LI
+Zero is represented as a vector of size zero
+and a positive sign.
+.LI
+All digits are stored as
+.V= uint8_t
+values in the range 0...9,
+not as characters in the range
+.V= '0' ... '9' .
+.LI
+To print a digit, cast it to an integer\(::
+.V= static_cast<int>\~(digit) .
+.LE
+.LI
+The scanner will produce numbers as
+.V= string s,
+so scan each string from the end of the string,
+using a
+.V= const_reverse_iterator
+(or other means)
+from the end of the string (least significant digit)
+to the beginning of the string (most significant digit)
+using
+.V= push_back
+to append them to the vector.
+.LE
+.H 1 "Implementation of operators"
+.ALX a ()
+.LI
+For
+.V= bigint::operator+ ,
+check the signs.
+.ALX 1 ()
+.LI
+If the signs are the same\(::
+.ALX-ITEMS
+.LI
+Call
+.V= ubigint::operator+ 
+with the unsigned numbers.
+.LI
+The sign of the result is the sign of either number.
+.LE
+.LI
+If the signs are different\(::
+.ALX-ITEMS
+.LI
+Call
+.V= ubigint::operator- 
+with the larger number as its left number.
+.LI
+The sign of the result is the sign of the larger number.
+.LE
+.LE
+.LI
+The operator
+.V= bigint::operator- ,
+check the signs.
+.ALX 1 ()
+.LI
+If the signs are different\(::
+.ALX-ITEMS
+.LI
+Call
+.V= ubigint::operator+
+with the unsigned numbers.
+.LI
+The sign of the result is the sign of the left number.
+.LE
+.LI
+If the signs are the same\(::
+.ALX-ITEMS
+.LI
+Call
+.V= ubigint::operator- 
+with the larger number as its left number.
+.LI
+If the left number is larger,
+the sign of the result is its sign.
+.LI
+Else
+the the result has the opposite of the sign of the right number.
+.LE
+.LE
+.LI
+To implement
+.V= ubigint::operator+ ,
+create a new
+.V= ubigint
+and proceed from the low order end to the high order end,
+adding digits pairwise.
+For any sum >= 10,
+take the remainder and add the carry to the next digit.
+Use
+.V= push_back
+to append the new digits to the
+.V= ubigint .
+When you run out of digits in the shorter number,
+continue, matching the longer vector with zeros,
+until it is done.
+Make sure the sign of 0 is positive.
+.LI
+To implement
+.V= ubigint::operator- ,
+also create a new empty vector, starting from the low order end
+and continuing until the high end.
+If the left digit is smaller than the right digit,
+the subtraction will be less than zero.
+In that case, add 10 to the digit,
+and set the borrow to the next digit to \-1.
+After the algorithm is done,
+.V= pop_back
+all high order zeros from the vector before returning it.
+Make sure the sign of 0 is positive.
+.LI
+To implement
+.V= operator== ,
+check to see if the signs are the same and the lengths of
+the vectors are the same.
+If not, return false.
+Otherwise run down both vectors and return false as soon a difference
+is found.
+Otherwise return true.
+.LI
+To implement
+.V= operator< ,
+remember that a negative number is less than a positive number.
+If the signs are the same,
+for positive numbers, the shorter one is less,
+and for negative nubmers, the longer one is less.
+If the signs and lengths are the same,
+run down the parallel vectors from the high order end to the low
+order end.
+When a difference is found, return true or false, as appropriate.
+If no difference is found, return false.
+.LI
+Implement function
+.V= bigint::operator* ,
+which uses the rule of signs to determine the result.
+The number crunching is delegated to
+.V= ubigint::operator* ,
+which produces the unsigned result.
+.LI
+Multiplication in
+.V= ubigint::operator*
+proceeds by allocating a new vector
+whose size is
+equal to the sum of the sizes of the other two operands.
+If
+.V= u
+is a vector of size
+.V= m
+and
+.V= v
+is a vector of size
+.V= n ,
+then in
+.V= O(mn)
+speed,
+perform an outer loop over one argument and an inner loop over
+the other argument, adding the new partial products to the product
+.V= p
+as you would by hand.
+The algorithm can be described as follows\(::
+.DS
+.VCODE* 1 "p = all zeros"
+.VCODE* 1 "for i in interval [0,m):"
+.VCODE* 2     "carry = 0"
+.VCODE* 2     "for j in interval [0,n):"
+.VCODE* 3         "digit = p[i+j] + u[i] * v[j] + carry"
+.VCODE* 3         "p[i+j] = digit % 10"
+.VCODE* 3         "carry = digit / 10"
+.VCODE* 2     "p[i+n] = carry"
+.DE
+Note that the interval
+.V= [a,b)
+refers to the half-open interval including
+.V= a
+but excluding
+.V= b .
+This is the set
+.V= "{x| a<=x && x<b}" .
+In the same way,
+a pair of iterators in C++ is used to bound an interval
+(begin and end pair).
+.LI
+Long division is complicated if done correctly.
+See a paper by P. Brinch Hansen,
+``Multiple-length division revisited\(::
+A tour of the minefield'',
+.I "Software \[em] Practice and Experience 24",
+(June 1994), 579\[en]601.
+Algorithms 1 to 12 are on pages 13\[en]23,
+Note that in Pascal,
+array bounds are part of the type,
+which is not true for
+.V= vector s
+in C++.
+.ALX-ITEMS
+.LI
+.V= multiple-length-division.pdf
+.LI
+.V= http://brinch-hansen.net/papers/1994b.pdf
+.LI
+.V= http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.14.5815
+.LE
+.LI
+The function
+.V= divide
+as implemented uses the ancient Egyptian division algorithm,
+which is slower than Hansen's Pascal program,
+but is easier to understand.
+Replace the
+.V= long
+values in it by
+.V= vector<digit_t> .
+The logic is shown also in
+.V= misc/divisioncpp.cpp .
+The algorithm is rather slow,
+but the big-O analysis is reasonable.
+.LI
+The unsigned division function that is provided
+depends on two private functions,
+.V= multiply_by_2
+and
+.V= divide_by_2 ,
+which are in-lace non-constant functions.
+They both perform
+.V= without
+creating a new object.
+.ALX 1 ()
+.LI
+To implement
+.V= multiply_by_2 ,
+iterate from the low order digit,
+and double each digit (remainder 10),
+carrying to the next higher digit.
+At the end, if the carry is 1, use
+.V= push_back.
+.LI
+To implement
+.V= divide_by_2 ,
+iterate from the low order digit,
+and divide each digit by 2.
+Then,
+if the next higher digit is odd,
+add 5 to the current digit.
+Be careful of the end,
+and
+.V= pop_back
+any remaining high order zeros.
+.LE
+.LI
+Modify
+.V= operator<< ,
+first just to print out the number all in one line.
+You will need this to debug your program.
+When you are finished,
+make it print numbers in the same way as
+.V= dc (1)
+does.
+.LI
+The
+.V= pow
+function uses other operations to raise
+a number to a power.
+If the exponent does not fit into a single
+.V= long
+print an error message,
+otherwise do the computation.
+The power function is not a member of either
+.V= bigint
+or
+.V= ubigint ,
+and is just considered a library function that is implemented
+using more primitive operations.
+.LE
+.H 1 "Memory leak and other problems"
+Make sure that you test your program completely so that it does not
+crash on a Segmentation Fault or any other unexpected error.
+Since you are not using pointers,
+and all values are inline,
+there should be no memory leak.
+Use
+.V= valgrind (1)
+to check for and eliminate uninitialized variables and memory leak.
+.P
+If your program is producing strange output or segmentation faults,
+use
+.V= gdb (1)
+and the debug macros in the
+.V= debug
+module of the
+.V= code/
+subdirectory.
+.H 1 "What to submit"
+Submit source files and only source files\(::
+.V= Makefile ,
+.V= README ,
+and all of the header and implementation files necessary to build
+the target executable.
+If
+.V= gmake
+does not build
+.V= ydc
+your program can not be tested and you lose 1/2 of the points for
+the assignment.
+Use
+.V= checksource
+on  your code to verify basic formatting.
+.P
+Look in the grader's score
+subdirectory for instructions to graders.
+Read
+.V= Syllabus/pair-programming/
+and also submit
+.V= PARTNER 
+if you are doing pair programming.
+Either way submit the
+.V= README
+described therein.
+.char-nt he' he \[*e]\h'-3p'\*[+<]\h'3p'\*[+']
+.ds kai-ta-hetera \
+\[*k]\[*a]\[*i`] \[*t]\[*a`] \|\[he']\[*t]\[*e]\[*r]\[*a]
+.if n .H 1 "Et cetera."
+.if t .H 1 "Et cetera \~(\*[kai-ta-hetera])."
+The accuracy of the Unix utility
+.V= dc (1)
+can be checked by\(::
+.VTCODE* 0 "echo '82 43/25 43+65P80P82P73P76P32P70P79P79P76P10P' | dc"
+@
+
+
+1.232
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.231 2021-10-08 23:51:47-07 - - $"
+d679 1
+a679 2
+Look in the
+.V= \&.score/
+@
+
+
+1.231
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.230 2021-10-08 23:51:13-07 - - $"
+d350 4
+a353 4
+.V= v[3] = 4 ,
+.V= v[2] = 6 ,
+.V= v[1] = 2 ,
+.V= v[0] = 9 .
+d358 1
+a358 1
+.V= v[k] = d .
+@
+
+
+1.230
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.229 2021-10-04 23:55:33-07 - - $"
+d356 1
+a356 1
+.V= "d * pow(10,i)"
+@
+
+
+1.229
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.228 2021-10-04 16:53:14-07 - - $"
+a27 3
+.EQ
+delim ##
+.EN
+d356 1
+a356 1
+#d times 10 sup k#,
+@
+
+
+1.228
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.227 2021-10-04 16:52:47-07 - - $"
+d397 1
+a397 1
+.H 1 "Implementation of Operators"
+@
+
+
+1.227
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.226 2021-10-04 16:52:21-07 - - $"
+d552 1
+a552 2
+.\"# roman "{" x | a <= x < b roman "}" #.
+.V= "{x | a<=x && x<b}" .
+@
+
+
+1.226
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.225 2021-10-04 16:51:12-07 - - $"
+d553 1
+a553 1
+.V= "{ x | a <= x && x < b }" .
+@
+
+
+1.225
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.224 2021-10-04 16:50:06-07 - - $"
+d552 2
+a553 1
+# roman "{" x | a <= x < b roman "}" #.
+@
+
+
+1.224
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.223 2021-10-04 16:49:27-07 - - $"
+d358 1
+a358 1
+if a digit's value is
+@
+
+
+1.223
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.222 2021-10-04 16:48:35-07 - - $"
+d361 1
+a361 1
+#v sub k = d#.
+@
+
+
+1.222
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.221 2021-10-03 19:19:27-07 - - $"
+d372 1
+a372 1
+Zero is represented as a vector of zero length
+@
+
+
+1.221
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.220 2021-10-03 19:18:38-07 - - $"
+d353 4
+a356 4
+#v sub 3 = 4 #,
+#v sub 2 = 6 #,
+#v sub 1 = 2 #,
+#v sub 0 = 9 #.
+@
+
+
+1.220
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.219 2021-10-03 19:18:16-07 - - $"
+d381 2
+a382 2
+To print a digit, cast it to an int
+.=V ( static_cast<int>\~(digit) ).
+@
+
+
+1.219
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.218 2021-10-03 19:17:35-07 - - $"
+d382 1
+a382 1
+.=V ( static_cast<int> (digit) ).
+@
+
+
+1.218
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.217 2021-09-29 13:29:06-07 - - $"
+d382 1
+a382 1
+.=V ( static_cast<int>(d) ).
+@
+
+
+1.217
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.216 2021-09-29 13:26:45-07 - - $"
+d381 2
+a382 1
+To print a digit, cast it to an int.
+@
+
+
+1.216
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.215 2021-09-29 13:22:55-07 - - $"
+a12 6
+.de ALX-BL
+.   ALX \[bu] 0 "" 0 0
+..
+.de ALX-ITEMS
+.   ALX \[bu] 0 "2" 0 0
+..
+@
+
+
+1.215
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.214 2021-09-29 13:22:38-07 - - $"
+d574 8
+a581 4
+.VTCODE* 0 multiple-length-division.pdf
+.VTCODE* 0 http://brinch-hansen.net/papers/1994b.pdf
+.VTCODE* 0 \
+http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.14.5815
+@
+
+
+1.214
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.213 2021-09-29 13:21:05-07 - - $"
+d557 1
+a557 1
+# "{" x | a <= x < b "}" #.
+@
+
+
+1.213
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.211 2021-09-29 13:19:04-07 - - $"
+d557 1
+a557 1
+.V= {x|a<=x<b} .
+@
+
+
+1.212
+log
+@-
+@
+text
+@d359 4
+a362 1
+#v sub 3 = 4 , v sub 2 = 6 , v sub 1 = 2 , v sub 0 = 9 #.
+@
+
+
+1.211
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.210 2021-09-29 13:17:51-07 - - $"
+d359 1
+a359 4
+#v sub 3 = 4 #,
+#v sub 2 = 6 #,
+#v sub 1 = 2 #,
+#v sub 0 = 9 #.
+@
+
+
+1.210
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.209 2021-09-29 13:07:42-07 - - $"
+d381 3
+a383 1
+All digits are stored as integers in the range 0...9,
+@
+
+
+1.209
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.208 2021-09-29 13:06:19-07 - - $"
+d382 2
+a383 1
+not as characters.
+@
+
+
+1.208
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.207 2021-09-29 13:04:13-07 - - $"
+d538 8
+a545 8
+.VCODE* 1 "p = all zeros
+.VCODE* 1 "for i in interval [0,m):
+.VCODE* 1 "    carry = 0
+.VCODE* 1 "    for j in interval [0,n):
+.VCODE* 1 "        digit = p[i+j] + u[i] * v[j] + carry
+.VCODE* 1 "        p[i+j] = digit % 10
+.VCODE* 1 "        carry = digit / 10
+.VCODE* 1 "    p[i+n] = carry
+@
+
+
+1.207
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.206 2021-09-29 13:02:26-07 - - $"
+d538 8
+a545 11
+.in +\n[VCODENWIDTH]u
+.ft CB
+p = all zeros
+for i in interval [0,m):
+    carry = 0
+    for j in interval [0,n):
+        digit = p[i+j] + u[i] * v[j] + carry
+        p[i+j] = digit % 10
+        carry = digit / 10
+    p[i+n] = carry
+.in -\n[VCODENWIDTH]u
+@
+
+
+1.206
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.205 2021-09-29 13:01:50-07 - - $"
+d34 3
+a358 3
+.EQ
+delim ##
+.EN
+a367 4
+.EQ
+delim
+.EN
+###
+@
+
+
+1.205
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.204 2021-09-29 13:00:09-07 - - $"
+d371 1
+@
+
+
+1.204
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.203 2021-09-29 12:59:40-07 - - $"
+a33 4
+.EQ
+delim ##
+tdefine rem     |{type binary "\f[B]rem\f[P]"}|
+.EN
+d356 3
+d368 3
+@
+
+
+1.203
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.202 2021-09-29 12:59:13-07 - - $"
+d558 1
+a558 1
+.V= "{x|a<=x<b} .
+@
+
+
+1.202
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.201 2021-09-29 12:58:54-07 - - $"
+d560 2
+a561 1
+a pair of iterators in C++ bound an interval.
+@
+
+
+1.201
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.200 2021-09-29 12:58:35-07 - - $"
+d558 1
+a558 1
+.V= "{x|a<=x<b}.
+@
+
+
+1.200
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.199 2021-09-29 12:57:37-07 - - $"
+d558 1
+a558 2
+.V= "{x | a<=x<b}.
+# roman "{" x | a <= x < b roman "}" #.
+@
+
+
+1.199
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.198 2021-09-29 12:56:09-07 - - $"
+d558 1
+@
+
+
+1.198
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.197 2021-09-29 12:52:44-07 - - $"
+d553 1
+a553 3
+refers to the set
+# roman "{" x | a <= x < b roman "}" #,
+i.e., to a half-open interval including
+d557 2
+@
+
+
+1.197
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.196 2021-09-29 12:51:18-07 - - $"
+d531 1
+a531 1
+# O ( m n ) #
+@
+
+
+1.196
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.194 2021-09-29 12:50:17-07 - - $"
+d552 1
+a552 1
+# [ a , b ) #
+@
+
+
+1.195
+log
+@-
+@
+text
+@d366 1
+a366 3
+.EQ
+d times 10 sup k,
+.EN
+@
+
+
+1.194
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.192 2021-09-29 12:47:53-07 - - $"
+d366 3
+a368 1
+#d times 10 sup k#,
+@
+
+
+1.193
+log
+@-
+@
+text
+@d360 4
+a363 6
+.EQ
+v sub 3 = 4 ,
+v sub 2 = 6 ,
+v sub 1 = 2 ,
+v sub 0 = 9 .
+.EN
+@
+
+
+1.192
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.191 2021-09-29 12:43:34-07 - - $"
+d360 6
+a365 4
+#v sub 3 = 4 #,
+#v sub 2 = 6 #,
+#v sub 1 = 2 #,
+#v sub 0 = 9 #.
+@
+
+
+1.191
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.190 2021-09-29 12:42:38-07 - - $"
+a35 3
+define uvec  |{ bold u }|
+define vvec  |{ bold v }|
+define pvec  |{ bold p }|
+d356 4
+a359 2
+That means, for example, that the number #4629# would be stored in
+a vector #v# as\(::
+d367 2
+a368 1
+then #v sub k = d#.
+d522 11
+a532 3
+If #uvec# is a vector of size #m#
+and #vvec# is a vector of size #n#,
+then in # O ( m n ) # speed,
+d535 2
+a536 1
+#pvec# as you would by hand.
+d551 3
+a553 1
+Note that the interval # [ a , b ) # refers to the set
+d555 4
+a558 1
+i.e., to a half-open interval including #a# but excluding #b#.
+d591 1
+a591 1
+but the big-#O# analysis is reasonable.
+@
+
+
+1.190
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.189 2021-09-29 12:41:19-07 - - $"
+a540 8
+.DE
+.DS I
+.br
+# TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c #
+# TAB TAB pvec sub { i + j } <- d rem 10 #
+# TAB TAB c <- left floor d div 10 right floor #
+# TAB pvec sub { i + n } <- c #
+.br
+@
+
+
+1.189
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.188 2021-09-29 12:39:52-07 - - $"
+d536 1
+a536 1
+        digit = p[i+j] * u[i] * v[j] + carry
+a543 4
+# pvec <- PHI #
+# for ~ i elem [ 0 , m ) ~ : #
+# TAB c <- 0 #
+# TAB for ~ j elem [ 0 , n ) ~ : #
+@
+
+
+1.188
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.187 2021-09-29 12:33:52-07 - - $"
+d532 2
+a533 2
+product = all zeros
+for i in range [0,m):
+d535 3
+a537 3
+    for j in range [0,n):
+        digit = product[i+j] * arg1[i] * arg2[j] + carry
+        product[i+j] = digit % 10
+d539 1
+a539 1
+    product[i+n] = carry
+@
+
+
+1.187
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.186 2021-09-29 12:31:35-07 - - $"
+d528 14
+a541 1
+The algorithm can be described mathematically as follows\(::
+@
+
+
+1.186
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.185 2021-09-29 12:31:00-07 - - $"
+d530 10
+a539 11
+.EQ
+lpile { pvec <- PHI
+above   for ~ i elem [ 0 , m ) ~ :
+above   TAB c <- 0
+above   TAB for ~ j elem [ 0 , n ) ~ :
+above   TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c
+above   TAB TAB pvec sub { i + j } <- d rem 10
+above   TAB TAB c <- left floor d div 10 right floor
+above   TAB pvec sub { i + n } <- c
+}
+.EN
+@
+
+
+1.185
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.184 2021-09-29 12:29:15-07 - - $"
+a33 4
+.de UNIX_COMMAND
+.   nop bash-$ \f[CB]\\$*\f[P]
+.   pso \\$*
+..
+a652 14
+.H 1 "Version of g++"
+The code must compile and run using
+.V= g++
+on
+.V= unix.ucsc.edu ,
+regardless of whether it runs elsewhere.
+When this document was formatted that was\(::
+.in +\n[VCODENWIDTH]u
+.DS
+.ft CR
+.UNIX_COMMAND "which g++"
+.UNIX_COMMAND "g++ --version | head -1"
+.UNIX_COMMAND "uname -npo"
+.DE
+@
+
+
+1.184
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.180 2021-09-29 12:19:44-07 - - $"
+d148 1
+@
+
+
+1.183
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.177 2021-09-29 12:12:38-07 - - $"
+d533 11
+a543 10
+.br
+# pvec <- PHI #
+# for ~ i elem [ 0 , m ) ~ : #
+# TAB c <- 0 #
+# TAB for ~ j elem [ 0 , n ) ~ : #
+# TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c #
+# TAB TAB pvec sub { i + j } <- d rem 10 #
+# TAB TAB c <- left floor d div 10 right floor #
+# TAB pvec sub { i + n } <- c #
+.br
+@
+
+
+1.182
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.178 2021-09-29 12:14:02-07 - - $"
+d39 1
+a39 1
+delim $$
+d362 6
+a367 6
+That means, for example, that the number $4629$ would be stored in
+a vector $v$ as\(::
+$v sub 3 = 4 $,
+$v sub 2 = 6 $,
+$v sub 1 = 2 $,
+$v sub 0 = 9 $.
+d370 2
+a371 2
+$d times 10 sup k$,
+then $v sub k = d$.
+d525 3
+a527 3
+If $uvec$ is a vector of size $m$
+and $vvec$ is a vector of size $n$,
+then in $ O ( m n ) $ speed,
+d530 1
+a530 1
+$pvec$ as you would by hand.
+d534 8
+a541 8
+$ pvec <- PHI $
+$ for ~ i elem [ 0 , m ) ~ : $
+$ TAB c <- 0 $
+$ TAB for ~ j elem [ 0 , n ) ~ : $
+$ TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c $
+$ TAB TAB pvec sub { i + j } <- d rem 10 $
+$ TAB TAB c <- left floor d div 10 right floor $
+$ TAB pvec sub { i + n } <- c $
+d544 3
+a546 3
+Note that the interval $ [ a , b ) $ refers to the set
+$ roman "{" x | a <= x < b roman "}" $,
+i.e., to a half-open interval including $a$ but excluding $b$.
+d579 1
+a579 1
+but the big-O analysis is reasonable.
+@
+
+
+1.181
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.179 2021-09-29 12:15:15-07 - - $"
+d39 1
+a39 1
+delim ##
+d362 6
+a367 6
+That means, for example, that the number #4629# would be stored in
+a vector #v# as\(::
+#v sub 3 = 4 #,
+#v sub 2 = 6 #,
+#v sub 1 = 2 #,
+#v sub 0 = 9 #.
+d370 2
+a371 2
+#d times 10 sup k#,
+then #v sub k = d#.
+d525 3
+a527 3
+If #uvec# is a vector of size #m#
+and #vvec# is a vector of size #n#,
+then in # O ( m n ) # speed,
+d530 1
+a530 1
+#pvec# as you would by hand.
+d534 8
+a541 8
+# pvec <- PHI #
+# for ~ i elem [ 0 , m ) ~ : #
+# TAB c <- 0 #
+# TAB for ~ j elem [ 0 , n ) ~ : #
+# TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c #
+# TAB TAB pvec sub { i + j } <- d rem 10 #
+# TAB TAB c <- left floor d div 10 right floor #
+# TAB pvec sub { i + n } <- c #
+d544 3
+a546 3
+Note that the interval # [ a , b ) # refers to the set
+# roman "{" x | a <= x < b roman "}" #,
+i.e., to a half-open interval including #a# but excluding #b#.
+d579 1
+a579 1
+but the big-#O# analysis is reasonable.
+@
+
+
+1.180
+log
+@-
+@
+text
+@d533 10
+a542 11
+.EQ
+lpile { pvec <- PHI
+above   for ~ i elem [ 0 , m ) ~ :
+above   TAB c <- 0
+above   TAB for ~ j elem [ 0 , n ) ~ :
+above   TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c
+above   TAB TAB pvec sub { i + j } <- d rem 10
+above   TAB TAB c <- left floor d div 10 right floor
+above   TAB pvec sub { i + n } <- c
+}
+.EN
+@
+
+
+1.179
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.177 2021-09-29 12:12:38-07 - - $"
+d533 11
+a543 10
+.br
+# pvec <- PHI #
+# for ~ i elem [ 0 , m ) ~ : #
+# TAB c <- 0 #
+# TAB for ~ j elem [ 0 , n ) ~ : #
+# TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c #
+# TAB TAB pvec sub { i + j } <- d rem 10 #
+# TAB TAB c <- left floor d div 10 right floor #
+# TAB pvec sub { i + n } <- c #
+.br
+@
+
+
+1.178
+log
+@-
+@
+text
+@d39 1
+a39 1
+delim $$
+d362 6
+a367 6
+That means, for example, that the number $4629$ would be stored in
+a vector $v$ as\(::
+$v sub 3 = 4 $,
+$v sub 2 = 6 $,
+$v sub 1 = 2 $,
+$v sub 0 = 9 $.
+d370 2
+a371 2
+$d times 10 sup k$,
+then $v sub k = d$.
+d525 3
+a527 3
+If $uvec$ is a vector of size $m$
+and $vvec$ is a vector of size $n$,
+then in $ O ( m n ) $ speed,
+d530 1
+a530 1
+$pvec$ as you would by hand.
+d534 8
+a541 8
+$ pvec <- PHI $
+$ for ~ i elem [ 0 , m ) ~ : $
+$ TAB c <- 0 $
+$ TAB for ~ j elem [ 0 , n ) ~ : $
+$ TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c $
+$ TAB TAB pvec sub { i + j } <- d rem 10 $
+$ TAB TAB c <- left floor d div 10 right floor $
+$ TAB pvec sub { i + n } <- c $
+d544 3
+a546 3
+Note that the interval $ [ a , b ) $ refers to the set
+$ roman "{" x | a <= x < b roman "}" $,
+i.e., to a half-open interval including $a$ but excluding $b$.
+d579 1
+a579 1
+but the big-O analysis is reasonable.
+@
+
+
+1.177
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.176 2021-09-29 12:10:06-07 - - $"
+d39 1
+a39 1
+delim ##
+d362 6
+a367 6
+That means, for example, that the number #4629# would be stored in
+a vector #v# as\(::
+#v sub 3 = 4 #,
+#v sub 2 = 6 #,
+#v sub 1 = 2 #,
+#v sub 0 = 9 #.
+d370 2
+a371 2
+#d times 10 sup k#,
+then #v sub k = d#.
+d525 3
+a527 3
+If #uvec# is a vector of size #m#
+and #vvec# is a vector of size #n#,
+then in # O ( m n ) # speed,
+d530 1
+a530 1
+#pvec# as you would by hand.
+d534 8
+a541 8
+# pvec <- PHI #
+# for ~ i elem [ 0 , m ) ~ : #
+# TAB c <- 0 #
+# TAB for ~ j elem [ 0 , n ) ~ : #
+# TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c #
+# TAB TAB pvec sub { i + j } <- d rem 10 #
+# TAB TAB c <- left floor d div 10 right floor #
+# TAB pvec sub { i + n } <- c #
+d544 3
+a546 3
+Note that the interval # [ a , b ) # refers to the set
+# roman "{" x | a <= x < b roman "}" #,
+i.e., to a half-open interval including #a# but excluding #b#.
+d579 1
+a579 1
+but the big-#O# analysis is reasonable.
+@
+
+
+1.176
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.175 2021-09-29 08:31:54-07 - - $"
+d667 1
+a667 1
+.UNIX_COMMAND "echo $(hostname) $(uname -srp)
+@
+
+
+1.175
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.174 2021-09-29 08:30:58-07 - - $"
+d667 1
+a667 1
+.UNIX_COMMAND "echo $(uname -sp) - $(hostname) - $(date)"
+@
+
+
+1.174
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.173 2021-09-29 08:30:34-07 - - $"
+d388 1
+a388 1
+To print a digits, cast it to an int.
+@
+
+
+1.173
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.171 2021-09-29 08:24:43-07 - - $"
+d379 1
+a379 1
+.E= "Canonical form."
+@
+
+
+1.172
+log
+@-
+@
+text
+@d380 2
+a381 1
+.br
+d384 6
+@
+
+
+1.171
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.166 2021-09-29 08:21:28-07 - - $"
+d587 1
+a587 1
+write a loop from the low or digit,
+d597 2
+a598 1
+Then if the next higher digit is odd,
+@
+
+
+1.170
+log
+@-
+@
+text
+@d450 1
+a450 1
+Else,
+@
+
+
+1.169
+log
+@-
+@
+text
+@d450 1
+a450 1
+Otherwise,
+@
+
+
+1.168
+log
+@-
+@
+text
+@d449 1
+d451 1
+a451 1
+the sign of the result is the opposite of the sign of the right number.
+@
+
+
+1.167
+log
+@-
+@
+text
+@d440 4
+a443 2
+If the signs are the same,
+call
+d446 1
+d451 1
+@
+
+
+1.166
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.165 2021-09-29 08:18:48-07 - - $"
+d430 4
+a433 2
+If the signs are different,
+call
+d436 1
+d438 1
+@
+
+
+1.165
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.164 2021-09-29 08:18:22-07 - - $"
+a434 2
+.LE
+.ALX 1 ()
+@
+
+
+1.164
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.163 2021-09-29 08:16:38-07 - - $"
+d16 1
+a16 1
+.DE ALX-ITEMS
+@
+
+
+1.163
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.162 2021-09-29 08:14:36-07 - - $"
+d16 3
+d405 1
+a405 1
+.ALX-BL
+d415 1
+a415 1
+.ALX-BL
+@
+
+
+1.162
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.161 2021-09-29 08:13:03-07 - - $"
+d401 4
+a404 2
+If the signs are the same,
+call
+d407 1
+d409 1
+d411 4
+a414 2
+If the signs are different,
+call
+d417 1
+d419 1
+@
+
+
+1.161
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.159 2021-09-28 23:38:41-07 - - $"
+d14 1
+a14 1
+.   ALX \[bu] 0 "2" 0 0
+d88 1
+a88 1
+.ALX \[bu] 0 "" 0 0
+d189 1
+a189 1
+.ALX \[bu] 0 "" 0 0
+@
+
+
+1.160
+log
+@-
+@
+text
+@d88 1
+a88 1
+.ALX-BL
+d189 1
+a189 1
+.ALX-BL
+@
+
+
+1.159
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.158 2021-09-28 23:34:41-07 - - $"
+d88 1
+a88 1
+.ALX \[bu] 0 "" 0 0
+d189 1
+a189 1
+.ALX \[bu] 0 "" 0 0
+@
+
+
+1.158
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.157 2021-09-28 23:34:24-07 - - $"
+d565 21
+@
+
+
+1.157
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.156 2021-09-28 23:33:57-07 - - $"
+d377 1
+a377 1
+.br`
+@
+
+
+1.156
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.155 2021-09-28 23:33:19-07 - - $"
+d376 2
+a377 1
+.E= "Canonical form\(::"
+@
+
+
+1.155
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.154 2021-09-28 23:33:04-07 - - $"
+d371 1
+a371 3
+always store numbers in a
+.E= canonical
+form\(::
+@
+
+
+1.154
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.153 2021-09-28 23:32:22-07 - - $"
+a65 1
+.br
+@
+
+
+1.153
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.151 2021-09-28 23:31:18-07 - - $"
+d618 1
+@
+
+
+1.152
+log
+@-
+@
+text
+@d31 4
+a34 5
+ .de UNIX_COMMAND
+ .   nop bash-$ \f[CB]\\$*\f[P]
+ .   pso \\$*
+ ..
+.DS
+@
+
+
+1.151
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.150 2021-09-28 23:28:50-07 - - $"
+d31 4
+a34 4
+.de UNIX_COMMAND
+.   nop bash-$ \f[CB]\\$*\f[P]
+.   pso \\$*
+..
+a64 1
+.fi
+@
+
+
+1.150
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.149 2021-09-28 23:19:35-07 - - $"
+d65 1
+@
+
+
+1.149
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.148 2021-09-28 23:18:02-07 - - $"
+d373 3
+a375 1
+always store numbers in a canonical form\(::
+d379 3
+a381 1
+Zero should be represented as a vector of zero length
+d402 1
+a402 1
+.ALX-BL
+d420 1
+a420 1
+.ALX-BL
+d428 1
+a428 1
+.ALX-BL
+d558 10
+@
+
+
+1.148
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.146 2021-09-28 23:16:33-07 - - $"
+d432 2
+a433 2
+If the right number is larger,
+the sign of the result is the opposite of its sign.
+@
+
+
+1.147
+log
+@-
+@
+text
+@a429 1
+.br
+@
+
+
+1.146
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.145 2021-09-28 23:15:28-07 - - $"
+a403 1
+.br
+@
+
+
+1.145
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.144 2021-09-28 23:15:11-07 - - $"
+d403 1
+a403 1
+with the unsigned arguments.
+d410 1
+a410 1
+with the larger number as its left argument.
+d422 2
+a423 2
+with the unsigned arguments.
+The sign of the result is the sign of the left argument.
+d430 1
+a430 1
+with the larger number as its left argument.
+d432 1
+a432 1
+If the left argument is larger,
+@
+
+
+1.144
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.143 2021-09-28 23:13:38-07 - - $"
+a435 1
+.LE
+@
+
+
+1.143
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.142 2021-09-28 23:11:32-07 - - $"
+d423 1
+a423 1
+THe sign of the result is the sign of the left argument.
+d429 3
+a431 7
+.V= ubigint::operator- \(::
+.ALX-BL
+.LI
+The left argument is the larger number.
+.LI
+The right argument is the smaller number.
+.LI
+a433 1
+.LI
+@
+
+
+1.142
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.140 2021-09-28 23:07:57-07 - - $"
+d421 3
+a423 7
+.V= ubigint::operator+ \(::
+.ALX-BL
+.LI
+Arguments may be in either order.
+.LI
+The signed result uses the sign of the left signed number.
+.LE
+@
+
+
+1.141
+log
+@-
+@
+text
+@d403 2
+a404 1
+with the unsigned argumens.
+@
+
+
+1.140
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.139 2021-09-28 23:07:32-07 - - $"
+a404 1
+.LE
+@
+
+
+1.139
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.138 2021-09-28 23:05:28-07 - - $"
+a411 1
+.LE
+@
+
+
+1.138
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.137 2021-09-28 23:03:14-07 - - $"
+d402 2
+a403 5
+.V= ubigint::operator+ \(::
+.ALX-BL
+.LI
+Arguments may be in either order.
+.LI
+d409 3
+a411 8
+.V= ubigint::operator- \(::
+.ALX-BL
+.LI
+The left argument is the larger number.
+.LI
+The right argument is the smaller number.
+.LI
+The signed result uses the sign of the larger number.
+@
+
+
+1.137
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.136 2021-09-28 23:02:36-07 - - $"
+d449 2
+a450 1
+If the left number is larger, use its sign.
+d452 2
+a453 1
+If the right number is larger, use the opposite of its sign.
+@
+
+
+1.136
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.135 2021-09-28 22:52:12-07 - - $"
+d439 1
+@
+
+
+1.135
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.134 2021-09-28 22:50:15-07 - - $"
+d448 3
+a450 1
+The signed result uses the sign of the left signed number.
+@
+
+
+1.134
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.133 2021-09-28 22:47:31-07 - - $"
+d435 1
+a435 1
+The sign of the result is the sign of the larger number.
+@
+
+
+1.133
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.132 2021-09-28 22:46:28-07 - - $"
+d448 1
+a448 1
+The signed result uses the sign of the larger number.
+@
+
+
+1.132
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.131 2021-09-28 22:37:16-07 - - $"
+d437 1
+a448 1
+.LE
+@
+
+
+1.131
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.130 2021-09-28 22:34:59-07 - - $"
+d415 1
+a415 1
+The left argument is the smaller number.
+d417 1
+a417 1
+The right argument is the larger number.
+d424 27
+a450 6
+.V= bigint::operator-
+should perform similarly.
+If the signs are different, it uses
+.V= ubigint::operator+
+but if the same, it uses
+.V= ubigint::operator- .
+@
+
+
+1.130
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.129 2021-09-28 22:25:08-07 - - $"
+d400 1
+a400 1
+If the same,
+d402 7
+a408 3
+.V= ubigint::operator+
+to compute the sum.
+The sign of the result is the same.
+@
+
+
+1.129
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.118 2021-09-04 15:49:10-07 - - $"
+d13 3
+d31 5
+d397 3
+a399 1
+check to see if the signs are the same or different.
+d403 3
+a405 1
+to compute the sum, and set the result sign as appopriate.
+d408 10
+a417 3
+.V= ubigint::operator-
+with the larger number first and the smaller number second.
+The sign is the sign of the larger number.
+a594 5
+.de UNIX_COMMAND
+.   nop bash-$ \f[CB]\\$*\f[P]
+.   pso \\$*
+..
+.DS
+@
+
+
+1.128
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.126 2021-09-28 22:17:55-07 - - $"
+a27 4
+.de UNIX_COMMAND
+.   nop bash-$ \f[CB]\\$*\f[P]
+.   pso \\$*
+..
+d353 7
+a359 9
+That means, for example, that the number 4629 would be stored in
+a vector
+.V= v
+as\(::
+v[3]\~=\~4,
+v[2]\~=\~6,
+v[1]\~=\~2,
+v[0]\~=\~9.
+In\~other\~words,
+d361 2
+a362 7
+.EQ
+d times 10 sup k ,
+.EN
+then
+.EQ
+v sub k = d .
+.EN
+d471 3
+a473 8
+If
+.V= u
+is a vector of size
+.V= m ,
+and 
+.V= v
+is a vector of size
+.V= n ,
+d476 1
+a476 2
+.V= p
+as you would by hand.
+d480 8
+a487 10
+.nf
+.ft CB
+p = empty
+for i in [0 .. m): 
+    c = 0 
+    for j in [0 .. n):
+        d = p[i+j] + u[i] * v[j] + c 
+        p[i+j] = d % 10 
+        c = d / 10
+    p[i+n] = c 
+d490 3
+a492 10
+Note that the interval 
+.V= "[a .. b)"
+refers to the set
+.EW
+roman "{" x | a <= x < b roman "}" ","
+.EN
+i.e., to a half-open interval including 
+.V= a
+but excluding
+.V= b .
+d525 1
+a525 1
+but the big-O analysis is reasonable.
+d576 4
+@
+
+
+1.127
+log
+@-
+@
+text
+@d357 9
+a365 7
+That means, for example, that the number #4629# would be stored in
+a vector #v# as\(::
+#v sub 3 = 4 #,
+#v sub 2 = 6 #,
+#v sub 1 = 2 #,
+#v sub 0 = 9 #.
+In other words,
+d367 7
+a373 2
+#d times 10 sup k#,
+then #v sub k = d#.
+d509 10
+a518 3
+Note that the interval # [ a , b ) # refers to the set
+# roman "{" x | a <= x < b roman "}" #,
+i.e., to a half-open interval including #a# but excluding #b#.
+d551 1
+a551 1
+but the big-#O# analysis is reasonable.
+@
+
+
+1.126
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.125 2021-09-28 21:57:53-07 - - $"
+d493 2
+a494 2
+for i in [0 .. m): #
+    c = 0 #
+d496 2
+a497 2
+        d = p[i+j] + u[i] * v[j] + c #
+        p[i+j] = d % 10 #
+d499 1
+a499 1
+    p[i+n] = c #
+@
+
+
+1.125
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.118 2021-09-04 15:49:10-07 - - $"
+d28 4
+d475 8
+a482 3
+If #uvec# is a vector of size #m#
+and #vvec# is a vector of size #n#,
+then in # O ( m n ) # speed,
+d485 2
+a486 1
+#pvec# as you would by hand.
+d490 10
+a499 8
+# pvec <- PHI #
+# for ~ i elem [ 0 , m ) ~ : #
+# TAB c <- 0 #
+# TAB for ~ j elem [ 0 , n ) ~ : #
+# TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c #
+# TAB TAB pvec sub { i + j } <- d rem 10 #
+# TAB TAB c <- left floor d div 10 right floor #
+# TAB pvec sub { i + n } <- c #
+a587 4
+.de UNIX_COMMAND
+.   nop bash-$ \f[CB]\\$*\f[P]
+.   pso \\$*
+..
+@
+
+
+1.124
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.117 2021-09-04 15:48:07-07 - - $"
+d37 1
+a37 1
+not C style, as shown in the following table.
+@
+
+
+1.123
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.116 2021-09-04 15:47:42-07 - - $"
+d101 1
+a101 1
+Optimization sometimes rearranges bugs in code in unexpected ways.
+@
+
+
+1.122
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.115 2021-09-04 15:13:18-07 - - $"
+d99 1
+a99 1
+reduces compilation time and makes debugging produce expected
+d101 1
+a101 1
+Optimization sometimes rearranges buggy code in unexpected ways.
+@
+
+
+1.121
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.119 2021-09-04 15:50:00-07 - - $"
+a9 1
+.GETST* MULTIPLY_ALG Figure_MULTIPLY_ALG
+d37 1
+a37 1
+not C style.
+d65 1
+a65 1
+files from C only when a
+d99 1
+a99 1
+reduces compilation time and makes debugging produce more expected
+d101 1
+a101 1
+Optimization may rearrange bugs in code in unexpected ways.
+d353 1
+a353 1
+That means, for example, that the number 4629 would be stored in
+a383 17
+.br
+.DF
+\&
+.br
+.B1
+.SP
+# pvec <- PHI #
+# for ~ i elem [ 0 , m ) ~ : #
+# TAB c <- 0 #
+# TAB for ~ j elem [ 0 , n ) ~ : #
+# TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c #
+# TAB TAB pvec sub { i + j } <- d rem 10 #
+# TAB TAB c <- left floor d div 10 right floor #
+# TAB pvec sub { i + n } <- c #
+.SP
+.B2
+.FG "Multiplication algorithm" "" 0 MULTIPLY_ALG
+d477 13
+a489 2
+The algorithm can be described mathematically is shown
+in Figure \*[Figure_MULTIPLY_ALG].
+@
+
+
+1.120
+log
+@-
+@
+text
+@d10 1
+a10 1
+.GETST* MULTIPLY_ALG Figure_MULTTIPLY_ALG
+@
+
+
+1.119
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.118 2021-09-04 15:49:10-07 - - $"
+d10 1
+d354 1
+a354 1
+That means, for example, that the number #4629# would be stored in
+d385 17
+d495 2
+a496 13
+The algorithm can be described mathematically as follows\(::
+.DS I
+.br
+# pvec <- PHI #
+# for ~ i elem [ 0 , m ) ~ : #
+# TAB c <- 0 #
+# TAB for ~ j elem [ 0 , n ) ~ : #
+# TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c #
+# TAB TAB pvec sub { i + j } <- d rem 10 #
+# TAB TAB c <- left floor d div 10 right floor #
+# TAB pvec sub { i + n } <- c #
+.br
+.DE
+@
+
+
+1.118
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.117 2021-09-04 15:48:07-07 - - $"
+d65 1
+a65 1
+files from C only when an appropriate
+@
+
+
+1.117
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.116 2021-09-04 15:47:42-07 - - $"
+d37 1
+a37 1
+not C style, as shown in the following table.
+@
+
+
+1.116
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.115 2021-09-04 15:13:18-07 - - $"
+d101 1
+a101 1
+Optimization sometimes rearranges bugs in code in unexpected ways.
+@
+
+
+1.115
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.114 2021-09-04 15:12:23-07 - - $"
+d99 1
+a99 1
+reduces compilation time and makes debugging produce expected
+d101 1
+a101 1
+Optimization sometimes rearranges buggy code in unexpected ways.
+@
+
+
+1.114
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.111 2021-09-04 14:26:54-07 - - $"
+d115 1
+a115 1
+warns whenever a loccal variable or type declaration
+@
+
+
+1.113
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.112 2021-09-04 15:10:52-07 - - $"
+d82 3
+a84 2
+.VL \n[Pi] "" 1
+.V=LI -std=gnu++2a
+d88 2
+a89 1
+.V=LI -g
+d97 2
+a98 1
+.V=LI -O0
+d102 2
+a103 1
+.V=LI -Wall
+d105 2
+a106 1
+.V=LI -Wextra
+d109 2
+a110 1
+.V=LI -Wpedantic
+d113 2
+a114 1
+.V=LI -Wshadow
+d117 2
+a118 1
+.V=LI -Wold-style-cast
+d127 2
+a128 1
+.V=LI -fdiagnostics-color=never 
+@
+
+
+1.112
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.111 2021-09-04 14:26:54-07 - - $"
+a82 1
+.LI
+a86 1
+.LI
+a94 1
+.LI
+a98 1
+.LI
+a100 1
+.LI
+a103 1
+.LI
+a106 1
+.LI
+a109 1
+.LI
+a118 1
+.LI
+@
+
+
+1.111
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.110 2021-09-04 14:26:16-07 - - $"
+d82 1
+a82 1
+.ALX \[bu] 0 "" 0 0
+d84 1
+a84 1
+.V= -std=gnu++2a
+d89 1
+a89 1
+.V= -g
+d98 1
+a98 1
+.V= -O0
+d103 1
+a103 1
+.V= -Wall
+d106 1
+a106 1
+.V= -Wextra
+d110 1
+a110 1
+.V= -Wpedantic
+d114 1
+a114 1
+.V= -Wshadow
+d118 1
+a118 1
+.V= -Wold-style-cast
+d128 1
+a128 1
+.V= -fdiagnostics-color=never 
+@
+
+
+1.110
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.109 2021-09-04 14:25:02-07 - - $"
+d85 1
+a85 1
+specifies the Gnu dialect of C++20,
+@
+
+
+1.109
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.108 2021-09-04 14:23:46-07 - - $"
+d121 1
+d126 1
+a126 2
+.V= reinterpret_cast 
+should be used instead.
+@
+
+
+1.108
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.107 2021-09-04 14:22:54-07 - - $"
+d83 1
+d88 1
+d97 1
+d102 1
+d105 1
+d109 1
+d113 1
+d117 1
+d127 1
+@
+
+
+1.107
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.106 2021-09-04 14:21:08-07 - - $"
+d83 1
+a83 1
+.V=LI -std=gnu++2a
+d87 1
+a87 1
+.V=LI -g
+d95 1
+a95 1
+.V=LI -O0
+d99 1
+a99 1
+.V=LI -Wall
+d101 1
+a101 1
+.V=LI -Wextra
+d104 1
+a104 1
+.V=LI -Wpedantic
+d107 1
+a107 1
+.V=LI -Wshadow
+d110 1
+a110 1
+.V=LI -Wold-style-cast
+d119 1
+a119 1
+.V=LI -fdiagnostics-color=never 
+@
+
+
+1.106
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.105 2021-09-04 14:20:16-07 - - $"
+d82 1
+a82 1
+.VL \n[Pi] "" 1
+@
+
+
+1.105
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.104 2021-09-04 14:06:22-07 - - $"
+d82 1
+a82 1
+.VL \n[PI] "" 1
+@
+
+
+1.104
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.103 2021-09-04 14:05:59-07 - - $"
+d84 3
+d88 7
+d96 3
+d100 1
+d102 2
+d105 2
+d108 2
+d111 8
+d120 2
+@
+
+
+1.103
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.102 2021-09-04 13:59:07-07 - - $"
+d82 1
+a82 1
+.VL \n[PI]
+@
+
+
+1.102
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.101 2021-09-04 13:58:07-07 - - $"
+d81 12
+@
+
+
+1.101
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.100 2021-09-04 13:57:09-07 - - $"
+a80 1
+.ft P
+d95 1
+@
+
+
+1.100
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.99 2021-09-04 13:53:15-07 - - $"
+d92 2
+a93 2
+be sure to port and test your code the the Linux timeshares.
+If it works on your system, but not on the servers,
+@
+
+
+1.99
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.98 2021-09-04 13:52:43-07 - - $"
+a80 5
+If you develop on your personal system,
+be sure to port code the the Linux servers.
+If it works on your system, but not on the servers,
+.ft BI
+then it does not work.
+d90 6
+@
+
+
+1.98
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.97 2021-09-02 13:18:33-07 - - $"
+d85 1
+a85 1
+.UL "then it does not work."
+@
+
+
+1.97
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.96 2021-09-02 13:17:40-07 - - $"
+d84 3
+a86 1
+then it does not work.
+@
+
+
+1.96
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.95 2021-09-02 13:16:36-07 - - $"
+d67 1
+a67 1
+files does not exist.
+@
+
+
+1.95
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.94 2021-09-02 13:15:16-07 - - $"
+d58 2
+a59 1
+.V= "using namespace std;" .
+d78 1
+a78 3
+Compile with the
+.V= g++
+options
+d80 1
+a80 1
+.VTCODE* 1 "-std=gnu++2a -g -O0 \*[G++OPTS]"
+@
+
+
+1.94
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.93 2021-09-02 13:14:00-07 - - $"
+d73 1
+a73 1
+The production system for all work this quarter is
+d77 1
+a77 1
+Compilation will be done with the
+@
+
+
+1.93
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.92 2021-09-02 11:35:00-07 - - $"
+d57 2
+a58 2
+Include only C++ header files where feasible and use the declaration
+.V= "using namespace std;" 
+d61 1
+a61 1
+files only when C++ header files are unavailable.
+d66 1
+a66 1
+files is unavailable.
+@
+
+
+1.92
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.91 2021-09-02 11:27:50-07 - - $"
+d57 1
+a57 1
+Include only C++11/14/17 header files where feasible\(::
+a58 1
+.br
+d61 1
+a61 1
+files only when C++-style files are unavailable.
+@
+
+
+1.91
+log
+@-
+@
+text
+@d5 1
+a5 1
+.ds Quarter Spring\~2021
+d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.90 2021-09-02 11:26:47-07 - - $"
+@
+
+
+1.90
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.89 2021-09-02 11:25:36-07 - - $"
+d75 2
+a76 3
+the ITS Linux server
+.=V ( unix.ucsc.edu ),
+with
+@
+
+
+1.89
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.88 2021-09-02 11:24:45-07 - - $"
+d77 2
+a78 2
+and the compiler we will use is
+.V= g++
+@
+
+
+1.88
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.87 2021-09-02 11:23:38-07 - - $"
+d91 1
+a91 1
+compiler is
+@
+
+
+1.87
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.86 2021-09-02 11:20:17-07 - - $"
+d92 1
+d95 1
+@
+
+
+1.86
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.85 2021-09-02 11:20:03-07 - - $"
+d10 2
+a13 1
+.   nr VCODEN \\n[VCODENWIDTH]u*\\$[1]
+d16 1
+a16 1
+.   nop \h'\\n[VCODEN]u'-bash-\\n+[SHELLCNT]$
+@
+
+
+1.85
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.84 2021-09-02 11:16:43-07 - - $"
+d15 1
+a15 1
+.   nop \h'\n[VCODEN]u'-bash-\\n+[SHELLCNT]$
+@
+
+
+1.84
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.83 2021-09-02 11:13:56-07 - - $"
+d12 1
+d15 1
+a15 1
+.   nop -bash-\\n+[SHELLCNT]$
+a87 1
+.nr VCODEN \\n[VCODENWIDTH]u*\\$[1]
+a90 1
+.in +\n[VTCODEN]u
+a92 1
+.in -\n[VTCODEN]u
+@
+
+
+1.83
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.82 2021-09-02 11:12:42-07 - - $"
+d87 1
+d91 1
+d94 1
+@
+
+
+1.82
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.81 2021-09-02 11:09:49-07 - - $"
+a80 5
+.P
+The particular
+.V= g++ compiler is
+.COMMAND which g++
+.COMMAND g++ --version | grep -i g++
+d86 6
+@
+
+
+1.81
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.80 2021-09-02 11:06:08-07 - - $"
+a75 2
+.VTCODE* 1  /opt/rh/devtoolset-8/root/usr/bin/g++
+You need not use the full pathname.
+a76 3
+is already in your
+.V= \[DO]PATH
+environment variable.
+d81 5
+@
+
+
+1.80
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.79 2021-09-02 11:05:38-07 - - $"
+d10 16
+@
+
+
+1.79
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.78 2021-09-02 11:04:40-07 - - $"
+d66 3
+a68 1
+Compilation will be done with the options
+@
+
+
+1.78
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.77 2021-09-02 11:00:05-07 - - $"
+d66 1
+a66 2
+.P
+Compilation should always be done with the options
+d68 1
+a68 1
+.VTCODE* 1 "g++ -std=gnu++2a -g -O0 \*[G++OPTS]"
+@
+
+
+1.77
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.76 2021-09-02 10:59:30-07 - - $"
+d57 3
+d61 5
+a65 2
+running on the ITS LT Linux servers
+.=V ( unix.ucsc.edu ).
+@
+
+
+1.76
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.75 2021-09-02 10:58:50-07 - - $"
+d60 1
+@
+
+
+1.75
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.74 2021-09-02 10:56:31-07 - - $"
+d57 1
+a57 1
+.V= /opt/rh/devtoolset-8/root/usr/bin/g++
+@
+
+
+1.74
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.73 2021-09-02 10:51:44-07 - - $"
+d57 3
+a59 2
+.V= unix.ucsc.edu ,
+which is the ITS LT Linux servers.
+d61 1
+a61 1
+.ds G++OPTS -Wall -Wextra -Wpedantic -Wshadow -Wold-style-cast "
+@
+
+
+1.73
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.72 2021-09-02 10:51:13-07 - - $"
+d55 11
+@
+
+
+1.72
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.71 2021-03-26 00:01:01-07 - - $"
+d17 1
+a17 1
+.H 1 "Using C++11/14/17 (\f[CB]-std=gnu++2a\f[P])"
+@
+
+
+1.71
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.70 2020-12-27 19:14:43-08 - - $"
+d17 1
+a17 1
+.H 1 "Using C++11/14/17 (20?)"
+@
+
+
+1.70
+log
+@-
+@
+text
+@d5 1
+a5 1
+.ds Quarter Winter\~2021
+d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.69 2020-12-27 19:13:07-08 - - $"
+@
+
+
+1.69
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.68 2020-12-27 19:10:56-08 - - $"
+d91 1
+a91 2
+.\".ALX \[bu] 0 "" 0 0
+.BL
+@
+
+
+1.68
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.67 2020-12-27 18:59:05-08 - - $"
+d91 2
+a92 1
+.ALX \[bu] 0 "" 0 0
+@
+
+
+1.67
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.66 2020-12-27 18:57:26-08 - - $"
+d89 12
+@
+
+
+1.66
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.65 2020-12-27 18:57:12-08 - - $"
+d244 1
+a244 1
+In storing the big integer, each digit is kept as a number in
+@
+
+
+1.65
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.64 2020-12-27 18:56:09-08 - - $"
+d41 1
+@
+
+
+1.64
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.63 2020-12-27 18:55:17-08 - - $"
+d39 2
+a40 2
+Include only C++11/14/17 header files and facilities where feasible\(::
+.VTCODE* 1 "using namespace std;" 
+@
+
+
+1.63
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.62 2020-12-27 18:54:06-08 - - $"
+d39 1
+a39 1
+Include only C++11/14/17 header files and facilities where feasable,
+@
+
+
+1.62
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.61 2020-12-27 18:52:31-08 - - $"
+a38 1
+Header files\(::
+d40 1
+a40 2
+and
+.V= "using namespace std;" .
+@
+
+
+1.61
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.60 2020-11-25 15:06:56-08 - - $"
+d42 1
+a42 1
+.=V `` using\~namespace\~std; ''.
+@
+
+
+1.60
+log
+@-
+@
+text
+@d5 1
+a5 1
+.ds Quarter Fall\~2020
+d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.59 2020-11-25 15:06:04-08 - - $"
+@
+
+
+1.59
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.58 2020-11-25 15:04:52-08 - - $"
+d238 1
+a238 1
+in
+@
+
+
+1.58
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.57 2020-11-25 15:00:37-08 - - $"
+d239 1
+a239 1
+.V= ubigint.h .
+@
+
+
+1.57
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.56 2020-09-20 14:06:26-07 - - $"
+d240 4
+@
+
+
+1.56
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.55 2020-09-20 14:05:43-07 - - $"
+d236 1
+a236 2
+.VCODE* 1 "using udigit_t = unsigned char;"
+.VCODE* 1 "using ubigvalue_t = vector<udigit_t>;"
+@
+
+
+1.55
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.54 2020-09-20 14:04:32-07 - - $"
+d42 1
+a42 1
+.=V `` "using namespace std;" ''.
+@
+
+
+1.54
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.53 2020-06-28 17:22:16-07 - - $"
+d42 1
+a42 1
+.V= "using namespace std" .
+@
+
+
+1.53
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.52 2020-06-21 16:04:56-07 - - $"
+d42 1
+a42 1
+.V= "use namespace std" .
+@
+
+
+1.52
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.51 2020-03-13 15:27:49-07 - - $"
+d17 1
+a17 1
+.H 1 "Using C++11/14/17"
+@
+
+
+1.51
+log
+@-
+@
+text
+@d5 1
+a5 1
+.ds Quarter Spring\~2020
+d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.50 2020-01-06 13:20:33-08 - - $"
+@
+
+
+1.50
+log
+@-
+@
+text
+@d5 1
+a5 1
+.ds Quarter Winter\~2020
+d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.49 2019-12-13 16:35:54-08 - - $"
+@
+
+
+1.49
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.48 2019-12-13 16:34:21-08 - - $"
+d206 1
+a206 1
+.V= bigint::operator+=
+d208 1
+a208 1
+.V= bigint::operator-=
+d210 1
+a210 1
+.V= ubigint::operator+=
+d212 1
+a212 1
+.V= ubigint::operator-= ,
+d282 1
+a282 1
+.V= bigint::operator+= ,
+d286 1
+a286 1
+.V= ubigint::operator+=
+d290 1
+a290 1
+.V= ubigint::operator-=
+d295 1
+a295 1
+.V= bigint::operator-=
+d298 1
+a298 1
+.V= ubigint::operator+=
+d300 1
+a300 1
+.V= ubigint::operator-= .
+d303 1
+a303 1
+.V= ubigint::operator+= ,
+d320 1
+a320 1
+.V= ubigint::operator-= ,
+d354 1
+a354 1
+.V= bigint::operator*= ,
+d357 1
+a357 1
+.V= ubigint::operator*= ,
+d361 1
+a361 1
+.V= ubigint::operator*=
+@
+
+
+1.48
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.47 2019-12-13 16:33:50-08 - - $"
+d512 1
+a512 1
+.if t .H 1 "Et cetera (\*[kai-ta-hetera])."
+@
+
+
+1.47
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.46 2019-12-13 16:30:28-08 - - $"
+d508 1
+a508 1
+.char-nt he' he \[*e]\h'-2p'\*[+<]\h'2p'\*[+']
+@
+
+
+1.46
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.45 2019-12-13 16:29:47-08 - - $"
+d510 1
+a510 1
+\[*k]\[*a]\[*i`] \[*t]\[*a`] \[he']\[*t]\[*e]\[*r]\[*a]
+@
+
+
+1.45
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.44 2019-12-13 16:29:12-08 - - $"
+d508 1
+a508 1
+.char-nt he' he \[*e]\h'-4p'\*[+<]\h'4p'\*[+']
+d510 1
+a510 1
+"\[*k]\[*a]\[*i`] \[*t]\[*a`] \[he']\[*t]\[*e]\[*r]\[*a]"
+@
+
+
+1.44
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.43 2019-12-13 15:51:23-08 - - $"
+d511 2
+a512 1
+.H 1 "Et cetera."
+@
+
+
+1.43
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.42 2019-12-13 15:49:19-08 - - $"
+d508 3
+@
+
+
+1.42
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.41 2019-12-13 15:48:41-08 - - $"
+d508 1
+a508 1
+.H 1 Etc.
+@
+
+
+1.41
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.40 2019-12-12 18:30:23-08 - - $"
+d509 3
+a511 1
+The accuracy of the Unix utility dc can be checked by\(::
+@
+
+
+1.40
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.39 2019-12-12 18:30:04-08 - - $"
+d508 3
+@
+
+
+1.39
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.38 2019-12-12 18:29:43-08 - - $"
+a86 1
+.P
+d496 1
+@
+
+
+1.38
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.37 2019-12-12 18:28:13-08 - - $"
+d87 1
+@
+
+
+1.37
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.36 2019-12-12 18:27:44-08 - - $"
+d479 1
+a479 1
+.UNIX_COMMAND "echo $(uname -sp) ... $(hostname) ... $(date)"
+@
+
+
+1.36
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.35 2019-12-12 18:25:58-08 - - $"
+d479 1
+a479 1
+.UNIX_COMMAND "echo $(uname -sp) $(hostname) $(date)"
+@
+
+
+1.35
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.34 2019-12-12 18:23:47-08 - - $"
+d469 1
+a469 2
+When this document was formatted (\*[OLDDATE])
+that was\(::
+d479 1
+a479 1
+.UNIX_COMMAND "echo $(uname -sp) $(hostname)"
+@
+
+
+1.34
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.33 2019-12-12 18:21:32-08 - - $"
+d500 1
+a500 3
+.P
+If you are doing pair programming,
+follow the additional instructions in
+d503 5
+a507 1
+.V= PARTNER .
+@
+
+
+1.33
+log
+@-
+@
+text
+@d7 1
+a7 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.32 2019-09-18 16:33:52-07 - - $"
+d206 1
+a206 1
+.V= bigint::operator+
+d208 1
+a208 1
+.V= bigint::operator-
+d210 1
+a210 1
+.V= ubigint::operator+
+d212 1
+a212 1
+.V= ubigint::operator- ,
+d282 1
+a282 1
+.V= bigint::operator+ ,
+d286 1
+a286 1
+.V= ubigint::operator+
+d290 1
+a290 1
+.V= ubigint::operator-
+d295 1
+a295 1
+.V= bigint::operator-
+d298 1
+a298 1
+.V= ubigint::operator+
+d300 1
+a300 1
+.V= ubigint::operator- .
+d303 1
+a303 1
+.V= ubigint::operator+ ,
+d320 1
+a320 1
+.V= ubigint::operator- ,
+d354 1
+a354 1
+.V= bigint::operator* ,
+d357 1
+a357 1
+.V= ubigint::operator* ,
+d361 1
+a361 1
+.V= ubigint::operator*
+@
+
+
+1.32
+log
+@-
+@
+text
+@d5 3
+a7 2
+.TITLE CSE-111 Fall\~2019 Program\~1 "Overloading and operators"
+.RCS "$Id: asg1-dc-bigint.mm,v 1.31 2019-09-10 14:43:19-07 - - $"
+@
+
+
+1.31
+log
+@-
+@
+text
+@d5 2
+a6 2
+.TITLE CMPS-109 Fall\~2019 Program\~1 "Overloading and operators"
+.RCS "$Id: asg1-dc-bigint.mm,v 1.30 2019-06-14 18:31:49-07 - - $"
+@
+
+
+1.30
+log
+@-
+@
+text
+@d5 2
+a6 2
+.TITLE CMPS-109 Summer\~2019 Program\~1 "Overloading and operators"
+.RCS "$Id: asg1-dc-bigint.mm,v 1.29 2019-04-24 13:28:52-07 - - $"
+@
+
+
+1.29
+log
+@-
+@
+text
+@d5 2
+a6 2
+.TITLE CMPS-109 Spring\~2019 Program\~1 "Overloading and operators"
+.RCS "$Id: asg1-dc-bigint.mm,v 1.28 2019-04-08 12:00:12-07 - - $"
+@
+
+
+1.28
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.27 2019-04-08 11:59:38-07 - - $"
+a504 1
+.FINISH
+@
+
+
+1.27
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.26 2019-04-01 13:49:25-07 - - $"
+d497 1
+a497 1
+.V= \&.score
+@
+
+
+1.26
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.25 2018-12-13 10:56:18-08 - - $"
+a85 1
+.P
+d88 1
+a88 4
+for some examples and in
+.V= output/
+for the result of running the test data using
+.V= dc .
+@
+
+
+1.25
+log
+@-
+@
+text
+@d5 2
+a6 2
+.TITLE CMPS-109 Winter\~2019 Program\~1 "Overloading and operators"
+.RCS "$Id: asg1-dc-bigint.mm,v 1.24 2018-12-13 10:54:18-08 - - $"
+@
+
+
+1.24
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.23 2018-12-13 10:53:31-08 - - $"
+a473 1
+.nr bash_count 0 1
+d475 1
+a475 1
+.   nop bash-\\n+[bash_count]\[Do] \f[CB]\\$*\f[P]
+@
+
+
+1.23
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.22 2018-12-13 10:51:48-08 - - $"
+d484 1
+a484 1
+.UNIX_COMMAND "echo $(hostname) $(uname -sp)"
+@
+
+
+1.22
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.21 2018-12-13 10:51:05-08 - - $"
+d10 1
+a10 1
+delim $$
+d250 6
+a255 6
+That means, for example, that the number $4629$ would be stored in
+a vector $v$ as\(::
+$v sub 3 = 4 $,
+$v sub 2 = 6 $,
+$v sub 1 = 2 $,
+$v sub 0 = 9 $.
+d258 2
+a259 2
+$d times 10 sup k$,
+then $v sub k = d$.
+d368 3
+a370 3
+If $uvec$ is a vector of size $m$
+and $vvec$ is a vector of size $n$,
+then in $ O ( m n ) $ speed,
+d373 1
+a373 1
+$pvec$ as you would by hand.
+d377 8
+a384 8
+$ pvec <- PHI $
+$ for ~ i elem [ 0 , m ) ~ : $
+$ TAB c <- 0 $
+$ TAB for ~ j elem [ 0 , n ) ~ : $
+$ TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c $
+$ TAB TAB pvec sub { i + j } <- d rem 10 $
+$ TAB TAB c <- left floor d div 10 right floor $
+$ TAB pvec sub { i + n } <- c $
+d387 3
+a389 3
+Note that the interval $ [ a , b ) $ refers to the set
+$ roman "{" x | a <= x < b roman "}" $,
+i.e., to a half-open interval including $a$ but excluding $b$.
+d422 1
+a422 1
+but the big-$O$ analysis is reasonable.
+@
+
+
+1.21
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.20 2018-12-13 10:50:07-08 - - $"
+d484 1
+a484 1
+.UNIX_COMMAND "echo \[Do](hostname) \[Do](uname -sp)"
+@
+
+
+1.20
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.19 2018-12-13 10:48:17-08 - - $"
+d484 1
+a484 1
+.UNIX_COMMAND "hostname; uname -sp"
+@
+
+
+1.19
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.18 2018-12-13 10:44:52-08 - - $"
+d484 1
+a484 2
+.UNIX_COMMAND "uname -srp"
+.UNIX_COMMAND "hostname"
+@
+
+
+1.18
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.17 2018-06-11 16:34:28-07 - - $"
+d466 21
+@
+
+
+1.17
+log
+@-
+@
+text
+@d5 2
+a6 2
+.TITLE CMPS-109 Summer\~2018 Program\~1 "Overloading and operators"
+.RCS "$Id: asg1-dc-bigint.mm,v 1.16 2018-01-16 12:35:23-08 - - $"
+@
+
+
+1.16
+log
+@-
+@
+text
+@d5 2
+a6 2
+.TITLE CMPS-109 Winter\~2018 Program\~1 "Overloading and operators"
+.RCS "$Id: asg1-dc-bigint.mm,v 1.15 2018-01-05 16:52:14-08 - - $"
+@
+
+
+1.15
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.14 2018-01-05 16:51:31-08 - - $"
+d98 1
+a98 1
+.V= trace ,
+d131 1
+a131 3
+for printing out scanner results in
+.V= TRACE
+mode.
+@
+
+
+1.14
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.13 2017-12-14 11:32:29-08 - - $"
+a13 1
+.\"tdefine rem     |{type binary "\f[CR]%\f[P]"}|
+d23 1
+a23 1
+Do not use\(::|Instead, use\(:: 
+d42 1
+a42 1
+Include 
+d45 1
+a45 1
+Include 
+d63 1
+a63 1
+To begin read the 
+d67 1
+a67 1
+.VCODE* 1 "man -s 1 dc" 
+d69 1
+a69 1
+Your program will use the standard 
+d105 1
+a105 1
+The module 
+d161 1
+a161 1
+or just a 
+d196 1
+a196 1
+The others, 
+d208 1
+a208 1
+.V= ubigint 
+d226 1
+a226 1
+.V= ubigint 
+d232 1
+a232 1
+Now we turn to the representation of a 
+d244 1
+a244 1
+in 
+d274 1
+a274 1
+using a 
+d309 1
+a309 1
+create a new 
+d368 1
+a368 1
+whose size is 
+d374 1
+a374 1
+the other argument, adding the new partial products to the product 
+d378 1
+a378 1
+.br 
+d380 1
+a380 1
+$ for ~ i elem [ 0 , m ) ~ : $ 
+d382 2
+a383 2
+$ TAB for ~ j elem [ 0 , n ) ~ : $ 
+$ TAB TAB d <- pvec sub { i + j } + uvec sub i vvec sub j + c $ 
+d385 1
+a385 1
+$ TAB TAB c <- left floor d div 10 right floor $ 
+d387 2
+a388 2
+.br 
+.DE 
+d419 1
+a419 1
+values in it by 
+d445 1
+a445 1
+or 
+d463 1
+a463 1
+and the debug macros in the 
+d477 1
+a477 1
+.V= ydc 
+d489 1
+a489 1
+.V= Syllabus/pair-programming/ 
+@
+
+
+1.13
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.12 2017-12-14 11:31:16-08 - - $"
+d17 39
+@
+
+
+1.12
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.11 2017-12-14 11:28:00-08 - - $"
+d444 4
+a447 1
+on  your code.
+@
+
+
+1.11
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.10 2017-12-12 17:20:42-08 - - $"
+d412 1
+a412 1
+.H 1 "Memory leak"
+d419 1
+a419 1
+.V= valgrind
+d421 9
+@
+
+
+1.10
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.9 2017-12-12 17:20:24-08 - - $"
+d36 12
+@
+
+
+1.9
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.8 2017-12-12 17:19:35-08 - - $"
+d15 1
+a15 1
+tdefine rem     |{type binary "\f[B]\|rem\|\f[P]"}|
+@
+
+
+1.8
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.7 2017-12-12 17:18:59-08 - - $"
+d15 1
+a15 1
+tdefine rem     |{type binary "\f[B]rem\f[P]"}|
+@
+
+
+1.7
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.6 2017-12-12 17:18:32-08 - - $"
+d15 1
+a15 1
+tdefine rem     |{type binary { bold rem }}|
+@
+
+
+1.6
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.5 2017-12-05 14:15:44-08 - - $"
+d15 1
+a15 1
+tdefine rem     |{type binary bold rem}|
+@
+
+
+1.5
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.4 2017-06-16 15:09:35-07 - - $"
+d14 2
+a15 1
+tdefine rem     |{type binary "\f[CR]%\f[P]"}|
+@
+
+
+1.4
+log
+@-
+@
+text
+@d5 2
+a6 2
+.TITLE CMPS-109 Summer\~2017 Program\~1 "Overloading and operators"
+.RCS "$Id: asg1-dc-bigint.mm,v 1.3 2016-06-30 17:16:18-07 - - $"
+@
+
+
+1.3
+log
+@-
+@
+text
+@d5 2
+a6 2
+.TITLE CMPS-109 Summer\~2016 Program\~1 "Overloading and operators"
+.RCS "$Id: asg1-dc-bigint.mm,v 1.2 2016-06-13 13:45:48-07 - - $"
+@
+
+
+1.2
+log
+@-
+@
+text
+@d6 1
+a6 1
+.RCS "$Id: asg1-dc-bigint.mm,v 1.1 2016-03-24 19:11:57-07 - - $"
+d49 1
+a49 1
+.V= general
+d52 1
+a52 1
+.V= teneral .
+@
+
+
+1.1
+log
+@-
+@
+text
+@d5 2
+a6 2
+.TITLE CMPS-109 Spring\~2016 Program\~1 "Overloading and operators"
+.RCS "$Id: asg2-dc-bigint.mm,v 1.83 2016-03-24 18:05:46-07 - - $"
+@

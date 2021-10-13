@@ -1,0 +1,10 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ mkc: starting print-uint8.cpp
+$Id: print-uint8.cpp,v 1.21 2021-04-12 16:07:23-07 - - $
+checksource print-uint8.cpp
+checksource: TOTAL COMPLAINTS: 0
+print-uint8.cpp: $Id: print-uint8.cpp,v 1.21 2021-04-12 16:07:23-07 - - $
+cpplint.py.perl print-uint8.cpp
+Done processing print-uint8.cpp
+g++ -Wall -Wextra -Wpedantic -Wshadow -fdiagnostics-color=never -std=gnu++2a -Wold-style-cast -pthread -g -O0 print-uint8.cpp -o print-uint8 -lm
+rm -f print-uint8.o
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ mkc: finished print-uint8.cpp

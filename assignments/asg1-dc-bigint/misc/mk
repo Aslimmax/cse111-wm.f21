@@ -1,0 +1,16 @@
+#!/bin/sh
+# $Id: mk,v 1.5 2021-09-02 11:54:42-07 - - $
+cid -is $0
+
+cid -is egyptian-div.perl
+egyptian-div.perl 76543 123 >egyptian-div.out
+mkpspdf egyptian-div.ps egyptian-div.perl egyptian-div.out
+
+cid -is Great-Pyramid.txt
+txt2html Great-Pyramid.txt
+
+cid -is iterstack.h
+for cppfile in *.cpp; do
+   mkt $cppfile
+done
+

@@ -1,0 +1,47 @@
+head	1.2;
+access;
+symbols;
+locks;
+comment	@# @;
+
+
+1.2
+date	2021.09.02.18.55.31;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2019.12.17.23.16.20;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@-
+@
+text
+@#!/bin/sh
+# $Id: mk,v 1.1 2019-12-17 15:16:20-08 - - $
+
+cid -is $0 References.text
+txt2html References.text
+@
+
+
+1.1
+log
+@-
+@
+text
+@d2 1
+a2 1
+# $Id$
+d4 1
+a4 1
+cid + $0 References.text
+@
