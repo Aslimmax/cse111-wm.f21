@@ -74,15 +74,26 @@ ubigint ubigint::operator+ (const ubigint& that) const {
    } else if (leftVecSize > rightVecSize) {
       largerVec.ubig_value = ubig_value;
    } else { // both vectors had the same num of digits
+      while (result.ubig_value.size() > 0 &&
+       result.ubig_value.back() == 0) {
+         result.ubig_value.pop_back();
+      }
       return result;
    }
 
+   // store the size of largerVec
+   int largerVecSize = largerVec.ubig_value.size();
+
    // At this point, there are still digits in largerVec
-   for (int i = smallerVec; i < largerVec.ubig_value.size(); i++) {
+   for (int i = smallerVec; i < largerVecSize; i++) {
       // pushback the remaining digits in largerVec
       result.ubig_value.push_back(largerVec.ubig_value.size());
    }
    // DEBUGF ('u', result);
+   while (result.ubig_value.size() > 0 &&
+    result.ubig_value.back() == 0) {
+      result.ubig_value.pop_back();
+   }
    return result;
 }
 
