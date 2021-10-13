@@ -42,7 +42,7 @@ ubigint ubigint::operator+ (const ubigint& that) const {
    ubigint largerVec;
    int pairwiseSum = 0; // store the pairwise sum of the two numbers
    int smallerVec = 0; // store the length of the smaller vector
-   bool carryover = false; // determine if carrying over is needed
+   int carryover = 0; // store the carryover value (0 or 1)
 
    // Get the sizes of each vector
    int leftVecSize = ubig_value.size();
@@ -59,14 +59,10 @@ ubigint ubigint::operator+ (const ubigint& that) const {
 
    // Loop through vectors and add each digit pairwise
    for (int i = 0; i < smallerVec; i++) {
-      pairwiseSum = ubig_value[i] + that.ubig_value[i];
-
-      if (carryover) { // add 1 if previous pairwise add had carryover
-         pairwiseSum += 1;
-      }
+      pairwiseSum = ubig_value[i] + that.ubig_value[i] + carryover;
 
       // check if carryover is needed
-      carryover = (pairwiseSum >= 10) ? (true) : (false);
+      carryover = (pairwiseSum >= 10) ? (1) : (0);
 
       // pushback pairwiseSum
       result.ubig_value.push_back(pairwiseSum);
