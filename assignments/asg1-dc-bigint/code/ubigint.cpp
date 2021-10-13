@@ -258,7 +258,7 @@ void ubigint::divide_by_2() {
    }
 }
 
-// 
+
 // struct quo_rem { ubigint quotient; ubigint remainder; };
 // quo_rem udivide (const ubigint& dividend, const ubigint& divisor_) {
 //    // NOTE: udivide is a non-member function.
@@ -343,11 +343,23 @@ bool ubigint::operator< (const ubigint& that) const {
       }
    }
 
-   // At this point, no difference was found between the two vectors
+   // At this point, no differences were found between the two vectors
    return false;
 }
 
-// ostream& operator<< (ostream& out, const ubigint& that) { 
-//    return out << "ubigint(" << that.uvalue << ")";
-// }
+// DEBUG: << IS USED FOR DEBUGGING FOR NOW, CHANGED WHEN FINISHED
+ostream& operator<< (ostream& out, const ubigint& that) { 
+   // initialize empty output string to build up the number
+   string output = "";
 
+   // Get size of vector
+   int vecSize = that.ubig_value.size();
+
+   // Loop through vector and build up output string from the low end
+   for (int i = 0; i < vecSize; i++) {
+      // Append digit to output string
+      output.insert(0, static_cast<int> (that.ubig_value[i]));
+   }
+   
+   return out << "ubigint(" << output << ")";
+}
