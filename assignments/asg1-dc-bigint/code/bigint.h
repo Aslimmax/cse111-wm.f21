@@ -28,7 +28,7 @@ class bigint {
       bigint operator+() const;
       bigint operator-() const;
 
-    //   bigint operator+ (const bigint&) const;
+      bigint operator+ (const bigint&) const;
     //   bigint operator- (const bigint&) const;
     //   bigint operator* (const bigint&) const;
     //   bigint operator/ (const bigint&) const;
