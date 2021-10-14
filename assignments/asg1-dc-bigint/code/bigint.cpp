@@ -136,9 +136,12 @@ bigint bigint::operator- (const bigint& that) const {
 //    return result;
 // }
 
-// bool bigint::operator== (const bigint& that) const {
-//    return is_negative == that.is_negative and uvalue == that.uvalue;
-// }
+bool bigint::operator== (const bigint& that) const {
+   // Both conditions need to be true for both bigints to be equal:
+   // 1. The signs are the same
+   // 2. uvalue == that.uvalue
+   return is_negative == that.is_negative && uvalue == that.uvalue;
+}
 
 bool bigint::operator< (const bigint& that) const {
    bool output = false;

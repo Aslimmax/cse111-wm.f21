@@ -34,8 +34,8 @@ class bigint {
     //   bigint operator/ (const bigint&) const;
     //   bigint operator% (const bigint&) const;
 
-    //   bool operator== (const bigint&) const;
-    bool operator<  (const bigint&) const;
+      bool operator== (const bigint&) const;
+      bool operator<  (const bigint&) const;
 };
 
 #endif
