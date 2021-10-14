@@ -130,15 +130,13 @@ bigint bigint::operator- (const bigint& that) const {
 
    return bigIntResult;
 }
-
 
 bigint bigint::operator* (const bigint& that) const {
    // Initialize a default bigint result to hold the sum
    bigint bigIntResult;
    
    // Multiply the bigints with ubigint::*
-   ubigint unsignedResult {uvalue * that.uvalue};
-   bigIntResult.uvalue = unsignedResult;
+   bigIntResult.uvalue = uvalue * that.uvalue;
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
