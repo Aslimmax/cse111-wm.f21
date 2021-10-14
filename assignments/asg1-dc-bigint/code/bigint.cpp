@@ -136,15 +136,39 @@ bigint bigint::operator* (const bigint& that) const {
    return bigIntResult;
 }
 
-// bigint bigint::operator/ (const bigint& that) const {
-//    bigint result {uvalue / that.uvalue};
-//    return result;
-// }
+bigint bigint::operator/ (const bigint& that) const {
+   // Initialize a default bigint result to hold the sum
+   bigint bigIntResult;
+   
+   // Divide the bigints with ubigint::/
+   bigIntResult.uvalue = uvalue / that.uvalue;
+   // Determine the result's signs:
+   // * same sign -> not negative
+   // * diff sign -> negative
+   bigIntResult.is_negative = (is_negative == that.is_negative) ? 
+      (false) : (true);
 
-// bigint bigint::operator% (const bigint& that) const {
-//    bigint result {uvalue % that.uvalue};
-//    return result;
-// }
+   return bigIntResult;
+   // bigint result {uvalue / that.uvalue};
+   // return result;
+}
+
+bigint bigint::operator% (const bigint& that) const {
+   // Initialize a default bigint result to hold the sum
+   bigint bigIntResult;
+   
+   // Divide the bigints with ubigint::/
+   bigIntResult.uvalue = uvalue % that.uvalue;
+   // Determine the result's signs:
+   // * same sign -> not negative
+   // * diff sign -> negative
+   bigIntResult.is_negative = (is_negative == that.is_negative) ? 
+      (false) : (true);
+
+   return bigIntResult;
+   // bigint result {uvalue % that.uvalue};
+   // return result;
+}
 
 bool bigint::operator== (const bigint& that) const {
    // Both conditions need to be true for both bigints to be equal:
