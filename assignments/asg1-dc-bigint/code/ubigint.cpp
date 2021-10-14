@@ -1,4 +1,4 @@
-// $Id: ubigint.cpp,v 1.12 2020-10-19 13:14:59-07 - - $
+// $Id: ubigint.cpp,v 1.13 2021-10-14 02:10:43-07 - - $
 
 #include <cctype>
 #include <cstdlib>
@@ -13,15 +13,21 @@ using namespace std;
 #include "ubigint.h"
 
 ubigint::ubigint (unsigned long that): ubig_value () {
+   // cout << "Constructing ubigint from unsigned long" << endl;
    // store the new end digit every time 'that' is truncated
    int digit = 0; 
    
    while(that != 0) { // don't exit loop until 'that' is 0
       digit = that % 10; // get the last digit in 'that'
       ubig_value.push_back(digit); // store the digit into ubig_value
+      // cout << "Loop inserting " << digit << endl;
       that = that / 10; // delete the last digit in 'that'
    }
-//    DEBUGF ('~', this << " -> " << uvalue)
+
+   while (ubig_value.size() > 0 &&
+      ubig_value.back() == 0) {
+      ubig_value.pop_back();
+   }
 }
 
 ubigint::ubigint (const string& that): ubig_value() {
@@ -130,6 +136,9 @@ ubigint ubigint::operator- (const ubigint& that) const {
    // Get the sizes of each vector
    int leftVecSize = ubig_value.size();
    int rightVecSize = that.ubig_value.size();
+
+   cout << "Left Vec Size: " << leftVecSize << endl;
+   cout << "Right Vec Size: " << rightVecSize << endl;
    
    // Loop through vectors and add each digit pairwise
    for (int i = 0; i < rightVecSize; i++) {
@@ -137,7 +146,7 @@ ubigint ubigint::operator- (const ubigint& that) const {
       // if the left digit is less than the right digit, borrowing will
       // occur. Set pairwiseDiff to 10 to mimic adding 10 to the left
       // digit
-      if (ubig_value[i] < that.ubig_value[i]) {
+      if (ubig_value[i] - carryover < that.ubig_value[i]) {
          borrow = 10;
       } else {
          borrow = 0;
@@ -147,29 +156,35 @@ ubigint ubigint::operator- (const ubigint& that) const {
          + borrow;
 
       // check if carryover is needed
-      carryover = (ubig_value[i] < that.ubig_value[i]) ? (1) : (0);
+      carryover = (borrow == 10) ? (1) : (0);
 
       // pushback pairwiseSum
       result.ubig_value.push_back(pairwiseDiff);
    }
 
-   // Loop through the rest of the digits remaining in this ubig_value
-   for (int i = rightVecSize; i < leftVecSize; i++) {
-      int largerVecDigit = ubig_value[i];
-      // check if the digit from the previous loop produced a carryover
-      if (carryover == 1) {
-         largerVecDigit--;
-         carryover = 0;
-      }
-      // pushback the remaining digits in largerVec
-      result.ubig_value.push_back(largerVecDigit);
+   cout << "Result: " << result << endl;
+
+   if (leftVecSize > rightVecSize) {
+      // Loop through the rest of the digits remaining in 
+      // this ubig_value
+      for (int i = rightVecSize; i < leftVecSize; i++) {
+         int largerVecDigit = ubig_value[i];
+         // check if the digit from the previous loop produced 
+         // a carryover
+         if (carryover == 1) {
+            largerVecDigit--;
+            carryover = 0;
+         }
+         // pushback the remaining digits in largerVec
+         result.ubig_value.push_back(largerVecDigit);
+      }      
    }
+
    while (result.ubig_value.size() > 0 &&
     result.ubig_value.back() == 0) {
       result.ubig_value.pop_back();
    }
    return result;
-   // return ubigint (uvalue - that.uvalue);
 }
 
 ubigint ubigint::operator* (const ubigint& that) const {
@@ -212,7 +227,7 @@ ubigint ubigint::operator* (const ubigint& that) const {
 }
 
 void ubigint::multiply_by_2() {
-   cout << "Before: " << *this << endl;
+   // cout << "Before: " << *this << endl;
    // Store the carry value from the previous pairwise product
    int carryover = 0;
    // Store the product of the two digits
@@ -245,11 +260,11 @@ void ubigint::multiply_by_2() {
       ubig_value.pop_back();
    }
 
-   cout << "Multiply by 2: " << *this << endl;
+   // cout << "After: " << *this << endl;
 }
 
 void ubigint::divide_by_2() {
-   cout << "Before: " << *this << endl;
+   // cout << "Before: " << *this << endl;
    // Store the integer division of the two digits
    int pairwiseDigitQuotient = 0;
    // Get the length of the vector
@@ -262,10 +277,11 @@ void ubigint::divide_by_2() {
 
       // Check if the next higher digit is odd. If it is, add 5 to the
       // current digit
-      if (ubig_value[i + 1] % 2 == 1) {
-         pairwiseDigitQuotient += 5;
+      if (i < vecLength - 1) {
+         if (ubig_value[i + 1] % 2 == 1) {
+            pairwiseDigitQuotient += 5;
+         }         
       }
-
       // Update the ith digit in ubig_value
       ubig_value[i] = pairwiseDigitQuotient;
    }
@@ -275,7 +291,7 @@ void ubigint::divide_by_2() {
       ubig_value.pop_back();
    }
 
-   cout << "Divide by 2:" << *this << endl;
+   // cout << "After: " << *this << endl;
 }
 
 
@@ -287,7 +303,6 @@ quo_rem udivide (const ubigint& dividend, const ubigint& divisor_) {
    if (divisor == zero) throw domain_error ("udivide by zero");
    ubigint power_of_2 {1};
    ubigint quotient {0};
-   cout << "Quotient" << quotient << endl;
    ubigint remainder {dividend}; // left operand, dividend
    while (divisor < remainder) {
       divisor.multiply_by_2();
@@ -295,14 +310,23 @@ quo_rem udivide (const ubigint& dividend, const ubigint& divisor_) {
    }
    while (power_of_2 > zero) {
       if (divisor <= remainder) {
+         cout << "Remainder Before: " << remainder << 
+         " Divisor Before: " << divisor << endl;
          remainder = remainder - divisor;
+         cout << "Remainder After: " << remainder << endl;
+         cout << "Quotient Before: " << quotient << " Power Before: " 
+         << power_of_2 << endl; 
          quotient = quotient + power_of_2;
+         cout << "Quotient After: " << quotient << endl;
+         // cout << "Remainder: " << remainder << endl;
       }
       divisor.divide_by_2();
       power_of_2.divide_by_2();
+      // cout << "Power of 2" << power_of_2 << endl;
+      // cout << "Quotient: " << quotient << endl;
    }
-   DEBUGF ('/', "quotient = " << quotient);
-   DEBUGF ('/', "remainder = " << remainder);
+//    DEBUGF ('/', "quotient = " << quotient);
+//    DEBUGF ('/', "remainder = " << remainder);
    return {.quotient = quotient, .remainder = remainder};
 }
 
