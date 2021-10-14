@@ -22,7 +22,6 @@ ubigint::ubigint (unsigned long that): ubig_value () {
       that = that / 10; // delete the last digit in 'that'
    }
 //    DEBUGF ('~', this << " -> " << uvalue)
-
 }
 
 ubigint::ubigint (const string& that): ubig_value() {
@@ -97,10 +96,6 @@ ubigint ubigint::operator+ (const ubigint& that) const {
       result.ubig_value.push_back(largerVecDigit);
    }
    // DEBUGF ('u', result);
-   // while (result.ubig_value.size() > 0 &&
-   //  result.ubig_value.back() == 0) {
-   //    result.ubig_value.pop_back();
-   // }
    return result;
 }
 
@@ -259,39 +254,39 @@ void ubigint::divide_by_2() {
 }
 
 
-// struct quo_rem { ubigint quotient; ubigint remainder; };
-// quo_rem udivide (const ubigint& dividend, const ubigint& divisor_) {
-//    // NOTE: udivide is a non-member function.
-//    ubigint divisor {divisor_};
-//    ubigint zero {0}; 
-//    if (divisor == zero) throw domain_error ("udivide by zero");
-//    ubigint power_of_2 {1};
-//    ubigint quotient {0};
-//    ubigint remainder {dividend}; // left operand, dividend
-//    while (divisor < remainder) {
-//       divisor.multiply_by_2();
-//       power_of_2.multiply_by_2();
-//    }
-//    while (power_of_2 > zero) {
-//       if (divisor <= remainder) {
-//          remainder = remainder - divisor;
-//          quotient = quotient + power_of_2;
-//       }
-//       divisor.divide_by_2();
-//       power_of_2.divide_by_2();
-//    }
-//    DEBUGF ('/', "quotient = " << quotient);
-//    DEBUGF ('/', "remainder = " << remainder);
-//    return {.quotient = quotient, .remainder = remainder};
-// }
+struct quo_rem { ubigint quotient; ubigint remainder; };
+quo_rem udivide (const ubigint& dividend, const ubigint& divisor_) {
+   // NOTE: udivide is a non-member function.
+   ubigint divisor {divisor_};
+   ubigint zero {0}; 
+   if (divisor == zero) throw domain_error ("udivide by zero");
+   ubigint power_of_2 {1};
+   ubigint quotient {0};
+   ubigint remainder {dividend}; // left operand, dividend
+   while (divisor < remainder) {
+      divisor.multiply_by_2();
+      power_of_2.multiply_by_2();
+   }
+   while (power_of_2 > zero) {
+      if (divisor <= remainder) {
+         remainder = remainder - divisor;
+         quotient = quotient + power_of_2;
+      }
+      divisor.divide_by_2();
+      power_of_2.divide_by_2();
+   }
+   DEBUGF ('/', "quotient = " << quotient);
+   DEBUGF ('/', "remainder = " << remainder);
+   return {.quotient = quotient, .remainder = remainder};
+}
 
-// ubigint ubigint::operator/ (const ubigint& that) const {
-//    return udivide (*this, that).quotient;
-// }
+ubigint ubigint::operator/ (const ubigint& that) const {
+   return udivide (*this, that).quotient;
+}
 
-// ubigint ubigint::operator% (const ubigint& that) const {
-//    return udivide (*this, that).remainder;
-// }
+ubigint ubigint::operator% (const ubigint& that) const {
+   return udivide (*this, that).remainder;
+}
 
 bool ubigint::operator== (const ubigint& that) const {
    // Validate that the size of the vectors are the same
@@ -351,14 +346,20 @@ bool ubigint::operator< (const ubigint& that) const {
 ostream& operator<< (ostream& out, const ubigint& that) { 
    // initialize empty output string to build up the number
    string output = "";
+   // Initialize digit and num to store the converted digit
+   int digitInt = 0;
+   string digitString = "";
 
    // Get size of vector
    int vecSize = that.ubig_value.size();
 
    // Loop through vector and build up output string from the low end
    for (int i = 0; i < vecSize; i++) {
+      // Cast the digit to an int, then to a string
+      digitInt = static_cast<int>(that.ubig_value[i]);
+      digitString = to_string(digitInt);
       // Append digit to output string
-      output.insert(0, static_cast<int> (that.ubig_value[i]));
+      output.insert(0, digitString);
    }
    
    return out << "ubigint(" << output << ")";
