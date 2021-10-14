@@ -40,7 +40,7 @@ ubigint::ubigint (const string& that): ubig_value() {
 
 ubigint ubigint::operator+ (const ubigint& that) const {
    // DEBUGF ('u', *this << "+" <`< that);
-   ubigint result{0}; // initialize result to store the result of adding
+   ubigint result; // initialize result to store the result of adding
    // store the largerVec to add the remaining digits to result once the
    // smaller one runs out of digits
    ubigint largerVec;
@@ -61,6 +61,8 @@ ubigint ubigint::operator+ (const ubigint& that) const {
       smallerVec = leftVecSize;
    }
 
+   // cout << "Smaller vec: " << smallerVec << endl;
+
    // Loop through vectors and add each digit pairwise
    for (int i = 0; i < smallerVec; i++) {
       pairwiseSum = 0; // reset the sum
@@ -70,7 +72,8 @@ ubigint ubigint::operator+ (const ubigint& that) const {
       carryover = (pairwiseSum >= 10) ? (1) : (0);
 
       // pushback pairwiseSum
-      result.ubig_value.push_back(pairwiseSum);
+      result.ubig_value.push_back(pairwiseSum % 10);
+      // cout << "Result: " << result << endl;
    }
 
    // Determine which vector still has digits to add
@@ -91,15 +94,31 @@ ubigint ubigint::operator+ (const ubigint& that) const {
 
    // At this point, there are still digits in largerVec
    for (int i = smallerVec; i < largerVecSize; i++) {
-      int largerVecDigit = largerVec.ubig_value[i];
+      int largerVecDigit = largerVec.ubig_value[i] + carryover;
       // check if the digit from the previous loop produced a carryover
-      if (carryover == 1) {
-         largerVecDigit++;
+      if (largerVecDigit >= 10) {
+         carryover = 1;
+      } else {
          carryover = 0;
       }
+      // if (carryover == 1) {
+      //    largerVecDigit++;
+      //    // Check if largerVecDigit is >= 10 after the carryover
+      //    if (largerVecDigit >= 10) {
+      //       largerVecDigit = 0;
+      //       carryover = 1;
+      //    } else {
+      //       carryover = 0;
+      //    }
+      // }
       // pushback the remaining digits in largerVec
-      result.ubig_value.push_back(largerVecDigit);
+      result.ubig_value.push_back(largerVecDigit % 10);
    }
+
+   if (carryover == 1) {
+      result.ubig_value.push_back(1);
+   }
+   
    // DEBUGF ('u', result);
    return result;
 }
@@ -201,6 +220,7 @@ ubigint ubigint::operator* (const ubigint& that) const {
 }
 
 void ubigint::multiply_by_2() {
+   cout << "Before: " << *this << endl;
    // Store the carry value from the previous pairwise product
    int carryover = 0;
    // Store the product of the two digits
@@ -227,9 +247,17 @@ void ubigint::multiply_by_2() {
    if (carryover == 1) {
       ubig_value.push_back(1);
    }
+
+   // pop_back any remaining high order zeros
+   while (ubig_value.size() > 0 && ubig_value.back() == 0) {
+      ubig_value.pop_back();
+   }
+
+   cout << "Multiply by 2: " << *this << endl;
 }
 
 void ubigint::divide_by_2() {
+   cout << "Before: " << *this << endl;
    // Store the integer division of the two digits
    int pairwiseDigitQuotient = 0;
    // Get the length of the vector
@@ -238,7 +266,7 @@ void ubigint::divide_by_2() {
    // Loop through the vector starting from the low order digit
    for (int i = 0; i < vecLength; i++) {
       // Divide the digit by 2
-      pairwiseDigitQuotient /= 2;
+      pairwiseDigitQuotient = ubig_value[i] / 2;
 
       // Check if the next higher digit is odd. If it is, add 5 to the
       // current digit
@@ -254,6 +282,8 @@ void ubigint::divide_by_2() {
    while (ubig_value.size() > 0 && ubig_value.back() == 0) {
       ubig_value.pop_back();
    }
+
+   cout << "Divide by 2:" << *this << endl;
 }
 
 
@@ -261,10 +291,11 @@ struct quo_rem { ubigint quotient; ubigint remainder; };
 quo_rem udivide (const ubigint& dividend, const ubigint& divisor_) {
    // NOTE: udivide is a non-member function.
    ubigint divisor {divisor_};
-   ubigint zero {0}; 
+   ubigint zero {0};
    if (divisor == zero) throw domain_error ("udivide by zero");
    ubigint power_of_2 {1};
    ubigint quotient {0};
+   cout << "Quotient" << quotient << endl;
    ubigint remainder {dividend}; // left operand, dividend
    while (divisor < remainder) {
       divisor.multiply_by_2();
