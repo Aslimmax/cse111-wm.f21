@@ -59,21 +59,18 @@ bigint bigint::operator+ (const bigint& that) const {
    if (is_negative == that.is_negative) {
       // Add the two values with ubigint+
       ubigint unsignedResult {uvalue + that.uvalue};
-      cout << unsignedResult << endl; // DEBUG
 
       // Set the uvalue and is_negative of bigIntResult to 
       // unsignedResult and the sign of either bigint number 
       // respectively
       bigIntResult.uvalue = unsignedResult;
       // If unsignedResult is 0, ensure that the sign is positive
-      // cout << unsignedResult << endl;
       if (unsignedResult.getUBigValue().size() == 0) {
          bigIntResult.is_negative = false;
       }
       else {
           bigIntResult.is_negative = is_negative;
       }
-    //   cout << (bigIntResult.uvalue == unsignedResult) << endl;
 
    } // If the signs are different 
    else if (is_negative != that.is_negative) {
@@ -92,7 +89,6 @@ bigint bigint::operator+ (const bigint& that) const {
 
       // Subtract the two bigints and use the larger num as its left num
       ubigint unsignedResult {largerNum.uvalue - smallerNum.uvalue};
-      cout << unsignedResult << endl;
       
       // Set the uvalue and is_negative of bigIntResult to
       // unsignedResult and the sign of the largerNumber
@@ -101,7 +97,6 @@ bigint bigint::operator+ (const bigint& that) const {
    }
    
    // If unsignedResult is 0, ensure that the sign is positive
-   // cout << unsignedResult << endl;
    if (bigIntResult.uvalue.getUBigValue().size() == 0) {
       bigIntResult.is_negative = false;
    }
@@ -149,7 +144,6 @@ bigint bigint::operator- (const bigint& that) const {
    }
 
    // If unsignedResult is 0, ensure that the sign is positive
-   // cout << unsignedResult << endl;
    if (bigIntResult.uvalue.getUBigValue().size() == 0) {
       bigIntResult.is_negative = false;
    }

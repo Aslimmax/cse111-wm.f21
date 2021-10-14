@@ -119,9 +119,6 @@ ubigint ubigint::operator- (const ubigint& that) const {
    // Get the sizes of each vector
    int leftVecSize = ubig_value.size();
    int rightVecSize = that.ubig_value.size();
-
-   cout << "LeftVecSize: " << leftVecSize << endl;
-   cout << "RightVecSize: " << rightVecSize << endl;
    
    // Loop through vectors and add each digit pairwise
    for (int i = 0; i < rightVecSize; i++) {
