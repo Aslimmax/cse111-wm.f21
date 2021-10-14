@@ -31,11 +31,16 @@ ubigint::ubigint (const string& that): ubig_value() {
       // Push each digit to the end of ubig_value
       ubig_value.push_back(*iter - '0');
    }
+
+   while (ubig_value.size() > 0 &&
+      ubig_value.back() == 0) {
+      ubig_value.pop_back();
+   }
 }
 
 ubigint ubigint::operator+ (const ubigint& that) const {
    // DEBUGF ('u', *this << "+" <`< that);
-   ubigint result; // initialize result to store the result of adding
+   ubigint result{0}; // initialize result to store the result of adding
    // store the largerVec to add the remaining digits to result once the
    // smaller one runs out of digits
    ubigint largerVec;
@@ -74,10 +79,10 @@ ubigint ubigint::operator+ (const ubigint& that) const {
    } else if (leftVecSize > rightVecSize) {
       largerVec.ubig_value = ubig_value;
    } else { // both vectors had the same num of digits
-      // while (result.ubig_value.size() > 0 &&
-      //  result.ubig_value.back() == 0) {
-      //    result.ubig_value.pop_back();
-      // }
+      while (result.ubig_value.size() > 0 &&
+       result.ubig_value.back() == 0) {
+         result.ubig_value.pop_back();
+      }
       return result;
    }
 
@@ -107,24 +112,17 @@ ubigint ubigint::operator- (const ubigint& that) const {
    ubigint result; // initialize result to store the overall difference
    // store the largerVec to add the remaining digits to result once the
    // smaller one runs out of digits
-   ubigint largerVec;
    int pairwiseDiff = 0; // store the pairwise difference of the digits
-//    int smallerVec = 0; // store the length of the smaller vector
+   int borrow = 0; // store the borrowing amount
    int carryover = 0; // store the carryover value (0 or 1)
    
    // Get the sizes of each vector
    int leftVecSize = ubig_value.size();
    int rightVecSize = that.ubig_value.size();
-   
-//    // Determine smaller vector
-//    if (leftVecSize < rightVecSize) {
-//       smallerVec = leftVecSize;
-//    } else if (leftVecSize > rightVecSize) {
-//       smallerVec = rightVecSize;
-//    } else { // the sizes are equal, doesn't matter which one is set
-//       smallerVec = leftVecSize;
-//    }
 
+   cout << "LeftVecSize: " << leftVecSize << endl;
+   cout << "RightVecSize: " << rightVecSize << endl;
+   
    // Loop through vectors and add each digit pairwise
    for (int i = 0; i < rightVecSize; i++) {
       pairwiseDiff = 0; // reset the difference
@@ -132,10 +130,13 @@ ubigint ubigint::operator- (const ubigint& that) const {
       // occur. Set pairwiseDiff to 10 to mimic adding 10 to the left
       // digit
       if (ubig_value[i] < that.ubig_value[i]) {
-         pairwiseDiff = 10;
+         borrow = 10;
+      } else {
+         borrow = 0;
       }
       
-      pairwiseDiff -= ubig_value[i] - that.ubig_value[i] - carryover;
+      pairwiseDiff = ubig_value[i] - that.ubig_value[i] - carryover 
+         + borrow;
 
       // check if carryover is needed
       carryover = (ubig_value[i] < that.ubig_value[i]) ? (1) : (0);
@@ -146,7 +147,7 @@ ubigint ubigint::operator- (const ubigint& that) const {
 
    // Loop through the rest of the digits remaining in this ubig_value
    for (int i = rightVecSize; i < leftVecSize; i++) {
-      int largerVecDigit = largerVec.ubig_value[i];
+      int largerVecDigit = ubig_value[i];
       // check if the digit from the previous loop produced a carryover
       if (carryover == 1) {
          largerVecDigit--;
@@ -363,4 +364,9 @@ ostream& operator<< (ostream& out, const ubigint& that) {
    }
    
    return out << "ubigint(" << output << ")";
+}
+// ubigint ubigint::operator- (const ubigint& that) const {
+
+const ubigint::ubigvalue_t& ubigint::getUBigValue() const {
+   return ubig_value;
 }
