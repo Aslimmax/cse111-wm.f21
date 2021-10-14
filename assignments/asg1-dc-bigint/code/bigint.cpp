@@ -170,8 +170,7 @@ bool bigint::operator< (const bigint& that) const {
    return output;
 }
 
-// ostream& operator<< (ostream& out, const bigint& that) {
-//    return out << "bigint(" << (that.is_negative ? "-" : "+")
-//               << "," << that.uvalue << ")";
-// }
-
+ostream& operator<< (ostream& out, const bigint& that) {
+   return out << "bigint(" << (that.is_negative ? "-" : "+")
+              << "," << that.uvalue << ")";
+}
