@@ -8,26 +8,6 @@ using namespace std;
 
 #include "bigint.h"
 
-// bigint::bigint (long that): uvalue (ubigint(that)), 
-//    is_negative (that < 0) {
-//    // Set uvalue to a temp ubigint that will parse and store the 
-// digits
-//    // of that into a vector
-//    // uvalue = ubigint(that);
-//    // ubigint temp {that};
-//    // uvalue = temp;
-//    // DEBUGF ('~', this << " -> " << uvalue)
-// }
-
-// bigint::bigint (const ubigint& uvalue_, bool is_negative_):
-//                 uvalue(uvalue_), is_negative(is_negative_) {
-// }
-
-// bigint::bigint (const string& that) {
-//    is_negative = that.size() > 0 and that[0] == '_';
-//    uvalue = ubigint (that.substr (is_negative ? 1 : 0));
-// }
-
 bigint::bigint (long that): uvalue (that), is_negative (that < 0) {
 //    DEBUGF ('~', this << " -> " << uvalue)
 }
