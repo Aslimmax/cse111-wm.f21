@@ -82,6 +82,9 @@ ubigint ubigint::operator+ (const ubigint& that) const {
    } else if (leftVecSize > rightVecSize) {
       largerVec.ubig_value = ubig_value;
    } else { // both vectors had the same num of digits
+      if (carryover == 1) {
+         result.ubig_value.push_back(carryover);
+      }
       while (result.ubig_value.size() > 0 &&
        result.ubig_value.back() == 0) {
          result.ubig_value.pop_back();
@@ -95,22 +98,9 @@ ubigint ubigint::operator+ (const ubigint& that) const {
    // At this point, there are still digits in largerVec
    for (int i = smallerVec; i < largerVecSize; i++) {
       int largerVecDigit = largerVec.ubig_value[i] + carryover;
-      // check if the digit from the previous loop produced a carryover
-      if (largerVecDigit >= 10) {
-         carryover = 1;
-      } else {
-         carryover = 0;
-      }
-      // if (carryover == 1) {
-      //    largerVecDigit++;
-      //    // Check if largerVecDigit is >= 10 after the carryover
-      //    if (largerVecDigit >= 10) {
-      //       largerVecDigit = 0;
-      //       carryover = 1;
-      //    } else {
-      //       carryover = 0;
-      //    }
-      // }
+      // check if carryover is needed
+      carryover = (largerVecDigit >= 10) ? (1) : (0);
+
       // pushback the remaining digits in largerVec
       result.ubig_value.push_back(largerVecDigit % 10);
    }
@@ -118,7 +108,7 @@ ubigint ubigint::operator+ (const ubigint& that) const {
    if (carryover == 1) {
       result.ubig_value.push_back(1);
    }
-   
+
    // DEBUGF ('u', result);
    return result;
 }
