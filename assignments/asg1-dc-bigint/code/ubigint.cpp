@@ -82,6 +82,7 @@ ubigint ubigint::operator+ (const ubigint& that) const {
    } else if (leftVecSize > rightVecSize) {
       largerVec.ubig_value = ubig_value;
    } else { // both vectors had the same num of digits
+      // DEBUG: Review
       if (carryover == 1) {
          result.ubig_value.push_back(carryover);
       }
@@ -105,6 +106,7 @@ ubigint ubigint::operator+ (const ubigint& that) const {
       result.ubig_value.push_back(largerVecDigit % 10);
    }
 
+   // DEBUG: REVIEW
    if (carryover == 1) {
       result.ubig_value.push_back(1);
    }
