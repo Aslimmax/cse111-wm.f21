@@ -1,4 +1,4 @@
-// $Id: bigint.cpp,v 1.4 2021-09-26 10:35:44-07 - - $
+// $Id: bigint.cpp,v 1.5 2021-10-14 02:10:43-07 - - $
 
 #include <cstdlib>
 #include <exception>
@@ -140,9 +140,13 @@ bigint bigint::operator* (const bigint& that) const {
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
-   bigIntResult.is_negative = (is_negative == that.is_negative) ? 
-      (false) : (true);
-   
+
+   if (bigIntResult.uvalue.getUBigValue().size() == 0) {
+      bigIntResult.is_negative = false;
+   } else {
+      bigIntResult.is_negative = (is_negative == that.is_negative) ? 
+         (false) : (true);
+   }
    return bigIntResult;
 }
 
@@ -153,6 +157,8 @@ bigint bigint::operator/ (const bigint& that) const {
    // Divide the bigints with ubigint::/
    // ubigint unsignedResult {uvalue / that.uvalue};
    bigIntResult.uvalue = uvalue / that.uvalue;
+   cout << "Done" << endl;
+   // cout << bigIntResult << endl;
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
@@ -167,8 +173,9 @@ bigint bigint::operator% (const bigint& that) const {
    bigint bigIntResult;
    
    // Divide the bigints with ubigint::/
-   ubigint unsignedResult {uvalue % that.uvalue};
-   bigIntResult.uvalue = unsignedResult;
+   // ubigint unsignedResult {uvalue % that.uvalue};
+   // bigIntResult.uvalue = unsignedResult;
+   bigIntResult.uvalue = uvalue % that.uvalue;
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
