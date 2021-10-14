@@ -1,4 +1,4 @@
-// $Id: ubigint.h,v 1.5 2020-10-11 12:25:22-07 - - $
+// $Id: ubigint.h,v 1.6 2021-10-14 02:10:43-07 - - $
 
 #ifndef __UBIGINT_H__
 #define __UBIGINT_H__
