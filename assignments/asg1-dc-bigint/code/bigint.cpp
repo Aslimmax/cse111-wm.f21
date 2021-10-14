@@ -120,11 +120,21 @@ bigint bigint::operator- (const bigint& that) const {
    return bigIntResult;
 }
 
-// 
-// bigint bigint::operator* (const bigint& that) const {
-//    bigint result {uvalue * that.uvalue};
-//    return result;
-// }
+
+bigint bigint::operator* (const bigint& that) const {
+   // Initialize a default bigint result to hold the sum
+   bigint bigIntResult;
+   
+   // Multiply the bigints with ubigint::*
+   bigIntResult.uvalue = uvalue * that.uvalue;
+   // Determine the result's signs:
+   // * same sign -> not negative
+   // * diff sign -> negative
+   bigIntResult.is_negative = (is_negative == that.is_negative) ? 
+      (false) : (true);
+   
+   return bigIntResult;
+}
 
 // bigint bigint::operator/ (const bigint& that) const {
 //    bigint result {uvalue / that.uvalue};
