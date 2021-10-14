@@ -173,7 +173,7 @@ ubigint ubigint::operator* (const ubigint& that) const {
    ubigint result; // initialize new ubigint object to store the product
    // Resize the vector to be able to hold the entire product of the 
    // leftVec and rightVec
-   result.ubig_value.resize(leftVecSize * rightVecSize);
+   result.ubig_value.resize(leftVecSize + rightVecSize);
 
    // Multiplication algorithm
    for (int i = 0; i < leftVecSize; i++) {
@@ -190,6 +190,11 @@ ubigint ubigint::operator* (const ubigint& that) const {
       }
       // Set the next product result to the carryover value
       result.ubig_value[i + rightVecSize] = carryover;
+   }
+
+   while (result.ubig_value.size() > 0 &&
+      result.ubig_value.back() == 0) {
+      result.ubig_value.pop_back();
    }
 
    return result;
