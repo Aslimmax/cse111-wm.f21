@@ -8,14 +8,28 @@ using namespace std;
 
 #include "bigint.h"
 
-bigint::bigint (long that): uvalue (ubigint(that)), 
-   is_negative (that < 0) {
-   // Set uvalue to a temp ubigint that will parse and store the digits
-   // of that into a vector
-   // uvalue = ubigint(that);
-   // ubigint temp {that};
-   // uvalue = temp;
-   // DEBUGF ('~', this << " -> " << uvalue)
+// bigint::bigint (long that): uvalue (ubigint(that)), 
+//    is_negative (that < 0) {
+//    // Set uvalue to a temp ubigint that will parse and store the 
+// digits
+//    // of that into a vector
+//    // uvalue = ubigint(that);
+//    // ubigint temp {that};
+//    // uvalue = temp;
+//    // DEBUGF ('~', this << " -> " << uvalue)
+// }
+
+// bigint::bigint (const ubigint& uvalue_, bool is_negative_):
+//                 uvalue(uvalue_), is_negative(is_negative_) {
+// }
+
+// bigint::bigint (const string& that) {
+//    is_negative = that.size() > 0 and that[0] == '_';
+//    uvalue = ubigint (that.substr (is_negative ? 1 : 0));
+// }
+
+bigint::bigint (long that): uvalue (that), is_negative (that < 0) {
+//    DEBUGF ('~', this << " -> " << uvalue)
 }
 
 bigint::bigint (const ubigint& uvalue_, bool is_negative_):
@@ -104,7 +118,9 @@ bigint bigint::operator- (const bigint& that) const {
       }
 
       // Subtract the two bigints and use the larger num as its left num
-      bigIntResult.uvalue = largerNum.uvalue - smallerNum.uvalue;
+      // bigIntResult.uvalue = largerNum.uvalue - smallerNum.uvalue;
+      ubigint unsignedResult {largerNum.uvalue - smallerNum.uvalue};
+      bigIntResult.uvalue = unsignedResult;
 
       // If left num is larger, the sign of the result is its sign
       if (largerNum > smallerNum) {
@@ -126,7 +142,8 @@ bigint bigint::operator* (const bigint& that) const {
    bigint bigIntResult;
    
    // Multiply the bigints with ubigint::*
-   bigIntResult.uvalue = uvalue * that.uvalue;
+   ubigint unsignedResult {uvalue * that.uvalue};
+   bigIntResult.uvalue = unsignedResult;
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
@@ -141,7 +158,8 @@ bigint bigint::operator/ (const bigint& that) const {
    bigint bigIntResult;
    
    // Divide the bigints with ubigint::/
-   bigIntResult.uvalue = uvalue / that.uvalue;
+   ubigint unsignedResult {uvalue / that.uvalue};
+   bigIntResult.uvalue = unsignedResult;
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
@@ -158,7 +176,8 @@ bigint bigint::operator% (const bigint& that) const {
    bigint bigIntResult;
    
    // Divide the bigints with ubigint::/
-   bigIntResult.uvalue = uvalue % that.uvalue;
+   ubigint unsignedResult {uvalue % that.uvalue};
+   bigIntResult.uvalue = unsignedResult;
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative

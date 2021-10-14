@@ -25,7 +25,7 @@ ubigint::ubigint (unsigned long that): ubig_value () {
 }
 
 ubigint::ubigint (const string& that): ubig_value() {
-   DEBUGF ('~', "that = \"" << that << "\"");
+//    DEBUGF ('~', "that = \"" << that << "\"");
    // Iterate through the string starting from the end
    for (auto iter = that.crbegin(); iter != that.crend(); ++iter) {
       // Push each digit to the end of ubig_value
