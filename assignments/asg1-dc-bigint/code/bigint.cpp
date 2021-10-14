@@ -151,8 +151,8 @@ bigint bigint::operator/ (const bigint& that) const {
    bigint bigIntResult;
    
    // Divide the bigints with ubigint::/
-   ubigint unsignedResult {uvalue / that.uvalue};
-   bigIntResult.uvalue = unsignedResult;
+   // ubigint unsignedResult {uvalue / that.uvalue};
+   bigIntResult.uvalue = uvalue / that.uvalue;
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
@@ -160,8 +160,6 @@ bigint bigint::operator/ (const bigint& that) const {
       (false) : (true);
 
    return bigIntResult;
-   // bigint result {uvalue / that.uvalue};
-   // return result;
 }
 
 bigint bigint::operator% (const bigint& that) const {
