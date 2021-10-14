@@ -1,9 +1,14 @@
-head	1.5;
+head	1.6;
 access;
 symbols;
 locks;
 comment	@ * @;
 
+
+1.6
+date	2021.10.14.09.10.43;	author -;	state -;
+branches;
+next	1.5;
 
 1.5
 date	2020.10.11.19.25.22;	author -;	state -;
@@ -35,12 +40,12 @@ desc
 @@
 
 
-1.5
+1.6
 log
 @-
 @
 text
-@// $Id: ubigint.h,v 1.4 2020-01-06 13:39:55-08 - - $
+@// $Id: ubigint.h,v 1.5 2020-10-11 12:25:22-07 - - $
 
 #ifndef __UBIGINT_H__
 #define __UBIGINT_H__
@@ -49,6 +54,8 @@ text
 #include <iostream>
 #include <limits>
 #include <utility>
+#include <vector>
+#include <cstdint>
 using namespace std;
 
 #include "debug.h"
@@ -56,12 +63,53 @@ using namespace std;
 class ubigint {
    friend ostream& operator<< (ostream&, const ubigint&);
    private:
+        using ubigvalue_t = vector<uint8_t>;
+        ubigvalue_t ubig_value;
+   public:
+        void multiply_by_2();
+        void divide_by_2();
+ 
+        ubigint() = default; // Need default ctor as well.
+        ubigint (unsigned long);
+        ubigint (const string&);
+
+        ubigint operator+ (const ubigint&) const;
+        ubigint operator- (const ubigint&) const;
+        ubigint operator* (const ubigint&) const;
+        ubigint operator/ (const ubigint&) const;
+        ubigint operator% (const ubigint&) const;
+
+        bool operator== (const ubigint&) const;
+        bool operator<  (const ubigint&) const;
+
+        // Helper methods
+        const ubigvalue_t& getUBigValue() const;
+};
+
+#endif
+
+@
+
+
+1.5
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: ubigint.h,v 1.4 2020-01-06 13:39:55-08 - - $
+d10 2
+d19 2
+a20 2
       using unumber = unsigned long;
       unumber uvalue {};
-   public:
+d22 12
+a33 2
       void multiply_by_2();
       void divide_by_2();
-
+d35 2
+a36 9
       ubigint() = default; // Need default ctor as well.
       ubigint (unsigned long);
       ubigint (const string&);
@@ -71,13 +119,10 @@ class ubigint {
       ubigint operator* (const ubigint&) const;
       ubigint operator/ (const ubigint&) const;
       ubigint operator% (const ubigint&) const;
-
+d38 2
+a39 2
       bool operator== (const ubigint&) const;
       bool operator<  (const ubigint&) const;
-};
-
-#endif
-
 @
 
 
