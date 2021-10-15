@@ -13,6 +13,7 @@ using namespace std;
 #include "ubigint.h"
 
 ubigint::ubigint (unsigned long that): ubig_value () {
+   // DEBUGF ('~', this << " -> " << uvalue)
    // store the new end digit every time 'that' is truncated
    int digit = 0; 
    
@@ -22,6 +23,7 @@ ubigint::ubigint (unsigned long that): ubig_value () {
       that = that / 10; // delete the last digit in 'that'
    }
 
+   // Trim high-order zeros
    while (ubig_value.size() > 0 &&
       ubig_value.back() == 0) {
       ubig_value.pop_back();
@@ -29,13 +31,14 @@ ubigint::ubigint (unsigned long that): ubig_value () {
 }
 
 ubigint::ubigint (const string& that): ubig_value() {
-//    DEBUGF ('~', "that = \"" << that << "\"");
+   // DEBUGF ('~', "that = \"" << that << "\"");
    // Iterate through the string starting from the end
    for (auto iter = that.crbegin(); iter != that.crend(); ++iter) {
       // Push each digit to the end of ubig_value
       ubig_value.push_back(*iter - '0');
    }
 
+   // Trim high-order zeros
    while (ubig_value.size() > 0 &&
       ubig_value.back() == 0) {
       ubig_value.pop_back();
@@ -68,6 +71,8 @@ ubigint ubigint::operator+ (const ubigint& that) const {
    // Loop through vectors and add each digit pairwise
    for (int i = 0; i < smallerVec; i++) {
       pairwiseSum = 0; // reset the sum
+      
+      // Compute the sum with carryover (if defined)
       pairwiseSum = ubig_value[i] + that.ubig_value[i] + carryover;
 
       // check if carryover is needed
@@ -83,14 +88,17 @@ ubigint ubigint::operator+ (const ubigint& that) const {
    } else if (leftVecSize > rightVecSize) {
       largerVec.ubig_value = ubig_value;
    } else { // both vectors had the same num of digits
-      // DEBUG: Review
+      // If last sum had carryover, push back the one
       if (carryover == 1) {
          result.ubig_value.push_back(carryover);
       }
+
+      // Trim high order zeros
       while (result.ubig_value.size() > 0 &&
        result.ubig_value.back() == 0) {
          result.ubig_value.pop_back();
       }
+
       return result;
    }
 
@@ -107,16 +115,19 @@ ubigint ubigint::operator+ (const ubigint& that) const {
       result.ubig_value.push_back(largerVecDigit % 10);
    }
 
-   // DEBUG: REVIEW
+   // If last sum had carryover, push back the one   
    if (carryover == 1) {
       result.ubig_value.push_back(1);
    }
 
    // DEBUGF ('u', result);
+
    return result;
 }
 
 ubigint ubigint::operator- (const ubigint& that) const {
+   // If the left vectory is smaller than the right, throw a domain
+   // error
    if (ubig_value.size() < that.ubig_value.size()) {
       throw domain_error ("ubigint::operator-(a<b)");
    }
@@ -132,7 +143,7 @@ ubigint ubigint::operator- (const ubigint& that) const {
    int leftVecSize = ubig_value.size();
    int rightVecSize = that.ubig_value.size();
    
-   // Loop through vectors and add each digit pairwise
+   // Loop through vectors and subtract each digit pairwise
    for (int i = 0; i < rightVecSize; i++) {
       pairwiseDiff = 0; // reset the difference
       // if the left digit is less than the right digit, borrowing will
@@ -143,14 +154,15 @@ ubigint ubigint::operator- (const ubigint& that) const {
       } else {
          borrow = 0;
       }
-      
+
+      // Compute the difference with carryover and borrow (if defined)
       pairwiseDiff = ubig_value[i] - that.ubig_value[i] - carryover 
          + borrow;
 
-      // check if carryover is needed
+      // Check if carryover is needed
       carryover = (borrow == 10) ? (1) : (0);
 
-      // pushback pairwiseSum
+      // Push back pairwiseSum
       result.ubig_value.push_back(pairwiseDiff);
    }
 
@@ -159,13 +171,13 @@ ubigint ubigint::operator- (const ubigint& that) const {
       // this ubig_value
       for (int i = rightVecSize; i < leftVecSize; i++) {
          int largerVecDigit = ubig_value[i];
-         // check if the digit from the previous loop produced 
+         // Check if the digit from the previous loop produced 
          // a carryover
          if (carryover == 1) {
             largerVecDigit--;
             carryover = 0;
          }
-         // pushback the remaining digits in largerVec
+         // Push back the remaining digits in largerVec
          result.ubig_value.push_back(largerVecDigit);
       }      
    }
@@ -181,12 +193,12 @@ ubigint ubigint::operator* (const ubigint& that) const {
    // Get the sizes of the leftVec and rightVec
    int leftVecSize = ubig_value.size();
    int rightVecSize = that.ubig_value.size();
-   // store the carryover value from intermediate multiplication between
+   // Store the carryover value from intermediate multiplication between
    // 2 digits
    int carryover = 0; 
-   int pairwiseDigit = 0; // store the pairwise product of 2 digits
+   int pairwiseDigit = 0; // Store the pairwise product of 2 digits
    
-   ubigint result; // initialize new ubigint object to store the product
+   ubigint result; // Initailize new ubigint object to store the product
    // Resize the vector to be able to hold the entire product of the 
    // leftVec and rightVec
    result.ubig_value.resize(leftVecSize + rightVecSize);
@@ -195,7 +207,8 @@ ubigint ubigint::operator* (const ubigint& that) const {
    for (int i = 0; i < leftVecSize; i++) {
       carryover = 0; 
       for (int j = 0; j < rightVecSize; j++) {
-         // perform the pairwise multiplication
+         // Perform the pairwise multiplication with carryover
+         // (if defined)
          pairwiseDigit = result.ubig_value[i + j] + ubig_value[i] * 
          that.ubig_value[j] + carryover; 
          // Get the last digit of the pairwise digit multiplication
@@ -208,6 +221,7 @@ ubigint ubigint::operator* (const ubigint& that) const {
       result.ubig_value[i + rightVecSize] = carryover;
    }
 
+   // Trim high order zeros
    while (result.ubig_value.size() > 0 &&
       result.ubig_value.back() == 0) {
       result.ubig_value.pop_back();
@@ -230,7 +244,7 @@ void ubigint::multiply_by_2() {
       // Multiply each digit by 2 and add previous carryover
       pairwiseDigitProduct = ubig_value[i] * 2 + carryover;
 
-      // Check if there is carryover required
+      // Check if carryover required
       carryover = (pairwiseDigitProduct >= 10) ? (1) : (0);
 
       // Save product in proper index
@@ -244,7 +258,7 @@ void ubigint::multiply_by_2() {
       ubig_value.push_back(1);
    }
 
-   // pop_back any remaining high order zeros
+   // Trim high order zeros
    while (ubig_value.size() > 0 && ubig_value.back() == 0) {
       ubig_value.pop_back();
    }
@@ -272,12 +286,11 @@ void ubigint::divide_by_2() {
       ubig_value[i] = pairwiseDigitQuotient;
    }
 
-   // pop_back any remaining high order zeros
+   // Trim high order zeros
    while (ubig_value.size() > 0 && ubig_value.back() == 0) {
       ubig_value.pop_back();
    }
 }
-
 
 struct quo_rem { ubigint quotient; ubigint remainder; };
 quo_rem udivide (const ubigint& dividend, const ubigint& divisor_) {
@@ -300,8 +313,8 @@ quo_rem udivide (const ubigint& dividend, const ubigint& divisor_) {
       divisor.divide_by_2();
       power_of_2.divide_by_2();
    }
-//    DEBUGF ('/', "quotient = " << quotient);
-//    DEBUGF ('/', "remainder = " << remainder);
+   // DEBUGF ('/', "quotient = " << quotient);
+   // DEBUGF ('/', "remainder = " << remainder);
    return {.quotient = quotient, .remainder = remainder};
 }
 
@@ -321,35 +334,37 @@ bool ubigint::operator== (const ubigint& that) const {
 
    // At this point, both vectors have the same size
    int vecSize = ubig_value.size(); // get the size of one vector
-   // Loop through both vectors and compare each digit
+   // Loop through both vectors and compare each digit from low order
    for (int i = 0; i < vecSize; i++) {
+      // If one value does not match with the other, the vectors are not
+      // equal
       if (ubig_value[i] != that.ubig_value[i]) {
          return false;
       }
    }
 
-   // Each digit in both vectors are the same
+   // Each digit in both vectors are the same, so the vectors are equal
    return true;
 }
 
 bool ubigint::operator< (const ubigint& that) const {
-   // Store the sizes of each vector
+   // Store the sizes of both vectors
    int leftVecSize = ubig_value.size();
    int rightVecSize = that.ubig_value.size();
 
    // Validate that the size of the vectors are the same
    if (leftVecSize < rightVecSize) {
-      // the left vec has more digits
+      // The left vec has more digits
       return true;
    } else if (leftVecSize > rightVecSize) { 
-      // the right vec has more digits
+      // The right vec has more digits
       return false;
    }
 
    // Both vectors have the same size, so compare each digits starting
    // from the high order end to the low order end
    for (int i = 0; i < leftVecSize; i++) {
-      // if any digit in the leftVec is less than the rightVec, then
+      // If any digit in the leftVec is less than the rightVec, then
       // leftVec < rightVec
       if (ubig_value[leftVecSize - i - 1] < 
       that.ubig_value[leftVecSize - i - 1]) {
