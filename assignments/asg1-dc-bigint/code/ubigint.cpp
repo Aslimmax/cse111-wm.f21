@@ -13,14 +13,12 @@ using namespace std;
 #include "ubigint.h"
 
 ubigint::ubigint (unsigned long that): ubig_value () {
-   // cout << "Constructing ubigint from unsigned long" << endl;
    // store the new end digit every time 'that' is truncated
    int digit = 0; 
    
    while(that != 0) { // don't exit loop until 'that' is 0
       digit = that % 10; // get the last digit in 'that'
       ubig_value.push_back(digit); // store the digit into ubig_value
-      // cout << "Loop inserting " << digit << endl;
       that = that / 10; // delete the last digit in 'that'
    }
 
@@ -67,8 +65,6 @@ ubigint ubigint::operator+ (const ubigint& that) const {
       smallerVec = leftVecSize;
    }
 
-   // cout << "Smaller vec: " << smallerVec << endl;
-
    // Loop through vectors and add each digit pairwise
    for (int i = 0; i < smallerVec; i++) {
       pairwiseSum = 0; // reset the sum
@@ -79,7 +75,6 @@ ubigint ubigint::operator+ (const ubigint& that) const {
 
       // pushback pairwiseSum
       result.ubig_value.push_back(pairwiseSum % 10);
-      // cout << "Result: " << result << endl;
    }
 
    // Determine which vector still has digits to add
@@ -136,9 +131,6 @@ ubigint ubigint::operator- (const ubigint& that) const {
    // Get the sizes of each vector
    int leftVecSize = ubig_value.size();
    int rightVecSize = that.ubig_value.size();
-
-   cout << "Left Vec Size: " << leftVecSize << endl;
-   cout << "Right Vec Size: " << rightVecSize << endl;
    
    // Loop through vectors and add each digit pairwise
    for (int i = 0; i < rightVecSize; i++) {
@@ -161,8 +153,6 @@ ubigint ubigint::operator- (const ubigint& that) const {
       // pushback pairwiseSum
       result.ubig_value.push_back(pairwiseDiff);
    }
-
-   cout << "Result: " << result << endl;
 
    if (leftVecSize > rightVecSize) {
       // Loop through the rest of the digits remaining in 
@@ -227,7 +217,6 @@ ubigint ubigint::operator* (const ubigint& that) const {
 }
 
 void ubigint::multiply_by_2() {
-   // cout << "Before: " << *this << endl;
    // Store the carry value from the previous pairwise product
    int carryover = 0;
    // Store the product of the two digits
@@ -259,12 +248,9 @@ void ubigint::multiply_by_2() {
    while (ubig_value.size() > 0 && ubig_value.back() == 0) {
       ubig_value.pop_back();
    }
-
-   // cout << "After: " << *this << endl;
 }
 
 void ubigint::divide_by_2() {
-   // cout << "Before: " << *this << endl;
    // Store the integer division of the two digits
    int pairwiseDigitQuotient = 0;
    // Get the length of the vector
@@ -290,8 +276,6 @@ void ubigint::divide_by_2() {
    while (ubig_value.size() > 0 && ubig_value.back() == 0) {
       ubig_value.pop_back();
    }
-
-   // cout << "After: " << *this << endl;
 }
 
 
@@ -310,20 +294,11 @@ quo_rem udivide (const ubigint& dividend, const ubigint& divisor_) {
    }
    while (power_of_2 > zero) {
       if (divisor <= remainder) {
-         cout << "Remainder Before: " << remainder << 
-         " Divisor Before: " << divisor << endl;
          remainder = remainder - divisor;
-         cout << "Remainder After: " << remainder << endl;
-         cout << "Quotient Before: " << quotient << " Power Before: " 
-         << power_of_2 << endl; 
          quotient = quotient + power_of_2;
-         cout << "Quotient After: " << quotient << endl;
-         // cout << "Remainder: " << remainder << endl;
       }
       divisor.divide_by_2();
       power_of_2.divide_by_2();
-      // cout << "Power of 2" << power_of_2 << endl;
-      // cout << "Quotient: " << quotient << endl;
    }
 //    DEBUGF ('/', "quotient = " << quotient);
 //    DEBUGF ('/', "remainder = " << remainder);
@@ -414,7 +389,6 @@ ostream& operator<< (ostream& out, const ubigint& that) {
    
    return out << "ubigint(" << output << ")";
 }
-// ubigint ubigint::operator- (const ubigint& that) const {
 
 const ubigint::ubigvalue_t& ubigint::getUBigValue() const {
    return ubig_value;
