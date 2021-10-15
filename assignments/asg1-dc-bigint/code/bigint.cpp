@@ -2,7 +2,6 @@
 
 #include <cstdlib>
 #include <exception>
-#include <sstream>
 #include <stack>
 #include <stdexcept>
 using namespace std;
