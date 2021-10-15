@@ -9,7 +9,7 @@ using namespace std;
 #include "bigint.h"
 
 bigint::bigint (long that): uvalue (that), is_negative (that < 0) {
-//    DEBUGF ('~', this << " -> " << uvalue)
+   // DEBUGF ('~', this << " -> " << uvalue)
 }
 
 bigint::bigint (const ubigint& uvalue_, bool is_negative_):
@@ -139,7 +139,7 @@ bigint bigint::operator* (const bigint& that) const {
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
-
+   // If the result is 0, ensure that the sign is negative
    if (bigIntResult.uvalue.getUBigValue().size() == 0) {
       bigIntResult.is_negative = false;
    } else {
@@ -154,13 +154,17 @@ bigint bigint::operator/ (const bigint& that) const {
    bigint bigIntResult;
    
    // Divide the bigints with ubigint::/
-   // ubigint unsignedResult {uvalue / that.uvalue};
    bigIntResult.uvalue = uvalue / that.uvalue;
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
-   bigIntResult.is_negative = (is_negative == that.is_negative) ? 
-      (false) : (true);
+   // If the result is 0, ensure that the sign is negative
+   if (bigIntResult.uvalue.getUBigValue().size() == 0) {
+      bigIntResult.is_negative = false;
+   } else {
+      bigIntResult.is_negative = (is_negative == that.is_negative) ? 
+         (false) : (true);
+   }
 
    return bigIntResult;
 }
@@ -169,19 +173,21 @@ bigint bigint::operator% (const bigint& that) const {
    // Initialize a default bigint result to hold the sum
    bigint bigIntResult;
    
-   // Divide the bigints with ubigint::/
-   // ubigint unsignedResult {uvalue % that.uvalue};
-   // bigIntResult.uvalue = unsignedResult;
+   // Get the remainder of the division between the two vectors with 
+   // ubigint::%
    bigIntResult.uvalue = uvalue % that.uvalue;
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
-   bigIntResult.is_negative = (is_negative == that.is_negative) ? 
-      (false) : (true);
+   // If the result is 0, ensure that the sign is negative
+   if (bigIntResult.uvalue.getUBigValue().size() == 0) {
+      bigIntResult.is_negative = false;
+   } else {
+      bigIntResult.is_negative = (is_negative == that.is_negative) ? 
+         (false) : (true);
+   }
 
    return bigIntResult;
-   // bigint result {uvalue % that.uvalue};
-   // return result;
 }
 
 bool bigint::operator== (const bigint& that) const {
@@ -194,14 +200,20 @@ bool bigint::operator== (const bigint& that) const {
 bool bigint::operator< (const bigint& that) const {
    bool output = false;
    // If the left sign is negative and the right side is positive, left
-   // is less than right
+   // is not less than right
    if (is_negative == false && that.is_negative == true) {
       return false;
-   } else if (is_negative == true && that.is_negative == false) {
+   } // If left sign is negative and right side is positive, left side
+   // is less than right side 
+   else if (is_negative == true && that.is_negative == false) {
       return true;
-   } else if (is_negative == false && that.is_negative == false) {
+   } // If both signs are positive, check with ubigint::< (the left
+   // vector has to be smaller for output to be true) 
+   else if (is_negative == false && that.is_negative == false) {
       output = (uvalue < that.uvalue) ? (true) : (false);
-   } else if (is_negative == true && that.is_negative == true) {
+   } // If both signs are negative, check with ubigint::< (the left 
+   // vector has to be bigger in ubigint::< for the output to be true) 
+   else if (is_negative == true && that.is_negative == true) {
       output = (uvalue < that.uvalue) ? (false) : (true);
    }
 
@@ -209,7 +221,7 @@ bool bigint::operator< (const bigint& that) const {
 }
 
 ostream& operator<< (ostream& out, const bigint& that) {
-   // initialize empty output string to build up the number
+   // Initialize empty output string to build up the number
    string output = "";
    // Initialize digit and num to store the converted digit
    int digitInt = 0;

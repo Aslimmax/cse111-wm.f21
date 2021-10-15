@@ -36,6 +36,7 @@ class ubigint {
         bool operator<  (const ubigint&) const;
 
         // Helper methods
+        // Returns the private member ubig_value
         const ubigvalue_t& getUBigValue() const;
 };
 
