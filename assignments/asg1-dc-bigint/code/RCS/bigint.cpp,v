@@ -1,9 +1,14 @@
-head	1.5;
+head	1.6;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.6
+date	2021.10.15.05.18.21;	author -;	state -;
+branches;
+next	1.5;
 
 1.5
 date	2021.10.14.09.10.43;	author -;	state -;
@@ -35,12 +40,12 @@ desc
 @@
 
 
-1.5
+1.6
 log
 @-
 @
 text
-@// $Id: bigint.cpp,v 1.4 2021-09-26 10:35:44-07 - - $
+@// $Id: bigint.cpp,v 1.5 2021-10-14 02:10:43-07 - - $
 
 #include <cstdlib>
 #include <exception>
@@ -51,7 +56,7 @@ using namespace std;
 #include "bigint.h"
 
 bigint::bigint (long that): uvalue (that), is_negative (that < 0) {
-//    DEBUGF ('~', this << " -> " << uvalue)
+   // DEBUGF ('~', this << " -> " << uvalue)
 }
 
 bigint::bigint (const ubigint& uvalue_, bool is_negative_):
@@ -63,13 +68,12 @@ bigint::bigint (const string& that) {
    uvalue = ubigint (that.substr (is_negative ? 1 : 0));
 }
 
-// Make the bigint postive
 bigint bigint::operator+ () const {
    return *this;
 }
 
-// Makes the bigint negative
 bigint bigint::operator- () const {
+   // Flip the sign of is_negative
    return {uvalue, not is_negative};
 }
 
@@ -182,9 +186,13 @@ bigint bigint::operator* (const bigint& that) const {
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
-   bigIntResult.is_negative = (is_negative == that.is_negative) ? 
-      (false) : (true);
-   
+   // If the result is 0, ensure that the sign is negative
+   if (bigIntResult.uvalue.getUBigValue().size() == 0) {
+      bigIntResult.is_negative = false;
+   } else {
+      bigIntResult.is_negative = (is_negative == that.is_negative) ? 
+         (false) : (true);
+   }
    return bigIntResult;
 }
 
@@ -193,15 +201,17 @@ bigint bigint::operator/ (const bigint& that) const {
    bigint bigIntResult;
    
    // Divide the bigints with ubigint::/
-   // ubigint unsignedResult {uvalue / that.uvalue};
    bigIntResult.uvalue = uvalue / that.uvalue;
-   cout << "Done" << endl;
-   // cout << bigIntResult << endl;
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
-   bigIntResult.is_negative = (is_negative == that.is_negative) ? 
-      (false) : (true);
+   // If the result is 0, ensure that the sign is negative
+   if (bigIntResult.uvalue.getUBigValue().size() == 0) {
+      bigIntResult.is_negative = false;
+   } else {
+      bigIntResult.is_negative = (is_negative == that.is_negative) ? 
+         (false) : (true);
+   }
 
    return bigIntResult;
 }
@@ -210,18 +220,21 @@ bigint bigint::operator% (const bigint& that) const {
    // Initialize a default bigint result to hold the sum
    bigint bigIntResult;
    
-   // Divide the bigints with ubigint::/
-   ubigint unsignedResult {uvalue % that.uvalue};
-   bigIntResult.uvalue = unsignedResult;
+   // Get the remainder of the division between the two vectors with 
+   // ubigint::%
+   bigIntResult.uvalue = uvalue % that.uvalue;
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
-   bigIntResult.is_negative = (is_negative == that.is_negative) ? 
-      (false) : (true);
+   // If the result is 0, ensure that the sign is negative
+   if (bigIntResult.uvalue.getUBigValue().size() == 0) {
+      bigIntResult.is_negative = false;
+   } else {
+      bigIntResult.is_negative = (is_negative == that.is_negative) ? 
+         (false) : (true);
+   }
 
    return bigIntResult;
-   // bigint result {uvalue % that.uvalue};
-   // return result;
 }
 
 bool bigint::operator== (const bigint& that) const {
@@ -234,14 +247,20 @@ bool bigint::operator== (const bigint& that) const {
 bool bigint::operator< (const bigint& that) const {
    bool output = false;
    // If the left sign is negative and the right side is positive, left
-   // is less than right
+   // is not less than right
    if (is_negative == false && that.is_negative == true) {
       return false;
-   } else if (is_negative == true && that.is_negative == false) {
+   } // If left sign is negative and right side is positive, left side
+   // is less than right side 
+   else if (is_negative == true && that.is_negative == false) {
       return true;
-   } else if (is_negative == false && that.is_negative == false) {
+   } // If both signs are positive, check with ubigint::< (the left
+   // vector has to be smaller for output to be true) 
+   else if (is_negative == false && that.is_negative == false) {
       output = (uvalue < that.uvalue) ? (true) : (false);
-   } else if (is_negative == true && that.is_negative == true) {
+   } // If both signs are negative, check with ubigint::< (the left 
+   // vector has to be bigger in ubigint::< for the output to be true) 
+   else if (is_negative == true && that.is_negative == true) {
       output = (uvalue < that.uvalue) ? (false) : (true);
    }
 
@@ -249,9 +268,113 @@ bool bigint::operator< (const bigint& that) const {
 }
 
 ostream& operator<< (ostream& out, const bigint& that) {
+   // Initialize empty output string to build up the number
+   string output = "";
+   // Initialize digit and num to store the converted digit
+   int digitInt = 0;
+   string digitString = "";
+   // Initialize counter to determine if character count for a line
+   // has been exceeded
+   int j = 0;
+
+   // Get size of vector
+   int vecSize = that.uvalue.getUBigValue().size();
+   
+   // If size == 0, print 0
+   if (vecSize == 0) {
+      // Check if input has a negative sign (only for printing purpose)
+      if (that.is_negative) {
+         output += "-";
+      }
+      output += "0";
+      return out << output;
+   }
+
+   // Check to see if the number is negative
+   if (that.is_negative) {
+      j++;
+      output += "-";
+   }
+
+   // Loop through vector and build up output string from the low end
+   for (int i = vecSize - 1; i >= 0; i--) {
+      // Cast the digit to an int, then to a string
+      digitInt = static_cast<int>(that.uvalue.getUBigValue()[i]);
+      digitString = to_string(digitInt);
+      // Move to the next line if the character count for the line has
+      // been exceeded     
+      if (j % 69 == 0 && j != 0) {
+         output += "\\";
+         output += "\n";
+      }
+      // Append digit to output string
+      output += digitString;
+      j++;
+   }
+
+   return out << output;
+}
+@
+
+
+1.5
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: bigint.cpp,v 1.4 2021-09-26 10:35:44-07 - - $
+d12 1
+a12 1
+//    DEBUGF ('~', this << " -> " << uvalue)
+a23 1
+// Make the bigint postive
+a27 1
+// Makes the bigint negative
+d29 1
+d142 7
+a148 3
+   bigIntResult.is_negative = (is_negative == that.is_negative) ? 
+      (false) : (true);
+   
+a156 1
+   // ubigint unsignedResult {uvalue / that.uvalue};
+a157 2
+   cout << "Done" << endl;
+   // cout << bigIntResult << endl;
+d161 7
+a167 2
+   bigIntResult.is_negative = (is_negative == that.is_negative) ? 
+      (false) : (true);
+d176 3
+a178 3
+   // Divide the bigints with ubigint::/
+   ubigint unsignedResult {uvalue % that.uvalue};
+   bigIntResult.uvalue = unsignedResult;
+d182 7
+a188 2
+   bigIntResult.is_negative = (is_negative == that.is_negative) ? 
+      (false) : (true);
+a190 2
+   // bigint result {uvalue % that.uvalue};
+   // return result;
+d203 1
+a203 1
+   // is less than right
+d206 3
+a208 1
+   } else if (is_negative == true && that.is_negative == false) {
+d210 3
+a212 1
+   } else if (is_negative == false && that.is_negative == false) {
+d214 3
+a216 1
+   } else if (is_negative == true && that.is_negative == true) {
+d224 45
+a268 2
    return out << "bigint(" << (that.is_negative ? "-" : "+")
               << "," << that.uvalue << ")";
-}
 @
 
 

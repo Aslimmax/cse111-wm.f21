@@ -1,4 +1,4 @@
-// $Id: bigint.cpp,v 1.5 2021-10-14 02:10:43-07 - - $
+// $Id: bigint.cpp,v 1.6 2021-10-14 22:18:21-07 - - $
 
 #include <cstdlib>
 #include <exception>

@@ -1,4 +1,4 @@
-// $Id: ubigint.cpp,v 1.13 2021-10-14 02:10:43-07 - - $
+// $Id: ubigint.cpp,v 1.14 2021-10-14 22:18:21-07 - - $
 
 #include <cctype>
 #include <cstdlib>

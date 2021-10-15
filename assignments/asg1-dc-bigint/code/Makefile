@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.10 2021-09-05 12:44:19-07 - - $
+# $Id: Makefile,v 1.11 2021-10-14 22:18:21-07 - - $
 
 MKFILE      = Makefile
 DEPSFILE    = ${MKFILE}.deps
@@ -62,8 +62,8 @@ again :
 	${GMAKE} spotless deps ci all lis
 
 submit : ${CPPSOURCE} ${CPPHEADER} ${MKFILE} 
-	- submit cse111-wm.f21 asg1 ${CPPSOURCE} ${CPPHEADER} ${MKFILE} \
-	README
+	- submit cse111-wm.f21 asg1 ${CPPSOURCE} ${CPPHEADER} \
+	${MKFILE} README
 
 ifeq (${NEEDINCL}, )
 include ${DEPSFILE}

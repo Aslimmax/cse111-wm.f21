@@ -1,9 +1,14 @@
-head	1.6;
+head	1.7;
 access;
 symbols;
 locks;
 comment	@ * @;
 
+
+1.7
+date	2021.10.15.05.18.21;	author -;	state -;
+branches;
+next	1.6;
 
 1.6
 date	2021.10.14.09.10.43;	author -;	state -;
@@ -40,12 +45,12 @@ desc
 @@
 
 
-1.6
+1.7
 log
 @-
 @
 text
-@// $Id: ubigint.h,v 1.5 2020-10-11 12:25:22-07 - - $
+@// $Id: ubigint.h,v 1.6 2021-10-14 02:10:43-07 - - $
 
 #ifndef __UBIGINT_H__
 #define __UBIGINT_H__
@@ -83,11 +88,24 @@ class ubigint {
         bool operator<  (const ubigint&) const;
 
         // Helper methods
+        // Returns the private member ubig_value
         const ubigvalue_t& getUBigValue() const;
 };
 
 #endif
 
+@
+
+
+1.6
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: ubigint.h,v 1.5 2020-10-11 12:25:22-07 - - $
+d39 1
 @
 
 
