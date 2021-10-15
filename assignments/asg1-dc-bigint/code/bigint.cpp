@@ -214,6 +214,7 @@ ostream& operator<< (ostream& out, const bigint& that) {
    // Initialize digit and num to store the converted digit
    int digitInt = 0;
    string digitString = "";
+   int j = 0;
 
    // Get size of vector
    int vecSize = that.uvalue.getUBigValue().size();
@@ -227,23 +228,26 @@ ostream& operator<< (ostream& out, const bigint& that) {
       return out << output;
    }
 
+   // Check to see if the number is negative
+   if (that.is_negative) {
+      j++;
+      output += "-";
+   }
+
    // Loop through vector and build up output string from the low end
-   for (int i = vecSize - 1, j = 0; i >= 0; i--, j++) {
+   for (int i = vecSize - 1; i >= 0; i--) {
       // Cast the digit to an int, then to a string
       digitInt = static_cast<int>(that.uvalue.getUBigValue()[i]);
       digitString = to_string(digitInt);
       // Determine the sign of the number      
-      if (j % 70 == 0 && j != 0) {
+      if (j % 69 == 0 && j != 0) {
          // cout << "vecSize: " << vecSize << " i: " << i << endl;
          output += "\\";
          output += "\n";
       }
       // Append digit to output string
       output += digitString;
-   }
-
-   if (that.is_negative) {
-      output += "-";
+      j++;
    }
 
    return out << output;
