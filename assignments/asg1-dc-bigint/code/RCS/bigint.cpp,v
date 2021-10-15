@@ -1,9 +1,29 @@
-head	1.6;
+head	1.10;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.10
+date	2021.10.15.06.59.59;	author -;	state -;
+branches;
+next	1.9;
+
+1.9
+date	2021.10.15.06.57.53;	author -;	state -;
+branches;
+next	1.8;
+
+1.8
+date	2021.10.15.06.55.42;	author -;	state -;
+branches;
+next	1.7;
+
+1.7
+date	2021.10.15.06.33.55;	author -;	state -;
+branches;
+next	1.6;
 
 1.6
 date	2021.10.15.05.18.21;	author -;	state -;
@@ -40,17 +60,18 @@ desc
 @@
 
 
-1.6
+1.10
 log
 @-
 @
 text
-@// $Id: bigint.cpp,v 1.5 2021-10-14 02:10:43-07 - - $
+@// $Id: bigint.cpp,v 1.9 2021-10-14 23:57:53-07 - - $
 
 #include <cstdlib>
 #include <exception>
 #include <stack>
 #include <stdexcept>
+#include <sstream>
 using namespace std;
 
 #include "bigint.h"
@@ -268,11 +289,8 @@ bool bigint::operator< (const bigint& that) const {
 }
 
 ostream& operator<< (ostream& out, const bigint& that) {
-   // Initialize empty output string to build up the number
-   string output = "";
    // Initialize digit and num to store the converted digit
    int digitInt = 0;
-   string digitString = "";
    // Initialize counter to determine if character count for a line
    // has been exceeded
    int j = 0;
@@ -284,36 +302,132 @@ ostream& operator<< (ostream& out, const bigint& that) {
    if (vecSize == 0) {
       // Check if input has a negative sign (only for printing purpose)
       if (that.is_negative) {
-         output += "-";
+         out << "-";
       }
-      output += "0";
-      return out << output;
+      out << 0;
+      return out;
    }
 
    // Check to see if the number is negative
    if (that.is_negative) {
       j++;
-      output += "-";
+      out << "-";
    }
 
-   // Loop through vector and build up output string from the low end
+   // Loop through vector and build up out from the lowend
    for (int i = vecSize - 1; i >= 0; i--) {
       // Cast the digit to an int, then to a string
       digitInt = static_cast<int>(that.uvalue.getUBigValue()[i]);
-      digitString = to_string(digitInt);
+      // Write digit to ostream
+      out << digitInt;
+      // Increment character count
+      j++;  
       // Move to the next line if the character count for the line has
-      // been exceeded     
+      // been exceeded 
       if (j % 69 == 0 && j != 0) {
-         output += "\\";
-         output += "\n";
+         out << "\\";
+         out << "\n";
       }
-      // Append digit to output string
-      output += digitString;
-      j++;
    }
 
-   return out << output;
+   return out;
 }
+@
+
+
+1.9
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: bigint.cpp,v 1.8 2021-10-14 23:55:42-07 - - $
+d254 1
+d256 2
+d259 1
+a259 2
+      // been exceeded   
+      j++;  
+@
+
+
+1.8
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: bigint.cpp,v 1.7 2021-10-14 23:33:55-07 - - $
+d256 3
+a258 2
+      // been exceeded     
+      if (j % 68 == 0 && j != 0) {
+a261 1
+      j++;
+@
+
+
+1.7
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: bigint.cpp,v 1.6 2021-10-14 22:18:21-07 - - $
+d240 1
+a240 1
+      out << "0";
+a254 1
+      // digitString = to_string(digitInt);
+d257 1
+a257 1
+      if (j % 69 == 0 && j != 0) {
+@
+
+
+1.6
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: bigint.cpp,v 1.5 2021-10-14 02:10:43-07 - - $
+d7 1
+a224 2
+   // Initialize empty output string to build up the number
+   string output = "";
+a226 1
+   string digitString = "";
+d238 1
+a238 1
+         output += "-";
+d240 2
+a241 2
+      output += "0";
+      return out << output;
+d247 1
+a247 1
+      output += "-";
+d250 1
+a250 1
+   // Loop through vector and build up output string from the low end
+d254 2
+a255 1
+      digitString = to_string(digitInt);
+d259 2
+a260 2
+         output += "\\";
+         output += "\n";
+a261 2
+      // Append digit to output string
+      output += digitString;
+d265 1
+a265 1
+   return out << output;
 @
 
 

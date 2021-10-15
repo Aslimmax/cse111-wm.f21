@@ -1,4 +1,4 @@
-// $Id: ubigint.cpp,v 1.14 2021-10-14 22:18:21-07 - - $
+// $Id: ubigint.cpp,v 1.17 2021-10-14 23:59:59-07 - - $
 
 #include <cctype>
 #include <cstdlib>
@@ -383,11 +383,8 @@ bool ubigint::operator< (const ubigint& that) const {
 }
 
 ostream& operator<< (ostream& out, const ubigint& that) { 
-   // initialize empty output string to build up the number
-   string output = "";
    // Initialize digit and num to store the converted digit
    int digitInt = 0;
-   string digitString = "";
    // Initialize counter to determine if character count for a line
    // has been exceeded
    int j = 0;
@@ -397,27 +394,27 @@ ostream& operator<< (ostream& out, const ubigint& that) {
    
    // If size == 0, print 0
    if (vecSize == 0) {
-      output.insert(0, "0");
-      return out << output;
+      out << 0;
+      return out;
    }
 
-   // Loop through vector and build up output string from the low end
+   // Loop through vector and build up out from the lowend
    for (int i = vecSize - 1; i >= 0; i--) {
       // Cast the digit to an int, then to a string
       digitInt = static_cast<int>(that.ubig_value[i]);
-      digitString = to_string(digitInt);
-      // Move to the next line if the character count for the line has
-      // been exceeded
-      if (j % 69 == 0 && j != 0) {
-         output += "\\";
-         output += "\n";
-      }
-      // Append digit to output string
-      output += digitString;
+      // Write digit to ostream
+      out << digitInt;
+      // Increment character count
       j++;
+      // Move to the next line if the character count for the line has
+      // been exceeded     
+      if (j % 69 == 0 && j != 0) {
+         out << "\\";
+         out << "\n";
+      }
    }
 
-   return out << output;
+   return out;
 }
 
 const ubigint::ubigvalue_t& ubigint::getUBigValue() const {

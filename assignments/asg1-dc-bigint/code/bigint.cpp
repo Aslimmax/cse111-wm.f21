@@ -1,9 +1,10 @@
-// $Id: bigint.cpp,v 1.6 2021-10-14 22:18:21-07 - - $
+// $Id: bigint.cpp,v 1.10 2021-10-14 23:59:59-07 - - $
 
 #include <cstdlib>
 #include <exception>
 #include <stack>
 #include <stdexcept>
+#include <sstream>
 using namespace std;
 
 #include "bigint.h"
@@ -221,11 +222,8 @@ bool bigint::operator< (const bigint& that) const {
 }
 
 ostream& operator<< (ostream& out, const bigint& that) {
-   // Initialize empty output string to build up the number
-   string output = "";
    // Initialize digit and num to store the converted digit
    int digitInt = 0;
-   string digitString = "";
    // Initialize counter to determine if character count for a line
    // has been exceeded
    int j = 0;
@@ -237,33 +235,33 @@ ostream& operator<< (ostream& out, const bigint& that) {
    if (vecSize == 0) {
       // Check if input has a negative sign (only for printing purpose)
       if (that.is_negative) {
-         output += "-";
+         out << "-";
       }
-      output += "0";
-      return out << output;
+      out << 0;
+      return out;
    }
 
    // Check to see if the number is negative
    if (that.is_negative) {
       j++;
-      output += "-";
+      out << "-";
    }
 
-   // Loop through vector and build up output string from the low end
+   // Loop through vector and build up out from the lowend
    for (int i = vecSize - 1; i >= 0; i--) {
       // Cast the digit to an int, then to a string
       digitInt = static_cast<int>(that.uvalue.getUBigValue()[i]);
-      digitString = to_string(digitInt);
+      // Write digit to ostream
+      out << digitInt;
+      // Increment character count
+      j++;  
       // Move to the next line if the character count for the line has
-      // been exceeded     
+      // been exceeded 
       if (j % 69 == 0 && j != 0) {
-         output += "\\";
-         output += "\n";
+         out << "\\";
+         out << "\n";
       }
-      // Append digit to output string
-      output += digitString;
-      j++;
    }
 
-   return out << output;
+   return out;
 }

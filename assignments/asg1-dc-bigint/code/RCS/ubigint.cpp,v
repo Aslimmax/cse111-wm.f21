@@ -1,9 +1,24 @@
-head	1.14;
+head	1.17;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.17
+date	2021.10.15.06.59.59;	author -;	state -;
+branches;
+next	1.16;
+
+1.16
+date	2021.10.15.06.55.42;	author -;	state -;
+branches;
+next	1.15;
+
+1.15
+date	2021.10.15.06.33.55;	author -;	state -;
+branches;
+next	1.14;
 
 1.14
 date	2021.10.15.05.18.21;	author -;	state -;
@@ -80,12 +95,12 @@ desc
 @@
 
 
-1.14
+1.17
 log
 @-
 @
 text
-@// $Id: ubigint.cpp,v 1.13 2021-10-14 02:10:43-07 - - $
+@// $Id: ubigint.cpp,v 1.16 2021-10-14 23:55:42-07 - - $
 
 #include <cctype>
 #include <cstdlib>
@@ -470,11 +485,8 @@ bool ubigint::operator< (const ubigint& that) const {
 }
 
 ostream& operator<< (ostream& out, const ubigint& that) { 
-   // initialize empty output string to build up the number
-   string output = "";
    // Initialize digit and num to store the converted digit
    int digitInt = 0;
-   string digitString = "";
    // Initialize counter to determine if character count for a line
    // has been exceeded
    int j = 0;
@@ -484,32 +496,108 @@ ostream& operator<< (ostream& out, const ubigint& that) {
    
    // If size == 0, print 0
    if (vecSize == 0) {
-      output.insert(0, "0");
-      return out << output;
+      out << 0;
+      return out;
    }
 
-   // Loop through vector and build up output string from the low end
+   // Loop through vector and build up out from the lowend
    for (int i = vecSize - 1; i >= 0; i--) {
       // Cast the digit to an int, then to a string
       digitInt = static_cast<int>(that.ubig_value[i]);
-      digitString = to_string(digitInt);
-      // Move to the next line if the character count for the line has
-      // been exceeded
-      if (j % 69 == 0 && j != 0) {
-         output += "\\";
-         output += "\n";
-      }
-      // Append digit to output string
-      output += digitString;
+      // Write digit to ostream
+      out << digitInt;
+      // Increment character count
       j++;
+      // Move to the next line if the character count for the line has
+      // been exceeded     
+      if (j % 69 == 0 && j != 0) {
+         out << "\\";
+         out << "\n";
+      }
    }
 
-   return out << output;
+   return out;
 }
 
 const ubigint::ubigvalue_t& ubigint::getUBigValue() const {
    return ubig_value;
 }
+@
+
+
+1.16
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: ubigint.cpp,v 1.15 2021-10-14 23:33:55-07 - - $
+d405 1
+d407 2
+d411 1
+a411 1
+      if (j % 68 == 0 && j != 0) {
+a414 1
+      j++;
+@
+
+
+1.15
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: ubigint.cpp,v 1.14 2021-10-14 22:18:21-07 - - $
+d397 1
+a397 1
+      out << "0";
+a405 1
+      // digitString = to_string(digitInt);
+d408 1
+a408 1
+      if (j % 69 == 0 && j != 0) {
+@
+
+
+1.14
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: ubigint.cpp,v 1.13 2021-10-14 02:10:43-07 - - $
+a385 2
+   // initialize empty output string to build up the number
+   string output = "";
+a387 1
+   string digitString = "";
+d397 2
+a398 2
+      output.insert(0, "0");
+      return out << output;
+d401 1
+a401 1
+   // Loop through vector and build up output string from the low end
+d405 2
+a406 1
+      digitString = to_string(digitInt);
+d408 1
+a408 1
+      // been exceeded
+d410 2
+a411 2
+         output += "\\";
+         output += "\n";
+a412 2
+      // Append digit to output string
+      output += digitString;
+d416 1
+a416 1
+   return out << output;
 @
 
 
