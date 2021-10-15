@@ -2,6 +2,7 @@
 
 #include <cstdlib>
 #include <exception>
+#include <sstream>
 #include <stack>
 #include <stdexcept>
 using namespace std;
@@ -21,13 +22,12 @@ bigint::bigint (const string& that) {
    uvalue = ubigint (that.substr (is_negative ? 1 : 0));
 }
 
-// Make the bigint postive
 bigint bigint::operator+ () const {
    return *this;
 }
 
-// Makes the bigint negative
 bigint bigint::operator- () const {
+   // Flip the sign of is_negative
    return {uvalue, not is_negative};
 }
 
@@ -157,8 +157,6 @@ bigint bigint::operator/ (const bigint& that) const {
    // Divide the bigints with ubigint::/
    // ubigint unsignedResult {uvalue / that.uvalue};
    bigIntResult.uvalue = uvalue / that.uvalue;
-   cout << "Done" << endl;
-   // cout << bigIntResult << endl;
    // Determine the result's signs:
    // * same sign -> not negative
    // * diff sign -> negative
@@ -212,6 +210,42 @@ bool bigint::operator< (const bigint& that) const {
 }
 
 ostream& operator<< (ostream& out, const bigint& that) {
-   return out << "bigint(" << (that.is_negative ? "-" : "+")
-              << "," << that.uvalue << ")";
+   // initialize empty output string to build up the number
+   string output = "";
+   // Initialize digit and num to store the converted digit
+   int digitInt = 0;
+   string digitString = "";
+
+   // Get size of vector
+   int vecSize = that.uvalue.getUBigValue().size();
+   
+   // If size == 0, print 0
+   if (vecSize == 0) {
+      output.insert(0, "0");
+      if (that.is_negative) {
+         output.insert(0, "-");
+      }
+      return out << output;
+   }
+
+   // Loop through vector and build up output string from the low end
+   for (int i = vecSize - 1, j = 0; i >= 0; i--, j++) {
+      // Cast the digit to an int, then to a string
+      digitInt = static_cast<int>(that.uvalue.getUBigValue()[i]);
+      digitString = to_string(digitInt);
+      // Determine the sign of the number      
+      if (j % 70 == 0 && j != 0) {
+         // cout << "vecSize: " << vecSize << " i: " << i << endl;
+         output += "\\";
+         output += "\n";
+      }
+      // Append digit to output string
+      output += digitString;
+   }
+
+   if (that.is_negative) {
+      output += "-";
+   }
+
+   return out << output;
 }
