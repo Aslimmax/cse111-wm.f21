@@ -1,2 +1,5 @@
+# Assignment 1
 assignments/asg1-dc-bigint/dot.score/SCORE.pair
-assignments/asg1-dc-bigint/dot.score/*.o
+
+# Assignment 2
+assignments/asg2-shell-fnptrs-oop/dot.score/SCORE.pair
