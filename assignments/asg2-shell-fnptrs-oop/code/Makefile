@@ -60,6 +60,10 @@ ${DEPFILE} : ${MKFILE}
 again :
 	${GMAKE} spotless dep ci all lis
 
+submit : ${CPPSOURCE} ${CPPHEADER} ${MKFILE} 
+	- submit cse111-wm.f21 asg2 ${CPPSOURCE} ${CPPHEADER} \
+	${MKFILE} README
+
 ifeq (${NEEDINCL}, )
 include ${DEPFILE}
 endif
