@@ -6,3 +6,6 @@ assignments/asg1-dc-bigint/dot.score/SCORE.pair
 
 # Assignment 2
 assignments/asg2-shell-fnptrs-oop/dot.score/SCORE.pair
+assignments/asg2-shell-fnptrs-oop/code/*.o
+assignments/asg2-shell-fnptrs-oop/code/*.dep
+assignments/asg2-shell-fnptrs-oop/code/yshell

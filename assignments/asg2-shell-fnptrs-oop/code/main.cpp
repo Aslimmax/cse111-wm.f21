@@ -54,6 +54,7 @@ int main (int argc, char** argv) {
             // Read a line, break at EOF, and echo print the prompt
             // if one is needed.
             cout << state.prompt();
+            // cout << "This is the state" << endl; // DEBUG
             string line;
             getline (cin, line);
             if (cin.eof()) {

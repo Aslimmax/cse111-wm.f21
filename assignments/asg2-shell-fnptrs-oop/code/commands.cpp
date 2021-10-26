@@ -17,7 +17,13 @@ command_hash cmd_hash {
    {"rm"    , fn_rm    },
    {"rmr"   , fn_rmr   },
 };
-
+/*
+ * Return the command in cmd_hash unordered map based on command passed
+ * 
+ * Input: constant string reference cmd
+ * Output: command_fn to which function needs to be executed. If the
+ * command doesn't exist, throw a command_error
+ */
 command_fn find_command_fn (const string& cmd) {
    // Note: value_type is pair<const key_type, mapped_type>
    // So: iterator->first is key_type (string)
@@ -50,6 +56,11 @@ void fn_cd (inode_state& state, const wordvec& words) {
    DEBUGF ('c', words);
 }
 
+/* Echos words, which may be empty, to the standard output on a line
+by itself
+Input: inode_state& state, wordvec& words (DEBUG: DEFINE EXTENSIVELY)
+Output: None
+ */
 void fn_echo (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
