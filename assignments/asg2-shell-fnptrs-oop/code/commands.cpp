@@ -16,7 +16,6 @@ command_hash cmd_hash {
    {"pwd"   , fn_pwd   },
    {"rm"    , fn_rm    },
    {"rmr"   , fn_rmr   },
-   test
 };
 /*
  * Return the command in cmd_hash unordered map based on command passed
