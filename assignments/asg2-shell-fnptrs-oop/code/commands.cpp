@@ -1,4 +1,4 @@
-// $Id: commands.cpp,v 1.21 2021-09-26 12:41:17-07 - - $
+// $Id: commands.cpp,v 1.22 2021-10-26 14:51:44-07 - - $
 
 #include "commands.h"
 #include "debug.h"
@@ -58,7 +58,7 @@ void fn_cd (inode_state& state, const wordvec& words) {
 
 /* Echos words, which may be empty, to the standard output on a line
 by itself
-Input: inode_state& state, wordvec& words (DEBUG: DEFINE EXTENSIVELY)
+Input: inode_state& obj, wordvec& string vector
 Output: None
  */
 void fn_echo (inode_state& state, const wordvec& words) {
@@ -77,6 +77,33 @@ void fn_exit (inode_state& state, const wordvec& words) {
 void fn_ls (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+
+   // If no arguments are passed with the command, then dot is used as
+   // its operand
+   if (words.size() < 1) {
+      cout << "/:" << endl;
+   } else {
+      cout << "/:" << endl;
+   }
+
+   // Loop through dirents
+   map<string, inode_ptr> dirents = 
+      state.getCwd()->contents()->getDirents();
+   for (map<string, inode_ptr>::iterator iter = dirents.begin(); 
+      iter != dirents.end(); ++iter) {
+      cout << setw(6) << iter->second->get_inode_nr()
+         << setw(6) << dirents.size();
+
+      string filePath = iter->first;
+      if (filePath == "..") {
+         cout << setw(7);
+      } else {
+         cout << setw(6);
+      }
+
+      // Print out the file path
+      cout << filePath << endl;
+   }
 }
 
 void fn_lsr (inode_state& state, const wordvec& words) {
@@ -99,9 +126,25 @@ void fn_prompt (inode_state& state, const wordvec& words) {
    DEBUGF ('c', words);
 }
 
+/* Prints the current working directory
+Input: inode_state obj, words ([0] => name of command, [1] => arguments)
+Output: void function
+ */
 void fn_pwd (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
-   DEBUGF ('c', words);
+   DEBUGF ('c', words);   
+   // initialize output string for the final path
+   string outputPath = ""; 
+   // If cwd points to root, then we are at the root directory
+   if (state.getRoot()->get_inode_nr() == 1) {
+      outputPath += "/";
+   }
+   else {
+
+   }
+   
+   cout << outputPath << endl;
+
 }
 
 void fn_rm (inode_state& state, const wordvec& words) {

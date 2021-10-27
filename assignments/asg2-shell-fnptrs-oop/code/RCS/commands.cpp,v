@@ -1,9 +1,14 @@
-head	1.21;
+head	1.22;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.22
+date	2021.10.26.21.51.44;	author -;	state -;
+branches;
+next	1.21;
 
 1.21
 date	2021.09.26.19.41.17;	author -;	state -;
@@ -115,12 +120,12 @@ desc
 @@
 
 
-1.21
+1.22
 log
 @-
 @
 text
-@// $Id: commands.cpp,v 1.20 2021-01-11 15:52:17-08 - - $
+@// $Id: commands.cpp,v 1.21 2021-09-26 12:41:17-07 - - $
 
 #include "commands.h"
 #include "debug.h"
@@ -139,7 +144,13 @@ command_hash cmd_hash {
    {"rm"    , fn_rm    },
    {"rmr"   , fn_rmr   },
 };
-
+/*
+ * Return the command in cmd_hash unordered map based on command passed
+ * 
+ * Input: constant string reference cmd
+ * Output: command_fn to which function needs to be executed. If the
+ * command doesn't exist, throw a command_error
+ */
 command_fn find_command_fn (const string& cmd) {
    // Note: value_type is pair<const key_type, mapped_type>
    // So: iterator->first is key_type (string)
@@ -172,6 +183,11 @@ void fn_cd (inode_state& state, const wordvec& words) {
    DEBUGF ('c', words);
 }
 
+/* Echos words, which may be empty, to the standard output on a line
+by itself
+Input: inode_state& state, wordvec& words (DEBUG: DEFINE EXTENSIVELY)
+Output: None
+ */
 void fn_echo (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
@@ -225,6 +241,21 @@ void fn_rmr (inode_state& state, const wordvec& words) {
    DEBUGF ('c', words);
 }
 
+@
+
+
+1.21
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: commands.cpp,v 1.20 2021-01-11 15:52:17-08 - - $
+d20 7
+a26 1
+
+d59 5
 @
 
 

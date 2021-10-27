@@ -5,9 +5,11 @@
 
 #include <exception>
 #include <iostream>
+#include <iomanip>
 #include <memory>
 #include <map>
 #include <vector>
+#include <typeinfo>
 using namespace std;
 
 #include "util.h"
@@ -31,18 +33,20 @@ ostream& operator<< (ostream&, file_type);
 
 class inode_state {
    friend class inode;
+   // friend class directory;
    friend ostream& operator<< (ostream& out, const inode_state&);
    private:
       inode_ptr root {nullptr};
       inode_ptr cwd {nullptr};
+      vector<string> filepath {};
       string prompt_ {"% "};
    public:
       inode_state (const inode_state&) = delete; // copy ctor
       inode_state& operator= (const inode_state&) = delete; // op=
       inode_state();
       // Getters
-      inode_ptr getRoot();
-      inode_ptr getCwd();
+      inode_ptr getRoot() const;
+      inode_ptr getCwd() const;
       // Setters
       inode_ptr setCwd();
       const string& prompt() const;
@@ -64,6 +68,8 @@ class inode_state {
 
 class inode {
    friend class inode_state;
+   // friend class base_file_ptr;
+   // friend class directory;
    private:
       static size_t next_inode_nr;
       size_t inode_nr;
@@ -74,6 +80,8 @@ class inode {
       inode& operator= (const inode&) = delete;
       inode (file_type);
       size_t get_inode_nr() const;
+      // Helper function
+      base_file_ptr getContents() const;
 }; 
 
 
@@ -88,6 +96,8 @@ class file_error: public runtime_error {
 };
 
 class base_file {
+   friend class inode;
+   friend class inode_state;
    protected:
       base_file() = default;
       virtual const string& error_file_type() const = 0;
@@ -100,7 +110,10 @@ class base_file {
       virtual void writefile (const wordvec& newdata);
       virtual void remove (const string& filename);
       virtual inode_ptr mkdir (const string& dirname);
-      virtual inode_ptr mkfile (const string& filename);
+      virtual inode_ptr mkfile (const string& filename);      
+      // Helper function that adds filename and inodePtr to dirents
+      virtual void addDirectoryContent(const string &filename, const inode_ptr& inodePtr);
+      virtual map<string, inode_ptr> getDirents() const;
 };
 
 // class plain_file -
@@ -156,6 +169,10 @@ class directory: public base_file {
       virtual void remove (const string& filename) override;
       virtual inode_ptr mkdir (const string& dirname) override;
       virtual inode_ptr mkfile (const string& filename) override;
+      // Helper function that adds filename and inodePtr to dirents
+      virtual void addDirectoryContent(const string &filename, 
+         const inode_ptr& inodePtr) override;
+      virtual map<string, inode_ptr> getDirents() const override;
 };
 
 #endif

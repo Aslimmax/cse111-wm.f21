@@ -1,4 +1,4 @@
-// $Id: main.cpp,v 1.12 2021-09-26 12:41:17-07 - - $
+// $Id: main.cpp,v 1.13 2021-10-26 14:51:44-07 - - $
 
 #include <cstdlib>
 #include <iostream>
@@ -54,7 +54,6 @@ int main (int argc, char** argv) {
             // Read a line, break at EOF, and echo print the prompt
             // if one is needed.
             cout << state.prompt();
-            // cout << "This is the state" << endl; // DEBUG
             string line;
             getline (cin, line);
             if (cin.eof()) {
