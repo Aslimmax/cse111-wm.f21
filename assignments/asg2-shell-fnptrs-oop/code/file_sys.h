@@ -24,7 +24,6 @@ using inode_ptr = shared_ptr<inode>;
 using base_file_ptr = shared_ptr<base_file>;
 ostream& operator<< (ostream&, file_type);
 
-
 // inode_state -
 //    A small convenient class to maintain the state of the simulated
 //    process:  the root (/), the current directory (.), and the
@@ -41,6 +40,11 @@ class inode_state {
       inode_state (const inode_state&) = delete; // copy ctor
       inode_state& operator= (const inode_state&) = delete; // op=
       inode_state();
+      // Getters
+      inode_ptr getRoot();
+      inode_ptr getCwd();
+      // Setters
+      inode_ptr setCwd();
       const string& prompt() const;
       void prompt (const string&);
 };
@@ -66,9 +70,11 @@ class inode {
       base_file_ptr contents;
    public:
       inode() = delete;
+      inode (const inode&) = delete;
+      inode& operator= (const inode&) = delete;
       inode (file_type);
       size_t get_inode_nr() const;
-};
+}; 
 
 
 // class base_file -
