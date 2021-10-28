@@ -86,23 +86,42 @@ void fn_ls (inode_state& state, const wordvec& words) {
       cout << "/:" << endl;
    }
 
-   // Loop through dirents
-   map<string, inode_ptr> dirents = 
+   // Set a temporary var to class member dirents
+   map<string, inode_ptr> tempDirEnts = 
       state.getCwd()->getContents()->getDirents();
-   for (map<string, inode_ptr>::iterator iter = dirents.begin(); 
-      iter != dirents.end(); ++iter) {
-      cout << setw(6) << iter->second->get_inode_nr()
-         << setw(6) << iter->second->getContents()->getDirents().size();
-
+   // Loop through dirents
+   for (map<string, inode_ptr>::iterator iter = tempDirEnts.begin();
+        iter != tempDirEnts.end(); ++iter)
+   {
+      // Stores whether or not the element is a file or directory
+      bool isDirectory = true;
+      size_t inodeNum = iter->second->get_inode_nr();
       string filePath = iter->first;
-      if (filePath == "..") {
-         cout << setw(7);
-      } else {
-         cout << setw(6);
+      int fileSize = 0;
+      inode_ptr inodePtr = iter->second;
+            
+      // Determine file type
+      isDirectory = (inodePtr->getFileType() == 
+         file_type::DIRECTORY_TYPE) ? true : false; 
+      
+      if (isDirectory) {
+         fileSize = inodePtr->getContents()->getDirents().size();
+         filePath += "/";
+      } 
+      else { // Otherwise, the file is a PLAIN_TYPE
+         // Store a reference to the wordvec data in plain_file
+         wordvec fileData = inodePtr->getContents()->getData();
+         // Loop through fileData and increment file size
+         for (wordvec::iterator wordIter = fileData.begin();
+              wordIter != fileData.end(); ++wordIter) {
+            fileSize += 1;
+         }
+         // size = inodePtr->getContents()->getData().size();
       }
 
-      // Print out the file path
-      cout << filePath << endl;
+      // Print out the completed line
+      cout << setw(6) << inodeNum << setw(6) << fileSize << "  "
+         << filePath << endl;
    }
 }
 
@@ -114,6 +133,7 @@ void fn_lsr (inode_state& state, const wordvec& words) {
 void fn_make (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+   state.getCwd()->getContents()->mkfile(words[1]);
 }
 
 void fn_mkdir (inode_state& state, const wordvec& words) {

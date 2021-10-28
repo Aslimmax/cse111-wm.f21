@@ -113,6 +113,10 @@ map<string, inode_ptr> base_file::getDirents() const {
    throw file_error ("is a " + error_file_type());
 }
 
+wordvec base_file::getData() const {
+   throw file_error ("is a " + error_file_type());
+}
+
 const wordvec &base_file::readfile() const {
    throw file_error ("is a " + error_file_type());
 }
@@ -149,6 +153,10 @@ void plain_file::writefile (const wordvec& words) {
    DEBUGF ('i', words);
 }
 
+wordvec plain_file::getData() const {
+   return data;
+}
+
 void directory::addDirectoryContent(const string& filename, 
    const inode_ptr& inodePtr) {
    // Create a tempPair obj to insert into dirents
@@ -156,6 +164,7 @@ void directory::addDirectoryContent(const string& filename,
    // Insert into dirents
    dirents.insert(tempPair);
 }
+
 
 /* Get dirents member from derived class directory
 Input: None
@@ -222,18 +231,18 @@ inode_ptr directory::mkdir (const string& dirname) {
 inode_ptr directory::mkfile (const string& filename) {
    DEBUGF ('i', filename);
    
-   // // Check if a directory or file called filename already exists
-   // map<string, inode_ptr>::iterator iter = dirents.find(filename);
-   // if (iter != dirents.end()) { // Found the element
-   //    // // Ensure that the element is not a directory
-   //    return nullptr;
-   // }
+   // Check if a directory or file called filename already exists
+   map<string, inode_ptr>::iterator iter = dirents.find(filename);
+   if (iter != dirents.end()) { // Found the element
+      // // Ensure that the element is not a directory
+      return nullptr;
+   }
    
-   // // Make a new file obj to add to dirents
-   // inode newFile(file_type::PLAIN_FILE);
-   // inode_ptr filePtr = make_shared<inode>(newFile);
+   // Make a new file obj to add to dirents
+   // inode newFile(file_type::PLAIN_TYPE);
+   inode_ptr filePtr = make_shared<inode>(file_type::PLAIN_TYPE);
 
-   // addDirectoryContent(filename, filePtr); 
+   addDirectoryContent(filename, filePtr); 
 
    return nullptr;
 }

@@ -116,6 +116,7 @@ class base_file {
       // Helper function that adds filename and inodePtr to dirents
       virtual void addDirectoryContent(const string &filename, const inode_ptr& inodePtr);
       virtual map<string, inode_ptr> getDirents() const;
+      virtual wordvec getData() const;
 };
 
 // class plain_file -
@@ -138,6 +139,10 @@ class plain_file: public base_file {
       virtual size_t size() const override;
       virtual const wordvec& readfile() const override;
       virtual void writefile (const wordvec& newdata) override;
+      // Helper functions
+      virtual wordvec getData() const override;
+      // virtual void addDirectoryContent(const string &filename,
+         // const inode_ptr &inodePtr) override;
 };
 
 // class directory -
