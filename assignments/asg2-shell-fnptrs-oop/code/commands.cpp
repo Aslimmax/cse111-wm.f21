@@ -109,13 +109,14 @@ void fn_ls (inode_state& state, const wordvec& words) {
          filePath += "/";
       } 
       else { // Otherwise, the file is a PLAIN_TYPE
+         fileSize = inodePtr->getContents()->getData().size();
          // Store a reference to the wordvec data in plain_file
-         wordvec fileData = inodePtr->getContents()->getData();
-         // Loop through fileData and increment file size
-         for (wordvec::iterator wordIter = fileData.begin();
-              wordIter != fileData.end(); ++wordIter) {
-            fileSize += 1;
-         }
+         // wordvec fileData = inodePtr->getContents()->getData();
+         // // Loop through fileData and increment file size
+         // for (wordvec::iterator wordIter = fileData.begin();
+         //      wordIter != fileData.end(); ++wordIter) {
+         //    fileSize += 1;
+         // }
          // size = inodePtr->getContents()->getData().size();
       }
 

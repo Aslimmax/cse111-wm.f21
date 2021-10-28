@@ -137,9 +137,21 @@ inode_ptr base_file::mkfile (const string&) {
    throw file_error ("is a " + error_file_type());
 }
 
-
+
+/* Get the size of plain_file wordvec data
+Input: None
+Output: number of characters in data*/
 size_t plain_file::size() const {
-   size_t size {0};
+   // Initailize size
+   size_t size = 0;
+
+   // Loop through all elements in data
+   for (wordvec::const_iterator iter = data.begin(); iter != data.end();
+      ++iter) {
+      // Increment size based on the length of the string in wordvec
+      size += (*iter).length();
+   }
+   
    DEBUGF ('i', "size = " << size);
    return size;
 }
