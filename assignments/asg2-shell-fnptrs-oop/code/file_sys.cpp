@@ -203,6 +203,10 @@ inode_ptr directory::mkdir (const string& dirname) {
    if (iter != dirents.end()) {
       return nullptr;
    }
+
+   /* TODO:
+   Add check for 'the complete pathname fo the parent of this new
+   directory does not already exist' */
    // Make a new inode_state obj
    inode_state directoryToAdd;
 
@@ -217,6 +221,23 @@ inode_ptr directory::mkdir (const string& dirname) {
 
 inode_ptr directory::mkfile (const string& filename) {
    DEBUGF ('i', filename);
+   
+   // Check if a directory or file called filename already exists
+   map<string, inode_ptr>::iterator iter = dirents.find(filename);
+   if (iter != dirents.end()) { // Found the element
+      // // Ensure that the element is not a directory
+      // if (iter->second->getFileType() == file_type::DIRECTORY_TYPE) {
+      //    return nullptr;
+      // }
+      return nullptr;
+   }
+   
+   // Make a new file obj to add to dirents
+   inode newFile(file_type::PLAIN_FILE);
+   inode_ptr filePtr = make_shared<inode>(newFile);
+
+   addDirectoryContent(filename, filePtr); 
+
    return nullptr;
 }
 
