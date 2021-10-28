@@ -88,11 +88,11 @@ void fn_ls (inode_state& state, const wordvec& words) {
 
    // Loop through dirents
    map<string, inode_ptr> dirents = 
-      state.getCwd()->contents()->getDirents();
+      state.getCwd()->getContents()->getDirents();
    for (map<string, inode_ptr>::iterator iter = dirents.begin(); 
       iter != dirents.end(); ++iter) {
       cout << setw(6) << iter->second->get_inode_nr()
-         << setw(6) << dirents.size();
+         << setw(6) << iter->second->getContents()->getDirents().size();
 
       string filePath = iter->first;
       if (filePath == "..") {
@@ -119,6 +119,11 @@ void fn_make (inode_state& state, const wordvec& words) {
 void fn_mkdir (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+   
+   // Ensure that a duplicate folder will not be added
+   if (state.getCwd()->getContents()->mkdir(words[1]) == nullptr) {
+      throw command_error(words[1] + ": directory already exists");
+   }
 }
 
 void fn_prompt (inode_state& state, const wordvec& words) {
@@ -150,6 +155,8 @@ void fn_pwd (inode_state& state, const wordvec& words) {
 void fn_rm (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+
+   state.getCwd()->getContents()->remove(words[1]);
 }
 
 void fn_rmr (inode_state& state, const wordvec& words) {

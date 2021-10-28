@@ -65,9 +65,11 @@ inode::inode(file_type type): inode_nr (next_inode_nr++) {
    switch (type) {
       case file_type::PLAIN_TYPE:
            contents = make_shared<plain_file>();
+           fileType = type;
            break;
       case file_type::DIRECTORY_TYPE:
            contents = make_shared<directory>();
+           fileType = type;
            break;
       default: assert (false);
    }
@@ -89,6 +91,14 @@ output: base_file_ptr contents member
  */
 base_file_ptr inode::getContents() const {
    return contents;
+}
+
+/* Get file_type of contents 
+Input: None
+Output: file_type
+ */
+file_type inode::getFileType() const {
+   return fileType;
 }
 
 file_error::file_error (const string& what):
@@ -171,30 +181,38 @@ size_t directory::size() const {
 
 void directory::remove (const string& filename) {
    DEBUGF ('i', filename);
+
+   // Check if filename exists in dirents
+   map<string, inode_ptr>::iterator iter = dirents.find(filename);
+   if (iter == dirents.end()) { // filename has not been found
+      return;
+   }
+
+   // Check if directory is empty
+   if (iter->second->getContents()->getDirents().size() == 2) {
+      iter->second->setCwd(nullptr);
+      dirents.erase(iter);
+   }
 }
 
 inode_ptr directory::mkdir (const string& dirname) {
    DEBUGF ('i', dirname);
-
+   
+   // Check if a directory or file called dirname already exists
+   map<string, inode_ptr>::iterator iter = dirents.find(dirname);
+   if (iter != dirents.end()) {
+      return nullptr;
+   }
    // Make a new inode_state obj
    inode_state directoryToAdd;
 
-   // Set the cwd of directoryToAdd to dirname
-   directoryToAdd
+   // Get the inode ptr
+   inode_ptr tempPtr = directoryToAdd.getCwd();
 
-   // initialize string to hold file path of cwd
-   string cwdFilePath = ""; 
-   
-   // Find the current path of the current directory
-   // for (map<string, inode_ptr>::iterator iter = dirents.begin(); 
-   //    iter != dirents.end(); ++iter) {
-   //    if (iter->first == ".") { // found the cwd
+   // Add new directory to dirents
+   addDirectoryContent(dirname, tempPtr);
 
-   //    }
-   // }
-
-   // Set the correct string paths for root and cwd
-   return nullptr;
+   return tempPtr;
 }
 
 inode_ptr directory::mkfile (const string& filename) {

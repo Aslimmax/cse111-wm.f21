@@ -74,6 +74,7 @@ class inode {
       static size_t next_inode_nr;
       size_t inode_nr;
       base_file_ptr contents;
+      file_type fileType;
    public:
       inode() = delete;
       inode (const inode&) = delete;
@@ -82,6 +83,7 @@ class inode {
       size_t get_inode_nr() const;
       // Helper function
       base_file_ptr getContents() const;
+      file_type getFileType() const;
 }; 
 
 
