@@ -1,9 +1,14 @@
-head	1.23;
+head	1.24;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.24
+date	2021.10.28.00.42.59;	author -;	state -;
+branches;
+next	1.23;
 
 1.23
 date	2021.10.27.22.19.03;	author -;	state -;
@@ -125,12 +130,12 @@ desc
 @@
 
 
-1.23
+1.24
 log
 @-
 @
 text
-@// $Id: commands.cpp,v 1.22 2021-10-26 14:51:44-07 - - $
+@// $Id: commands.cpp,v 1.23 2021-10-27 15:19:03-07 - - $
 
 #include "commands.h"
 #include "debug.h"
@@ -220,11 +225,11 @@ void fn_ls (inode_state& state, const wordvec& words) {
 
    // Loop through dirents
    map<string, inode_ptr> dirents = 
-      state.getCwd()->contents()->getDirents();
+      state.getCwd()->getContents()->getDirents();
    for (map<string, inode_ptr>::iterator iter = dirents.begin(); 
       iter != dirents.end(); ++iter) {
       cout << setw(6) << iter->second->get_inode_nr()
-         << setw(6) << dirents.size();
+         << setw(6) << iter->second->getContents()->getDirents().size();
 
       string filePath = iter->first;
       if (filePath == "..") {
@@ -251,6 +256,11 @@ void fn_make (inode_state& state, const wordvec& words) {
 void fn_mkdir (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+   
+   // Ensure that a duplicate folder will not be added
+   if (state.getCwd()->getContents()->mkdir(words[1]) == nullptr) {
+      throw command_error(words[1] + ": directory already exists");
+   }
 }
 
 void fn_prompt (inode_state& state, const wordvec& words) {
@@ -282,6 +292,8 @@ void fn_pwd (inode_state& state, const wordvec& words) {
 void fn_rm (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+
+   state.getCwd()->getContents()->remove(words[1]);
 }
 
 void fn_rmr (inode_state& state, const wordvec& words) {
@@ -289,6 +301,25 @@ void fn_rmr (inode_state& state, const wordvec& words) {
    DEBUGF ('c', words);
 }
 
+@
+
+
+1.23
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: commands.cpp,v 1.22 2021-10-26 14:51:44-07 - - $
+d91 1
+a91 1
+      state.getCwd()->contents()->getDirents();
+d95 1
+a95 1
+         << setw(6) << dirents.size();
+d122 5
+d158 2
 @
 
 

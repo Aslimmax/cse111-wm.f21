@@ -1,9 +1,14 @@
-head	1.11;
+head	1.12;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.12
+date	2021.10.28.00.42.59;	author -;	state -;
+branches;
+next	1.11;
 
 1.11
 date	2021.10.27.22.19.03;	author -;	state -;
@@ -65,12 +70,12 @@ desc
 @@
 
 
-1.11
+1.12
 log
 @-
 @
 text
-@// $Id: file_sys.cpp,v 1.10 2021-04-10 14:23:40-07 - - $
+@// $Id: file_sys.cpp,v 1.11 2021-10-27 15:19:03-07 - - $
 
 #include <cassert>
 #include <iostream>
@@ -137,9 +142,11 @@ inode::inode(file_type type): inode_nr (next_inode_nr++) {
    switch (type) {
       case file_type::PLAIN_TYPE:
            contents = make_shared<plain_file>();
+           fileType = type;
            break;
       case file_type::DIRECTORY_TYPE:
            contents = make_shared<directory>();
+           fileType = type;
            break;
       default: assert (false);
    }
@@ -161,6 +168,14 @@ output: base_file_ptr contents member
  */
 base_file_ptr inode::getContents() const {
    return contents;
+}
+
+/* Get file_type of contents 
+Input: None
+Output: file_type
+ */
+file_type inode::getFileType() const {
+   return fileType;
 }
 
 file_error::file_error (const string& what):
@@ -243,17 +258,86 @@ size_t directory::size() const {
 
 void directory::remove (const string& filename) {
    DEBUGF ('i', filename);
+
+   // Check if filename exists in dirents
+   map<string, inode_ptr>::iterator iter = dirents.find(filename);
+   if (iter == dirents.end()) { // filename has not been found
+      return;
+   }
+
+   // Check if directory is empty
+   if (iter->second->getContents()->getDirents().size() == 2) {
+      // iter->second->setCwd(nullptr);
+      dirents.erase(iter);
+   }
 }
 
 inode_ptr directory::mkdir (const string& dirname) {
    DEBUGF ('i', dirname);
+   
+   // Check if a directory or file called dirname already exists
+   map<string, inode_ptr>::iterator iter = dirents.find(dirname);
+   if (iter != dirents.end()) {
+      return nullptr;
+   }
 
+   /* TODO:
+   Add check for 'the complete pathname fo the parent of this new
+   directory does not already exist' */
    // Make a new inode_state obj
    inode_state directoryToAdd;
 
+   // Get the inode ptr
+   inode_ptr tempPtr = directoryToAdd.getCwd();
+
+   // Add new directory to dirents
+   addDirectoryContent(dirname, tempPtr);
+
+   return tempPtr;
+}
+
+inode_ptr directory::mkfile (const string& filename) {
+   DEBUGF ('i', filename);
+   
+   // // Check if a directory or file called filename already exists
+   // map<string, inode_ptr>::iterator iter = dirents.find(filename);
+   // if (iter != dirents.end()) { // Found the element
+   //    // // Ensure that the element is not a directory
+   //    return nullptr;
+   // }
+   
+   // // Make a new file obj to add to dirents
+   // inode newFile(file_type::PLAIN_FILE);
+   // inode_ptr filePtr = make_shared<inode>(newFile);
+
+   // addDirectoryContent(filename, filePtr); 
+
+   return nullptr;
+}
+
+@
+
+
+1.11
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: file_sys.cpp,v 1.10 2021-04-10 14:23:40-07 - - $
+d68 1
+d72 1
+d95 8
+d184 12
+d200 6
+d207 3
+d213 2
+a214 2
    // Set the cwd of directoryToAdd to dirname
    directoryToAdd
-
+d216 2
+a217 10
    // initialize string to hold file path of cwd
    string cwdFilePath = ""; 
    
@@ -264,16 +348,11 @@ inode_ptr directory::mkdir (const string& dirname) {
 
    //    }
    // }
-
+d219 1
+a219 2
    // Set the correct string paths for root and cwd
    return nullptr;
-}
-
-inode_ptr directory::mkfile (const string& filename) {
-   DEBUGF ('i', filename);
-   return nullptr;
-}
-
+d224 14
 @
 
 

@@ -1,4 +1,4 @@
-// $Id: file_sys.cpp,v 1.11 2021-10-27 15:19:03-07 - - $
+// $Id: file_sys.cpp,v 1.12 2021-10-27 17:42:59-07 - - $
 
 #include <cassert>
 #include <iostream>
@@ -190,7 +190,7 @@ void directory::remove (const string& filename) {
 
    // Check if directory is empty
    if (iter->second->getContents()->getDirents().size() == 2) {
-      iter->second->setCwd(nullptr);
+      // iter->second->setCwd(nullptr);
       dirents.erase(iter);
    }
 }
@@ -222,21 +222,18 @@ inode_ptr directory::mkdir (const string& dirname) {
 inode_ptr directory::mkfile (const string& filename) {
    DEBUGF ('i', filename);
    
-   // Check if a directory or file called filename already exists
-   map<string, inode_ptr>::iterator iter = dirents.find(filename);
-   if (iter != dirents.end()) { // Found the element
-      // // Ensure that the element is not a directory
-      // if (iter->second->getFileType() == file_type::DIRECTORY_TYPE) {
-      //    return nullptr;
-      // }
-      return nullptr;
-   }
+   // // Check if a directory or file called filename already exists
+   // map<string, inode_ptr>::iterator iter = dirents.find(filename);
+   // if (iter != dirents.end()) { // Found the element
+   //    // // Ensure that the element is not a directory
+   //    return nullptr;
+   // }
    
-   // Make a new file obj to add to dirents
-   inode newFile(file_type::PLAIN_FILE);
-   inode_ptr filePtr = make_shared<inode>(newFile);
+   // // Make a new file obj to add to dirents
+   // inode newFile(file_type::PLAIN_FILE);
+   // inode_ptr filePtr = make_shared<inode>(newFile);
 
-   addDirectoryContent(filename, filePtr); 
+   // addDirectoryContent(filename, filePtr); 
 
    return nullptr;
 }
