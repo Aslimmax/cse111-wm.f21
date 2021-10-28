@@ -129,6 +129,7 @@ class base_file {
 //    Replaces the contents of a file with new contents.
 
 class plain_file: public base_file {
+   friend class inode;
    private:
       wordvec data;
       virtual const string& error_file_type() const override {

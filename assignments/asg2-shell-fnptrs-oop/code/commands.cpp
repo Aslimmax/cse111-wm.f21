@@ -46,9 +46,19 @@ int exit_status_message() {
    return status;
 }
 
+/* Copy the contents of each file to the standard output
+Input: wordvec words
+Output: None, but the contents of words is printed to the standard
+output
+ */
 void fn_cat (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+
+   // Check that a file is specified
+   if (words.size() < 1) {
+      throw command_error(words[0] + ": no file specified");
+   }
 }
 
 void fn_cd (inode_state& state, const wordvec& words) {
@@ -109,15 +119,8 @@ void fn_ls (inode_state& state, const wordvec& words) {
          filePath += "/";
       } 
       else { // Otherwise, the file is a PLAIN_TYPE
-         fileSize = inodePtr->getContents()->getData().size();
-         // Store a reference to the wordvec data in plain_file
-         // wordvec fileData = inodePtr->getContents()->getData();
-         // // Loop through fileData and increment file size
-         // for (wordvec::iterator wordIter = fileData.begin();
-         //      wordIter != fileData.end(); ++wordIter) {
-         //    fileSize += 1;
-         // }
-         // size = inodePtr->getContents()->getData().size();
+         fileSize = dynamic_pointer_cast<plain_file>
+            (inodePtr->getContents())->size();
       }
 
       // Print out the completed line
@@ -134,7 +137,25 @@ void fn_lsr (inode_state& state, const wordvec& words) {
 void fn_make (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
-   state.getCwd()->getContents()->mkfile(words[1]);
+
+   // Check to see if no arguments were provided
+   if (words.size() <= 1) {
+      throw command_error(words[0] + ": missing file name");
+   }
+
+   // Make and insert an empty file into dirents
+   inode_ptr filePtr = state.getCwd()->getContents()->mkfile(words[1]);
+
+   // Check if words were passed to the argument
+   // words[0] = command name
+   // words[1] = file name
+   if (words.size() > 2) {
+      // Copy the words into fileContents
+      wordvec fileContents = wordvec(words.begin() + 2, words.end());
+      // Write to the file
+      dynamic_pointer_cast<plain_file>
+         (filePtr->getContents())->writefile(fileContents);
+   }
 }
 
 void fn_mkdir (inode_state& state, const wordvec& words) {

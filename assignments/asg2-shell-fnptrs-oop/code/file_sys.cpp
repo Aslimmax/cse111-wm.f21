@@ -140,7 +140,8 @@ inode_ptr base_file::mkfile (const string&) {
 
 /* Get the size of plain_file wordvec data
 Input: None
-Output: number of characters in data*/
+Output: number of characters in data
+ */
 size_t plain_file::size() const {
    // Initailize size
    size_t size = 0;
@@ -156,13 +157,22 @@ size_t plain_file::size() const {
    return size;
 }
 
+/* Return data
+Input: None
+Output: wordvec data (class member of plain_file) 
+ */
 const wordvec& plain_file::readfile() const {
    DEBUGF ('i', data);
    return data;
 }
 
+/* Replace the content of data
+Input: wordvec to replace current data
+Output: None
+ */
 void plain_file::writefile (const wordvec& words) {
    DEBUGF ('i', words);
+   data = words;
 }
 
 wordvec plain_file::getData() const {
@@ -246,16 +256,16 @@ inode_ptr directory::mkfile (const string& filename) {
    // Check if a directory or file called filename already exists
    map<string, inode_ptr>::iterator iter = dirents.find(filename);
    if (iter != dirents.end()) { // Found the element
-      // // Ensure that the element is not a directory
-      return nullptr;
+      // Ensure that the element is not a directory
+      return iter->second;
    }
    
    // Make a new file obj to add to dirents
    // inode newFile(file_type::PLAIN_TYPE);
    inode_ptr filePtr = make_shared<inode>(file_type::PLAIN_TYPE);
 
-   addDirectoryContent(filename, filePtr); 
+   addDirectoryContent(filename, filePtr);
 
-   return nullptr;
+   return filePtr;
 }
 
