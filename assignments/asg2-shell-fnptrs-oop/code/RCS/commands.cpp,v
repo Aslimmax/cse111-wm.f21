@@ -1,9 +1,14 @@
-head	1.24;
+head	1.25;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.25
+date	2021.10.28.02.15.14;	author -;	state -;
+branches;
+next	1.24;
 
 1.24
 date	2021.10.28.00.42.59;	author -;	state -;
@@ -130,12 +135,12 @@ desc
 @@
 
 
-1.24
+1.25
 log
 @-
 @
 text
-@// $Id: commands.cpp,v 1.23 2021-10-27 15:19:03-07 - - $
+@// $Id: commands.cpp,v 1.24 2021-10-27 17:42:59-07 - - $
 
 #include "commands.h"
 #include "debug.h"
@@ -223,23 +228,43 @@ void fn_ls (inode_state& state, const wordvec& words) {
       cout << "/:" << endl;
    }
 
-   // Loop through dirents
-   map<string, inode_ptr> dirents = 
+   // Set a temporary var to class member dirents
+   map<string, inode_ptr> tempDirEnts = 
       state.getCwd()->getContents()->getDirents();
-   for (map<string, inode_ptr>::iterator iter = dirents.begin(); 
-      iter != dirents.end(); ++iter) {
-      cout << setw(6) << iter->second->get_inode_nr()
-         << setw(6) << iter->second->getContents()->getDirents().size();
-
+   // Loop through dirents
+   for (map<string, inode_ptr>::iterator iter = tempDirEnts.begin();
+        iter != tempDirEnts.end(); ++iter)
+   {
+      // Stores whether or not the element is a file or directory
+      bool isDirectory = true;
+      size_t inodeNum = iter->second->get_inode_nr();
       string filePath = iter->first;
-      if (filePath == "..") {
-         cout << setw(7);
-      } else {
-         cout << setw(6);
+      int fileSize = 0;
+      inode_ptr inodePtr = iter->second;
+            
+      // Determine file type
+      isDirectory = (inodePtr->getFileType() == 
+         file_type::DIRECTORY_TYPE) ? true : false; 
+      
+      if (isDirectory) {
+         fileSize = inodePtr->getContents()->getDirents().size();
+         filePath += "/";
+      } 
+      else { // Otherwise, the file is a PLAIN_TYPE
+         fileSize = inodePtr->getContents()->getData().size();
+         // Store a reference to the wordvec data in plain_file
+         // wordvec fileData = inodePtr->getContents()->getData();
+         // // Loop through fileData and increment file size
+         // for (wordvec::iterator wordIter = fileData.begin();
+         //      wordIter != fileData.end(); ++wordIter) {
+         //    fileSize += 1;
+         // }
+         // size = inodePtr->getContents()->getData().size();
       }
 
-      // Print out the file path
-      cout << filePath << endl;
+      // Print out the completed line
+      cout << setw(6) << inodeNum << setw(6) << fileSize << "  "
+         << filePath << endl;
    }
 }
 
@@ -251,6 +276,7 @@ void fn_lsr (inode_state& state, const wordvec& words) {
 void fn_make (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+   state.getCwd()->getContents()->mkfile(words[1]);
 }
 
 void fn_mkdir (inode_state& state, const wordvec& words) {
@@ -301,6 +327,38 @@ void fn_rmr (inode_state& state, const wordvec& words) {
    DEBUGF ('c', words);
 }
 
+@
+
+
+1.24
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: commands.cpp,v 1.23 2021-10-27 15:19:03-07 - - $
+d89 3
+d93 6
+a98 7
+   map<string, inode_ptr> dirents = 
+      state.getCwd()->getContents()->getDirents();
+   for (map<string, inode_ptr>::iterator iter = dirents.begin(); 
+      iter != dirents.end(); ++iter) {
+      cout << setw(6) << iter->second->get_inode_nr()
+         << setw(6) << iter->second->getContents()->getDirents().size();
+
+d100 21
+a120 4
+      if (filePath == "..") {
+         cout << setw(7);
+      } else {
+         cout << setw(6);
+d123 3
+a125 2
+      // Print out the file path
+      cout << filePath << endl;
+d137 1
 @
 
 
