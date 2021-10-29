@@ -1,9 +1,14 @@
-head	1.13;
+head	1.14;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.14
+date	2021.10.29.19.45.52;	author -;	state -;
+branches;
+next	1.13;
 
 1.13
 date	2021.10.28.02.15.14;	author -;	state -;
@@ -75,12 +80,12 @@ desc
 @@
 
 
-1.13
+1.14
 log
 @-
 @
 text
-@// $Id: file_sys.cpp,v 1.12 2021-10-27 17:42:59-07 - - $
+@// $Id: file_sys.cpp,v 1.13 2021-10-27 19:15:14-07 - - $
 
 #include <cassert>
 #include <iostream>
@@ -120,6 +125,15 @@ inode_state::inode_state() {
 }
 
 const string& inode_state::prompt() const { return prompt_; }
+
+/**
+ * Change the prompt
+ * Input: string of the new promopt
+ * Output: none
+ */
+void inode_state::prompt(const string &newPrompt) {
+   prompt_ = newPrompt;
+}
 
 ostream& operator<< (ostream& out, const inode_state& state) {
    out << "inode_state: root = " << state.root
@@ -222,7 +236,8 @@ inode_ptr base_file::mkfile (const string&) {
 
 /* Get the size of plain_file wordvec data
 Input: None
-Output: number of characters in data*/
+Output: number of characters in data
+ */
 size_t plain_file::size() const {
    // Initailize size
    size_t size = 0;
@@ -238,13 +253,22 @@ size_t plain_file::size() const {
    return size;
 }
 
+/* Return data
+Input: None
+Output: wordvec data (class member of plain_file) 
+ */
 const wordvec& plain_file::readfile() const {
    DEBUGF ('i', data);
    return data;
 }
 
+/* Replace the content of data
+Input: wordvec to replace current data
+Output: None
+ */
 void plain_file::writefile (const wordvec& words) {
    DEBUGF ('i', words);
+   data = words;
 }
 
 wordvec plain_file::getData() const {
@@ -328,19 +352,47 @@ inode_ptr directory::mkfile (const string& filename) {
    // Check if a directory or file called filename already exists
    map<string, inode_ptr>::iterator iter = dirents.find(filename);
    if (iter != dirents.end()) { // Found the element
-      // // Ensure that the element is not a directory
-      return nullptr;
+      // Ensure that the element is not a directory
+      return iter->second;
    }
    
    // Make a new file obj to add to dirents
    // inode newFile(file_type::PLAIN_TYPE);
    inode_ptr filePtr = make_shared<inode>(file_type::PLAIN_TYPE);
 
-   addDirectoryContent(filename, filePtr); 
+   addDirectoryContent(filename, filePtr);
 
-   return nullptr;
+   return filePtr;
 }
 
+@
+
+
+1.13
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: file_sys.cpp,v 1.12 2021-10-27 17:42:59-07 - - $
+d42 9
+d152 2
+a153 1
+Output: number of characters in data*/
+d169 4
+d178 4
+d184 1
+d268 2
+a269 2
+      // // Ensure that the element is not a directory
+      return nullptr;
+d276 1
+a276 1
+   addDirectoryContent(filename, filePtr); 
+d278 1
+a278 1
+   return nullptr;
 @
 
 
