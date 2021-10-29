@@ -68,6 +68,14 @@ int main (int argc, char** argv) {
             // function.  Complain or call it.
             wordvec words = split (line, " \t");
             DEBUGF ('y', "words = " << words);
+            // Check if nothing was typed into the terminal
+            if (words.empty()) {
+               continue;
+            }
+            // Check if a comment was typed into the terminal
+            if (words.at(0) == "#") {
+               continue;
+            }
             command_fn fn = find_command_fn (words.at(0));
             fn (state, words);
          }catch (file_error& error) {
