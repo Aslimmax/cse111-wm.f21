@@ -37,6 +37,11 @@ inode_state::inode_state() {
           << ", prompt = \"" << prompt() << "\"");
 }
 
+/**
+ * Get the current promopt
+ * Input: None
+ * Output: string prompt
+ */
 const string& inode_state::prompt() const { return prompt_; }
 
 /**

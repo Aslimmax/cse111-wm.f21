@@ -205,7 +205,24 @@ void fn_prompt (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
 
-   
+   // Check if no arguemnts were provided
+   if (words.size() <= 1) {
+      throw command_error(words[0] + ": missing prompt argument");
+   }
+
+   string newPromptOutput = ""; // initialize final output
+   // Get the new prompt provided by the user
+   wordvec newPrompt = wordvec(words.begin() + 1, words.end());
+
+   // Loop through all words in newPrompt
+   for (wordvec::iterator iter = newPrompt.begin(); 
+      iter != newPrompt.end(); ++iter) {
+      // Append each word to the final output
+      newPromptOutput += (*iter) + " "; 
+   }
+
+   // Change the prompt
+   state.prompt(newPromptOutput);
 }
 
 /* Prints the current working directory
