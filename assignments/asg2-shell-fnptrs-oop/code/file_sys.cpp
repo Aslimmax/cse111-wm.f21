@@ -39,6 +39,15 @@ inode_state::inode_state() {
 
 const string& inode_state::prompt() const { return prompt_; }
 
+/**
+ * Change the prompt
+ * Input: string of the new promopt
+ * Output: none
+ */
+void inode_state::prompt(const string &newPrompt) {
+   prompt_ = newPrompt;
+}
+
 ostream& operator<< (ostream& out, const inode_state& state) {
    out << "inode_state: root = " << state.root
        << ", cwd = " << state.cwd;

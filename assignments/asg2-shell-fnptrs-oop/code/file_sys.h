@@ -50,7 +50,7 @@ class inode_state {
       // Setters
       inode_ptr setCwd();
       const string& prompt() const;
-      void prompt (const string&);
+      void prompt (const string& newPrompt);
 };
 
 // class inode -
@@ -84,6 +84,7 @@ class inode {
       // Helper function
       base_file_ptr getContents() const;
       file_type getFileType() const;
+      // bool isDirectory() const;
 }; 
 
 

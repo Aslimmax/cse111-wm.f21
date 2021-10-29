@@ -57,8 +57,41 @@ void fn_cat (inode_state& state, const wordvec& words) {
 
    // Check that a file is specified
    if (words.size() < 1) {
-      throw command_error(words[0] + ": no file specified");
+      throw command_error(words.at(0) + ": no file specified");
    }
+
+   // Look for the specified file in dirents
+   map<string, inode_ptr> tempDirents = 
+      state.getCwd()->getContents()->getDirents();
+   map<string, inode_ptr>::iterator iter =
+      tempDirents.find(words.at(1));
+
+   if (iter == tempDirents.end()) { // file wasn't found
+      throw command_error(words.at(1) + ": file does not exist");
+   }
+
+   // If the file was found, check that it is not a directory
+   inode_ptr inodePtr = iter->second;
+   bool isDirectory = (inodePtr->getFileType() ==
+      file_type::DIRECTORY_TYPE) ? true : false;
+
+   if (isDirectory) {
+      throw command_error(words.at(1) + ": this is a directory");
+   }
+
+   // File found is a plain_file class
+   string outputString = ""; // initialize output string of data
+   wordvec fileData = dynamic_pointer_cast<plain_file>
+      (inodePtr->getContents())->getData();
+   // Loop through plain_file data
+   for (wordvec::const_iterator wordIter = fileData.begin(); 
+      wordIter != fileData.end(); ++wordIter) {
+      outputString += (*wordIter) + " "; // build output string
+   }
+   // Remove the extra white space at the end of the string
+   outputString.pop_back();
+
+   cout << outputString << endl;
 }
 
 void fn_cd (inode_state& state, const wordvec& words) {
@@ -171,6 +204,8 @@ void fn_mkdir (inode_state& state, const wordvec& words) {
 void fn_prompt (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+
+   
 }
 
 /* Prints the current working directory
@@ -191,7 +226,6 @@ void fn_pwd (inode_state& state, const wordvec& words) {
    }
    
    cout << outputPath << endl;
-
 }
 
 void fn_rm (inode_state& state, const wordvec& words) {
