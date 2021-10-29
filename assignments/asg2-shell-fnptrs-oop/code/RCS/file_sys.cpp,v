@@ -1,9 +1,14 @@
-head	1.15;
+head	1.16;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.16
+date	2021.10.29.23.51.43;	author -;	state -;
+branches;
+next	1.15;
 
 1.15
 date	2021.10.29.20.30.54;	author -;	state -;
@@ -85,12 +90,12 @@ desc
 @@
 
 
-1.15
+1.16
 log
 @-
 @
 text
-@// $Id: file_sys.cpp,v 1.14 2021-10-29 12:45:52-07 - - $
+@// $Id: file_sys.cpp,v 1.15 2021-10-29 13:30:54-07 - - $
 
 #include <cassert>
 #include <iostream>
@@ -342,18 +347,28 @@ inode_ptr directory::mkdir (const string& dirname) {
    }
 
    /* TODO:
-   Add check for 'the complete pathname fo the parent of this new
+   Add check for 'the complete pathname of the parent of this new
    directory does not already exist' */
    // Make a new inode_state obj
-   inode_state directoryToAdd;
+   // inode_state directoryToAdd;
 
    // Get the inode ptr
-   inode_ptr tempPtr = directoryToAdd.getCwd();
+   // inode_ptr tempPtr = directoryToAdd.getCwd();
+   inode_ptr inodePtr = make_shared<inode>(file_type::DIRECTORY_TYPE);
 
    // Add new directory to dirents
-   addDirectoryContent(dirname, tempPtr);
+   addDirectoryContent(dirname, inodePtr);
 
-   return tempPtr;
+   // Add . our new directory
+   inodePtr->getContents()->addDirectoryContent(".", inodePtr);
+
+   // Get the inode_ptr of the root
+   iter = dirents.find("..");
+   // Add .. to our new directory
+   inodePtr->getContents()
+      ->addDirectoryContent("..", iter->second);
+
+   return inodePtr;
 }
 
 inode_ptr directory::mkfile (const string& filename) {
@@ -375,6 +390,32 @@ inode_ptr directory::mkfile (const string& filename) {
    return filePtr;
 }
 
+@
+
+
+1.15
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: file_sys.cpp,v 1.14 2021-10-29 12:45:52-07 - - $
+d253 1
+a253 1
+   Add check for 'the complete pathname fo the parent of this new
+d256 1
+a256 1
+   inode_state directoryToAdd;
+d259 2
+a260 1
+   inode_ptr tempPtr = directoryToAdd.getCwd();
+d263 1
+a263 1
+   addDirectoryContent(dirname, tempPtr);
+d265 10
+a274 1
+   return tempPtr;
 @
 
 

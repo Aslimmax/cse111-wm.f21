@@ -1,9 +1,14 @@
-head	1.15;
+head	1.16;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.16
+date	2021.10.29.23.51.43;	author -;	state -;
+branches;
+next	1.15;
 
 1.15
 date	2021.10.29.20.30.54;	author -;	state -;
@@ -85,12 +90,12 @@ desc
 @@
 
 
-1.15
+1.16
 log
 @-
 @
 text
-@// $Id: main.cpp,v 1.14 2021-10-27 15:19:03-07 - - $
+@// $Id: main.cpp,v 1.15 2021-10-29 13:30:54-07 - - $
 
 #include <cstdlib>
 #include <iostream>
@@ -165,7 +170,7 @@ int main (int argc, char** argv) {
                continue;
             }
             // Check if a comment was typed into the terminal
-            if (words.at(0) == "#") {
+            if (words[0][0] == '#') {
                continue;
             }
             command_fn fn = find_command_fn (words.at(0));
@@ -183,6 +188,20 @@ int main (int argc, char** argv) {
    return exit_status_message();
 }
 
+@
+
+
+1.15
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: main.cpp,v 1.14 2021-10-27 15:19:03-07 - - $
+d76 1
+a76 1
+            if (words.at(0) == "#") {
 @
 
 
