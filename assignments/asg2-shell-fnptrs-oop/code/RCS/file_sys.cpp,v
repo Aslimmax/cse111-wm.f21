@@ -1,9 +1,14 @@
-head	1.14;
+head	1.15;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.15
+date	2021.10.29.20.30.54;	author -;	state -;
+branches;
+next	1.14;
 
 1.14
 date	2021.10.29.19.45.52;	author -;	state -;
@@ -80,12 +85,12 @@ desc
 @@
 
 
-1.14
+1.15
 log
 @-
 @
 text
-@// $Id: file_sys.cpp,v 1.13 2021-10-27 19:15:14-07 - - $
+@// $Id: file_sys.cpp,v 1.14 2021-10-29 12:45:52-07 - - $
 
 #include <cassert>
 #include <iostream>
@@ -124,6 +129,11 @@ inode_state::inode_state() {
           << ", prompt = \"" << prompt() << "\"");
 }
 
+/**
+ * Get the current promopt
+ * Input: None
+ * Output: string prompt
+ */
 const string& inode_state::prompt() const { return prompt_; }
 
 /**
@@ -365,6 +375,18 @@ inode_ptr directory::mkfile (const string& filename) {
    return filePtr;
 }
 
+@
+
+
+1.14
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: file_sys.cpp,v 1.13 2021-10-27 19:15:14-07 - - $
+d40 5
 @
 
 

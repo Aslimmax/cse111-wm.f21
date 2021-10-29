@@ -1,9 +1,14 @@
-head	1.26;
+head	1.27;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.27
+date	2021.10.29.20.30.54;	author -;	state -;
+branches;
+next	1.26;
 
 1.26
 date	2021.10.29.19.45.52;	author -;	state -;
@@ -140,12 +145,12 @@ desc
 @@
 
 
-1.26
+1.27
 log
 @-
 @
 text
-@// $Id: commands.cpp,v 1.25 2021-10-27 19:15:14-07 - - $
+@// $Id: commands.cpp,v 1.26 2021-10-29 12:45:52-07 - - $
 
 #include "commands.h"
 #include "debug.h"
@@ -352,7 +357,24 @@ void fn_prompt (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
 
-   
+   // Check if no arguemnts were provided
+   if (words.size() <= 1) {
+      throw command_error(words[0] + ": missing prompt argument");
+   }
+
+   string newPromptOutput = ""; // initialize final output
+   // Get the new prompt provided by the user
+   wordvec newPrompt = wordvec(words.begin() + 1, words.end());
+
+   // Loop through all words in newPrompt
+   for (wordvec::iterator iter = newPrompt.begin(); 
+      iter != newPrompt.end(); ++iter) {
+      // Append each word to the final output
+      newPromptOutput += (*iter) + " "; 
+   }
+
+   // Change the prompt
+   state.prompt(newPromptOutput);
 }
 
 /* Prints the current working directory
@@ -387,6 +409,20 @@ void fn_rmr (inode_state& state, const wordvec& words) {
    DEBUGF ('c', words);
 }
 
+@
+
+
+1.26
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: commands.cpp,v 1.25 2021-10-27 19:15:14-07 - - $
+d208 18
+a225 1
+   
 @
 
 

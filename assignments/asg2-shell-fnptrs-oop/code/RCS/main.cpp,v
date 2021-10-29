@@ -1,9 +1,14 @@
-head	1.14;
+head	1.15;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.15
+date	2021.10.29.20.30.54;	author -;	state -;
+branches;
+next	1.14;
 
 1.14
 date	2021.10.27.22.19.03;	author -;	state -;
@@ -80,12 +85,12 @@ desc
 @@
 
 
-1.14
+1.15
 log
 @-
 @
 text
-@// $Id: main.cpp,v 1.13 2021-10-26 14:51:44-07 - - $
+@// $Id: main.cpp,v 1.14 2021-10-27 15:19:03-07 - - $
 
 #include <cstdlib>
 #include <iostream>
@@ -155,6 +160,14 @@ int main (int argc, char** argv) {
             // function.  Complain or call it.
             wordvec words = split (line, " \t");
             DEBUGF ('y', "words = " << words);
+            // Check if nothing was typed into the terminal
+            if (words.empty()) {
+               continue;
+            }
+            // Check if a comment was typed into the terminal
+            if (words.at(0) == "#") {
+               continue;
+            }
             command_fn fn = find_command_fn (words.at(0));
             fn (state, words);
          }catch (file_error& error) {
@@ -170,6 +183,18 @@ int main (int argc, char** argv) {
    return exit_status_message();
 }
 
+@
+
+
+1.14
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: main.cpp,v 1.13 2021-10-26 14:51:44-07 - - $
+d71 8
 @
 
 
