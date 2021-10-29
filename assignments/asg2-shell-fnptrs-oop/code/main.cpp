@@ -73,7 +73,7 @@ int main (int argc, char** argv) {
                continue;
             }
             // Check if a comment was typed into the terminal
-            if (words.at(0) == "#") {
+            if (words[0][0] == '#') {
                continue;
             }
             command_fn fn = find_command_fn (words.at(0));
