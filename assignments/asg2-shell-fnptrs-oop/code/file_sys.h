@@ -32,8 +32,6 @@ ostream& operator<< (ostream&, file_type);
 //    prompt.
 
 class inode_state {
-   friend class inode;
-   // friend class directory;
    friend ostream& operator<< (ostream& out, const inode_state&);
    private:
       inode_ptr root {nullptr};
@@ -50,7 +48,10 @@ class inode_state {
       // Setters
       inode_ptr setCwd();
       const string& prompt() const;
-      void prompt (const string& newPrompt);
+      void prompt (const string& newPrompt);   
+         
+   friend class inode;
+   friend class directory;
 };
 
 // class inode -
@@ -67,9 +68,6 @@ class inode_state {
 //    
 
 class inode {
-   friend class inode_state;
-   // friend class base_file_ptr;
-   // friend class directory;
    private:
       static size_t next_inode_nr;
       size_t inode_nr;
@@ -84,7 +82,10 @@ class inode {
       // Helper function
       base_file_ptr getContents() const;
       file_type getFileType() const;
-      // bool isDirectory() const;
+   
+   friend class inode_state;
+   friend class base_file;
+   friend class directory;
 }; 
 
 
@@ -182,6 +183,9 @@ class directory: public base_file {
       virtual void addDirectoryContent(const string &filename, 
          const inode_ptr& inodePtr) override;
       virtual map<string, inode_ptr> getDirents() const override;
+
+   friend class inode;
+   friend class inode_state;
 };
 
 #endif

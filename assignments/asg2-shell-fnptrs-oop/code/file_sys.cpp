@@ -250,18 +250,28 @@ inode_ptr directory::mkdir (const string& dirname) {
    }
 
    /* TODO:
-   Add check for 'the complete pathname fo the parent of this new
+   Add check for 'the complete pathname of the parent of this new
    directory does not already exist' */
    // Make a new inode_state obj
-   inode_state directoryToAdd;
+   // inode_state directoryToAdd;
 
    // Get the inode ptr
-   inode_ptr tempPtr = directoryToAdd.getCwd();
+   // inode_ptr tempPtr = directoryToAdd.getCwd();
+   inode_ptr inodePtr = make_shared<inode>(file_type::DIRECTORY_TYPE);
 
    // Add new directory to dirents
-   addDirectoryContent(dirname, tempPtr);
+   addDirectoryContent(dirname, inodePtr);
 
-   return tempPtr;
+   // Add . our new directory
+   inodePtr->getContents()->addDirectoryContent(".", inodePtr);
+
+   // Get the inode_ptr of the root
+   iter = dirents.find("..");
+   // Add .. to our new directory
+   inodePtr->getContents()
+      ->addDirectoryContent("..", iter->second);
+
+   return inodePtr;
 }
 
 inode_ptr directory::mkfile (const string& filename) {
