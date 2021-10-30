@@ -38,7 +38,7 @@ inode_state::inode_state() {
 }
 
 /**
- * Get the current promopt
+ * Get the current prompt
  * Input: None
  * Output: string prompt
  */
@@ -59,18 +59,20 @@ ostream& operator<< (ostream& out, const inode_state& state) {
    return out;
 }
 
-/* Get root of inode_state 
-Input: None
-Output: inode_ptr to class member root
-*/
+/**
+ * Get root of current state
+ * Input: None
+ * Output: inode_ptr to class member root
+ */
 inode_ptr inode_state::getRoot() const {
    return root;
 }
 
-/* Get cwd of inode_state 
-Input: None
-Output: inode_ptr to class member cwd
-*/
+/**
+ * Get cwd of current state
+ * Input: None
+ * Output: inode_ptr to class member cwd
+ */
 inode_ptr inode_state::getCwd() const {
    return cwd;
 }
@@ -97,6 +99,11 @@ string inode_state::getFilepath() const {
    return finalPathOutput;
 }
 
+/**
+ * Overloaded inode constructor
+ * Input: file type
+ * Output: None
+ */
 inode::inode(file_type type): inode_nr (next_inode_nr++) {
    switch (type) {
       case file_type::PLAIN_TYPE:
@@ -112,26 +119,29 @@ inode::inode(file_type type): inode_nr (next_inode_nr++) {
    DEBUGF ('i', "inode " << inode_nr << ", type = " << type);
 }
 
-/* Get inode number
-Input: None
-Output: size_t inode number
+/**
+ * Get inode number
+ * Input: None
+ * Output: size_t unique inode number
  */
 size_t inode::get_inode_nr() const {
    DEBUGF ('i', "inode = " << inode_nr);
    return inode_nr;
 }
 
-/* Get base_file_ptr contents
-Input: None
-output: base_file_ptr contents member
+/**
+ * Get base_file_ptr contents
+ * Input: None
+ * Output: base_file_ptr contents member
  */
 base_file_ptr inode::getContents() const {
    return contents;
 }
 
-/* Get file_type of contents 
-Input: None
-Output: file_type
+/**
+ * Get file_type of contents
+ * Input: None
+ * Output: file_type
  */
 file_type inode::getFileType() const {
    return fileType;
@@ -173,10 +183,10 @@ inode_ptr base_file::mkfile (const string&) {
    throw file_error ("is a " + error_file_type());
 }
 
-
-/* Get the size of plain_file wordvec data
-Input: None
-Output: number of characters in data
+/**
+ * Get the size of plain_file wordvec data
+ * Input: none
+ * Output: output of characters in data
  */
 size_t plain_file::size() const {
    // Initailize size
@@ -193,18 +203,20 @@ size_t plain_file::size() const {
    return size;
 }
 
-/* Return data
-Input: None
-Output: wordvec data (class member of plain_file) 
+/**
+ * Return data
+ * Input: none
+ * Output: wordvec data
  */
 const wordvec& plain_file::readfile() const {
    DEBUGF ('i', data);
    return data;
 }
 
-/* Replace the content of data
-Input: wordvec to replace current data
-Output: None
+/**
+ * Replace the content of data
+ * Input: wordvec to replace current data
+ * Output: none
  */
 void plain_file::writefile (const wordvec& words) {
    DEBUGF ('i', words);
