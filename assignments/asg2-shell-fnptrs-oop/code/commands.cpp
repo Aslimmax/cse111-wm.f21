@@ -186,10 +186,11 @@ void fn_cd (inode_state& state, const wordvec& words) {
    state.setCwd(directoryPath);
 }
 
-/* Echos words, which may be empty, to the standard output on a line
-by itself
-Input: inode_state obj, wordvec string vector
-Output: None
+/**
+ * Echos words, which may be empty, to the standard output on a line
+ * by itself
+ * Input: inode_state obj, wordvec string vector
+ * Output: none
  */
 void fn_echo (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
@@ -205,6 +206,40 @@ void fn_echo (inode_state& state, const wordvec& words) {
 void fn_exit (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+
+   // Check if too many operands were specified
+   if (words.size() > 2) {
+      throw command_error(words.at(0) + ": too many operands");
+   }
+
+   // Check if no arguments were specified
+   if (words.size() == 1) {
+      exec::status(0);
+   }
+   else {
+      // Set the status bassed on the argument passed, but check to see 
+      // if a non-numeric argument was passed
+      bool isNumeric = true;
+      string exitArg = words.at(1);
+
+      // Determine if the input is non-numeric
+      for (int i = 0; i < static_cast<int>(exitArg.length()); i++) {
+         // If at least one digit is non-numeric, break the loop and set
+         // isNumeric to false
+         if (isdigit(exitArg[i]) == false) {
+            isNumeric = false;
+            break;
+         }
+      }
+
+      if (!isNumeric) {
+         exec::status(127);
+      } else {
+         // const char* returnArg = exitArg;
+         exec::status(atoi(exitArg.c_str()));
+      }
+   }
+
    throw ysh_exit();
 }
 
@@ -281,12 +316,34 @@ void fn_make (inode_state& state, const wordvec& words) {
    DEBUGF ('c', words);
 
    // Check to see if no arguments were provided
-   if (words.size() <= 1) {
+   if (words.size() < 2) {
       throw command_error(words[0] + ": missing file name");
    }
 
+   inode_ptr directoryPath = state.getCwd();
+
+   // Check to see if each pathname supplied is a single element
+   wordvec pathname = split(words.at(1), "/");
+   if (pathname.size() != 1)
+   {
+      pathname = wordvec(words.begin(), words.end());
+
+      // Check to see if pathname is valid
+      directoryPath = validPath(state, pathname);
+
+      pathname = split(words.at(1), "/");
+   }
+
    // Make and insert an empty file into dirents
-   inode_ptr filePtr = state.getCwd()->getContents()->mkfile(words[1]);
+   directoryPath = 
+      dynamic_pointer_cast<directory>(directoryPath->getContents())
+      ->mkfile(pathname.back());
+      // directoryPath->getContents()->mkfile(pathname.back());
+
+   // Validate that if the element exists, it is not a directory
+   if (directoryPath == nullptr) {
+      throw command_error (words.at(1) + ": Not a file");
+   }
 
    // Check if words were passed to the argument
    // words[0] = command name
@@ -296,7 +353,7 @@ void fn_make (inode_state& state, const wordvec& words) {
       wordvec fileContents = wordvec(words.begin() + 2, words.end());
       // Write to the file
       dynamic_pointer_cast<plain_file>
-         (filePtr->getContents())->writefile(fileContents);
+         (directoryPath->getContents())->writefile(fileContents);
    }
 }
 

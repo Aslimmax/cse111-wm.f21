@@ -393,6 +393,9 @@ inode_ptr directory::mkfile (const string& filename) {
    map<string, inode_ptr>::iterator iter = dirents.find(filename);
    if (iter != dirents.end()) { // Found the element
       // Ensure that the element is not a directory
+      if (iter->second->getFileType() == file_type::DIRECTORY_TYPE) {
+         return nullptr;
+      }
       return iter->second;
    }
    
