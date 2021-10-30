@@ -56,35 +56,44 @@ void fn_cat (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
 
-   // Check that a file is specified
+   // Check that a pathname is specified
    if (words.size() < 1) {
       throw command_error(words.at(0) + ": no file specified");
    }
 
-   // Look for the specified file in dirents
-   map<string, inode_ptr> tempDirents = 
-      state.getCwd()->getContents()->getDirents();
-   map<string, inode_ptr>::iterator iter =
-      tempDirents.find(words.at(1));
+   // Initialize pointer to the cwd's directory
+   inode_ptr directoryPath = state.getCwd();
 
-   if (iter == tempDirents.end()) { // file wasn't found
-      throw command_error(words.at(1) + ": file does not exist");
+   // Split the pathname into a wordvec
+   wordvec tempPath = split(words.at(1), "/");
+      
+   // Get the lastpath name
+   wordvec lastPath;
+   lastPath.push_back(tempPath.back());
+
+   // Check to see if the pathname is longer than one
+   if (tempPath.size() != 1) {
+      // Get the directory path minus the last pathname
+      tempPath = wordvec(tempPath.begin(), tempPath.end() - 1);
+
+      // Determine if subpath is valid
+      directoryPath = validPath(state, tempPath);
    }
 
-   // If the file was found, check that it is not a directory
-   inode_ptr inodePtr = iter->second;
-   bool isDirectory = (inodePtr->getFileType() ==
-      file_type::DIRECTORY_TYPE) ? true : false;
+   // Determine the file type of the last path
+   directoryPath = determineFileType(directoryPath, lastPath);
 
-   if (isDirectory) {
-      throw command_error(words.at(1) + ": this is a directory");
+   // If the lastpath points to an element, determine if it's a file
+   // or directory
+   if (directoryPath->getFileType() == file_type::DIRECTORY_TYPE) {
+      throw command_error(words.at(1) + ": Is a directory");
    }
 
-   // File found is a plain_file class
+   // Otherwise, element found is a plain_file class
    string outputString = ""; // initialize output string of data
    // Get the fileData
    wordvec fileData = dynamic_pointer_cast<plain_file>
-      (inodePtr->getContents())->getData();
+      (directoryPath->getContents())->getData();
    // Loop through plain_file data
    for (wordvec::const_iterator wordIter = fileData.begin(); 
       wordIter != fileData.end(); ++wordIter) {
@@ -123,8 +132,8 @@ void fn_cd (inode_state& state, const wordvec& words) {
    // Process the path
    wordvec path = split(words.at(1), "/");
 
-   // Get the ptr to the directory specified 
-   inode_ptr finalCwdPtr = validPath(state, words);
+   // Get the ptr to the directory specified
+   inode_ptr finalCwdPtr = validPath(state, path);
 
    // At this point, we have found the directory and confirmed that it 
    // is a directory. Can now update the cwd and filepath
@@ -269,6 +278,12 @@ void fn_make (inode_state& state, const wordvec& words) {
    }
 }
 
+/**
+ * Create a new directory. Two entries are automatically added to this
+ * directory, namely dot (.) and dotdot (..).
+ * Input: inode_state obj, wordvec, string vector
+ * Output: none
+ */
 void fn_mkdir (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
@@ -399,14 +414,12 @@ void fn_rmr (inode_state& state, const wordvec& words) {
  * Output: inode_ptr to the specified directory
  */
 inode_ptr validPath(inode_state& state, const wordvec& words) {
-   // Process the path
-   wordvec path = split(words.at(1), "/");
    // Initialize pointer to the cwd
    inode_ptr finalCwdPtr = state.getCwd();
 
    // Loop through each path, throw an error if a path doesn't exist
-   for (wordvec::iterator wordIter = path.begin();
-        wordIter != path.end(); ++wordIter)
+   for (wordvec::const_iterator wordIter = words.begin();
+        wordIter != words.end(); ++wordIter)
    {
       // Get the dirents of the cwd
       map<string, inode_ptr> tempDirents =
@@ -418,7 +431,7 @@ inode_ptr validPath(inode_state& state, const wordvec& words) {
 
       if (dirIter == tempDirents.end())
       { // file wasn't found
-         throw command_error(words.at(1) +
+         throw command_error(words.at(0) +
                              ": directory does not exist");
       }
 
@@ -429,7 +442,7 @@ inode_ptr validPath(inode_state& state, const wordvec& words) {
       
       // Throw an error if dirPtr is a file
       if (isFile) { 
-         throw command_error(words.at(1) + ": Not a directory");
+         throw command_error(words.at(0) + ": Not a directory");
       }
 
       // Update finalCwdPtr and continue to loop through path
@@ -441,29 +454,30 @@ inode_ptr validPath(inode_state& state, const wordvec& words) {
 
 /**
  * Determines the file type
- * Input: indoe_ptr to a directory, wordvec with a pathname, 
- * isDirectory reference
- * Output: inode_ptr to the file/directory, whether the inode_ptr points
- * to a file/directory (isDirectory is modified)
+ * Input: indoe_ptr to a directory, wordvec with a pathname
+ * Output: inode_ptr to the file/directory
  */
-// inode_ptr determineFileType(inode_ptr& inodePtr, 
-// const wordvec &words,
-//    bool &isDirectory) {
-//    // Look for the specified element in dirents
-//    map<string, inode_ptr> tempDirents = inodePtr->getContents()
-//       ->getDirents();
-//    map<string, inode_ptr>::iterator iter =
-//       tempDirents.find(words.at(0));
+inode_ptr determineFileType(inode_ptr& inodePtr, 
+   const wordvec &words) {
+   // Initialize return tuple with the inode_ptr to the file/directory
+   // and the filetype of the tuple
+   // tuple<inode_ptr, file_type> returnTuple;
 
-//    if (iter == tempDirents.end()) { // file wasn't found
-//       throw command_error(words.at(1) + ": file does not exist");
-//    }
+   // Look for the specified element in dirents with the specified
+   // inodePtr
+   map<string, inode_ptr> tempDirents = inodePtr->getContents()
+      ->getDirents();
+   map<string, inode_ptr>::iterator iter =
+      tempDirents.find(words.at(0));
 
-//    // If the element is found, determine the filetype
-//    inode_ptr inodePtr = iter->second;
-//    isDirectory = (inodePtr->getFileType() == 
-//       file_type::DIRECTORY_TYPE) ? true: false;
+   if (iter == tempDirents.end()) { // file wasn't found
+      throw command_error(words.at(0) + ": No such file or directory");
+   }
 
-//    // Return the ptr to the element
-//    return inodePtr;
-// }
+   // If the element is found, update the returnTuple
+   // get<0>(returnTuple) = iter->second;
+   // get<1>(returnTuple) = iter->second->getFileType();
+
+   // Return the ptr to the element
+   return iter->second;
+}

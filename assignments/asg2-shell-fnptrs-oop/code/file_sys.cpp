@@ -378,6 +378,11 @@ inode_ptr directory::mkdir (const string& dirname) {
    return inodePtr;
 }
 
+/**
+ * Create a new file in dirents
+ * Input: string name of the file
+ * Output: inode_ptr of the directory
+ */
 inode_ptr directory::mkfile (const string& filename) {
    DEBUGF ('i', filename);
    
@@ -392,6 +397,7 @@ inode_ptr directory::mkfile (const string& filename) {
    // inode newFile(file_type::PLAIN_TYPE);
    inode_ptr filePtr = make_shared<inode>(file_type::PLAIN_TYPE);
 
+   // Add the file to dirents
    addDirectoryContent(filename, filePtr);
 
    return filePtr;
