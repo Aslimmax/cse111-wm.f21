@@ -1,4 +1,4 @@
-// $Id: file_sys.h,v 1.16 2021-10-29 23:28:45-07 - - $
+// $Id: file_sys.h,v 1.17 2021-10-30 01:14:20-07 - - $
 
 #ifndef __INODE_H__
 #define __INODE_H__

@@ -1,9 +1,14 @@
-head	1.18;
+head	1.19;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.19
+date	2021.10.30.08.14.20;	author -;	state -;
+branches;
+next	1.18;
 
 1.18
 date	2021.10.30.06.28.45;	author -;	state -;
@@ -100,12 +105,12 @@ desc
 @@
 
 
-1.18
+1.19
 log
 @-
 @
 text
-@// $Id: file_sys.cpp,v 1.17 2021-10-29 17:35:41-07 - - $
+@// $Id: file_sys.cpp,v 1.18 2021-10-29 23:28:45-07 - - $
 
 #include <cassert>
 #include <iostream>
@@ -485,6 +490,11 @@ inode_ptr directory::mkdir (const string& dirname) {
    return inodePtr;
 }
 
+/**
+ * Create a new file in dirents
+ * Input: string name of the file
+ * Output: inode_ptr of the directory
+ */
 inode_ptr directory::mkfile (const string& filename) {
    DEBUGF ('i', filename);
    
@@ -499,11 +509,25 @@ inode_ptr directory::mkfile (const string& filename) {
    // inode newFile(file_type::PLAIN_TYPE);
    inode_ptr filePtr = make_shared<inode>(file_type::PLAIN_TYPE);
 
+   // Add the file to dirents
    addDirectoryContent(filename, filePtr);
 
    return filePtr;
 }
 
+@
+
+
+1.18
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: file_sys.cpp,v 1.17 2021-10-29 17:35:41-07 - - $
+d381 5
+d400 1
 @
 
 
