@@ -136,7 +136,10 @@ void fn_cd (inode_state& state, const wordvec& words) {
          return;
       } // Pop back last element in filepath if going to parent dir
       else if (path.at(0) == "..") {
-         state.popFilepath();
+         // Don't do anything if cwd == root
+         if (state.getCwd() != state.getRoot()) {
+            state.popFilepath();
+         }
       } else { // Otherwise, udpate the filepath
          state.pushFilepath(path.at(0));
       }
@@ -190,8 +193,13 @@ void fn_ls (inode_state& state, const wordvec& words) {
    // Print out the pathname specified
    cout << state.getFilepath() + ":" << endl;
 
-   // Check to see if the path supplied is valid
-   inode_ptr directoryPath = validPath(state, words);
+   // Initialize pointer to the cwd's directory
+   inode_ptr directoryPath = state.getCwd();
+
+   // Check if a pathname was specified
+   if (words.size() > 1) {
+      directoryPath = validPath(state, words);
+   }
 
    // Set a temporary var to class member dirents
    map<string, inode_ptr> tempDirents = 
@@ -231,6 +239,12 @@ void fn_lsr (inode_state& state, const wordvec& words) {
    DEBUGF ('c', words);
 }
 
+/**
+ * The file specified is created and the rest of the words are put into
+ * that file. If the file already exists, replace its contents.
+ * Input: inode_state obj, wordvec string vector
+ * Output: none
+ */
 void fn_make (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
@@ -315,16 +329,63 @@ void fn_pwd (inode_state& state, const wordvec& words) {
    cout << outputPath << endl;
 }
 
+/**
+ * Delete the specified file or directory (removed from its parent's
+ * list of files and subdirectories). If the pathname is a directory,
+ * it must be empty.
+ * Input: inode_state obj, wordvec string vector
+ * Output: none
+ */
 void fn_rm (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
 
    // Check if no arguemnts were provided
-   if (words.size() <= 1) {
+   if (words.size() < 2) {
       throw command_error(words[0] + ": missing operand");
    }
 
-   state.getCwd()->getContents()->remove(words[1]);
+   // Initialize pointer to the cwd's directory
+   inode_ptr directoryPath = state.getCwd();
+
+   // wordvec lastPath = words.end());
+   wordvec lastPath;
+   lastPath.push_back(words.back());
+   
+   // Check if a pathname was specified
+   if (words.size() > 2) {
+      // Get the directory path minus the last pathname
+      wordvec tempDir = wordvec(words.begin(), words.end() - 1);
+
+      // Determine if the subpath is valid
+      directoryPath = validPath(state, tempDir);
+   }
+   
+   // Check to see if the file/directory exists
+   map<string, inode_ptr> tempDirents = 
+      directoryPath->getContents()->getDirents();
+   map<string, inode_ptr>::iterator iter =
+      tempDirents.find(lastPath.at(0));
+   if (iter == tempDirents.end()) {
+      throw command_error(words.at(1) + ": No such file or directory");
+   }
+
+   // Check if the file/directory is a directory
+   bool isDirectory = (iter->second->getFileType() ==
+      file_type::DIRECTORY_TYPE) ? true : false;
+
+   // Check if it's a directory and if it's "empty"
+   if (isDirectory) {
+      // Get the size of the directory
+      size_t directorySize = dynamic_pointer_cast<directory>
+         (iter->second->getContents())->getDirents().size();
+      if (directorySize != 2) {
+         throw command_error(words.at(1) + ": directory is not empty");
+      }
+   }
+
+   // Remove the file/directory
+   directoryPath->getContents()->remove(lastPath.at(0));
 }
 
 void fn_rmr (inode_state& state, const wordvec& words) {
@@ -334,6 +395,8 @@ void fn_rmr (inode_state& state, const wordvec& words) {
 
 /**
  * Check to see if the pathname given leads to a valid directory
+ * Input: inode_state obj, wordvec string vector
+ * Output: inode_ptr to the specified directory
  */
 inode_ptr validPath(inode_state& state, const wordvec& words) {
    // Process the path
@@ -376,3 +439,31 @@ inode_ptr validPath(inode_state& state, const wordvec& words) {
    return finalCwdPtr;
 }
 
+/**
+ * Determines the file type
+ * Input: indoe_ptr to a directory, wordvec with a pathname, 
+ * isDirectory reference
+ * Output: inode_ptr to the file/directory, whether the inode_ptr points
+ * to a file/directory (isDirectory is modified)
+ */
+// inode_ptr determineFileType(inode_ptr& inodePtr, 
+// const wordvec &words,
+//    bool &isDirectory) {
+//    // Look for the specified element in dirents
+//    map<string, inode_ptr> tempDirents = inodePtr->getContents()
+//       ->getDirents();
+//    map<string, inode_ptr>::iterator iter =
+//       tempDirents.find(words.at(0));
+
+//    if (iter == tempDirents.end()) { // file wasn't found
+//       throw command_error(words.at(1) + ": file does not exist");
+//    }
+
+//    // If the element is found, determine the filetype
+//    inode_ptr inodePtr = iter->second;
+//    isDirectory = (inodePtr->getFileType() == 
+//       file_type::DIRECTORY_TYPE) ? true: false;
+
+//    // Return the ptr to the element
+//    return inodePtr;
+// }

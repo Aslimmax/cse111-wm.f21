@@ -299,18 +299,19 @@ void directory::addDirectoryContent(const string& filename,
    dirents.insert(tempPair);
 }
 
-
-/* Get dirents member from derived class directory
-Input: None
-Output: map<string, inode_ptr> dirents member
+/**
+ * Get dirents member from derviced class directory
+ * Input: None
+ * Output: map<string, inode_ptr> dirents member
  */
 map<string, inode_ptr> directory::getDirents() const {
    return dirents;
 }
 
-/* Get the number of entries in the directory
-Input: None
-Output: size_t number of entries in directory
+/**
+ * Get the number of entries in the directory
+ * Input: None
+ * Output: size_t number of entires in directory
  */
 size_t directory::size() const {
    size_t size = dirents.size();
@@ -324,22 +325,25 @@ size_t directory::size() const {
    return size;
 }
 
+/**
+ * Remove the file/directory from dirents
+ * Input: string name of the file/directory to be removed
+ * Output: none
+ */
 void directory::remove (const string& filename) {
    DEBUGF ('i', filename);
 
-   // Check if filename exists in dirents
+   // Find the file
    map<string, inode_ptr>::iterator iter = dirents.find(filename);
-   if (iter == dirents.end()) { // filename has not been found
-      return;
-   }
 
-   // Check if directory is empty
-   if (iter->second->getContents()->getDirents().size() == 2) {
-      // iter->second->setCwd(nullptr);
-      dirents.erase(iter);
-   }
+   dirents.erase(iter);
 }
 
+/**
+ * Create a new directory in dirents
+ * Input: string name of the directory
+ * Output: inode_ptr of the directory
+ */
 inode_ptr directory::mkdir (const string& dirname) {
    DEBUGF ('i', dirname);
    
