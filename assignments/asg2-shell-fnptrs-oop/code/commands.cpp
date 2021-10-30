@@ -97,6 +97,41 @@ void fn_cat (inode_state& state, const wordvec& words) {
 void fn_cd (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+
+   // Check that a directory is specified 
+   // (if not, use the root directory)
+   if (words.size() < 1) {
+      state.setCwd(state.getRoot());
+      // Reset the filepath
+      // throw command_error(words.at(0) + ": no directory specified");
+   }
+
+   // Check if more than one operand is given
+   if (words.size() > 2) {
+      throw command_error(words.at(0) + ": too many operands given");
+   }
+
+   // Check that the directory exists
+   map<string, inode_ptr> tempDirents =
+       state.getCwd()->getContents()->getDirents();
+   map<string, inode_ptr>::iterator iter =
+       tempDirents.find(words.at(1));
+
+   if (iter == tempDirents.end()) { // file wasn't found
+      throw command_error(words.at(1) + ": directory does not exist");
+   }
+
+   // If the directory was found, check that it is not a file
+   inode_ptr inodePtr = iter->second;
+   bool isFile = (inodePtr->getFileType() ==
+      file_type::PLAIN_TYPE) ? true : false;
+
+   if (isFile) {
+      throw command_error(words.at(1) + ": Not a directory");
+   }
+
+   // At this point, we have found the directory and confirmed that it 
+   // is a directory. Can now update the cwd
 }
 
 /* Echos words, which may be empty, to the standard output on a line
@@ -218,7 +253,7 @@ void fn_prompt (inode_state& state, const wordvec& words) {
    }
 
    // Change the prompt
-   state.prompt(newPromptOutput);
+   state.setPrompt(newPromptOutput);
 }
 
 /* Prints the current working directory

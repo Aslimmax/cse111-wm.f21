@@ -45,11 +45,13 @@ class inode_state {
       // Getters
       inode_ptr getRoot() const;
       inode_ptr getCwd() const;
-      string getFilepath() const;
-      // Setters
-      inode_ptr setCwd();
+      string getFilepath() const;      
       const string& prompt() const;
-      void prompt (const string& newPrompt);   
+      // Setters
+      void setCwd(const inode_ptr& newPtr);
+      void setPrompt(const string& newPrompt);
+      // Helper functions
+      void resetFilePath();   
          
    friend class inode;
    friend class directory;

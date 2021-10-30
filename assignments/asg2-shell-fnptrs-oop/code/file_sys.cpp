@@ -49,7 +49,7 @@ const string& inode_state::prompt() const { return prompt_; }
  * Input: string of the new promopt
  * Output: none
  */
-void inode_state::prompt(const string &newPrompt) {
+void inode_state::setPrompt(const string &newPrompt) {
    prompt_ = newPrompt;
 }
 
@@ -97,6 +97,24 @@ string inode_state::getFilepath() const {
    }
 
    return finalPathOutput;
+}
+
+/**
+ * Set the cwd
+ * Input: inode_ptr to pointer to
+ * Output: none
+ */
+void inode_state::setCwd(const inode_ptr& newPtr) {
+   cwd = newPtr;
+}
+
+/**
+ * Clear the filepath vector
+ * Input: None
+ * Output: None
+ */
+void inode_state::resetFilePath() {
+   filepath.clear();
 }
 
 /**
