@@ -75,6 +75,28 @@ inode_ptr inode_state::getCwd() const {
    return cwd;
 }
 
+/**
+ * Get filepath of inode_state
+ * Input: None
+ * Output: string of the current path
+ */
+string inode_state::getFilepath() const {
+   string finalPathOutput = ""; // initiailize output path
+
+   // Check if filepath is currently at the root
+   if (filepath.empty()) {
+      finalPathOutput += "/";
+   } else {
+      // Loop through filePath iterator
+      for (vector<string>::const_iterator iter = filepath.begin(); 
+         iter != filepath.end(); ++iter) {
+         finalPathOutput += "/" + (*iter);
+      }      
+   }
+
+   return finalPathOutput;
+}
+
 inode::inode(file_type type): inode_nr (next_inode_nr++) {
    switch (type) {
       case file_type::PLAIN_TYPE:

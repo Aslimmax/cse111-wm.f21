@@ -123,11 +123,7 @@ void fn_ls (inode_state& state, const wordvec& words) {
 
    // If no arguments are passed with the command, then dot is used as
    // its operand
-   if (words.size() < 1) {
-      cout << "/:" << endl;
-   } else {
-      cout << "/:" << endl;
-   }
+   cout << state.getFilepath() + ":" << endl;
 
    // Set a temporary var to class member dirents
    map<string, inode_ptr> tempDirEnts = 
@@ -234,13 +230,8 @@ void fn_pwd (inode_state& state, const wordvec& words) {
    DEBUGF ('c', words);   
    // initialize output string for the final path
    string outputPath = ""; 
-   // If cwd points to root, then we are at the root directory
-   if (state.getRoot()->get_inode_nr() == 1) {
-      outputPath += "/";
-   }
-   else {
 
-   }
+   outputPath = state.getFilepath();
    
    cout << outputPath << endl;
 }

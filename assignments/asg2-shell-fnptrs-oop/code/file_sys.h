@@ -45,6 +45,7 @@ class inode_state {
       // Getters
       inode_ptr getRoot() const;
       inode_ptr getCwd() const;
+      string getFilepath() const;
       // Setters
       inode_ptr setCwd();
       const string& prompt() const;
