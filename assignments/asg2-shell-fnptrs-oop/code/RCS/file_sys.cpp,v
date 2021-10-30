@@ -1,9 +1,14 @@
-head	1.16;
+head	1.17;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.17
+date	2021.10.30.00.35.41;	author -;	state -;
+branches;
+next	1.16;
 
 1.16
 date	2021.10.29.23.51.43;	author -;	state -;
@@ -90,12 +95,12 @@ desc
 @@
 
 
-1.16
+1.17
 log
 @-
 @
 text
-@// $Id: file_sys.cpp,v 1.15 2021-10-29 13:30:54-07 - - $
+@// $Id: file_sys.cpp,v 1.16 2021-10-29 16:51:43-07 - - $
 
 #include <cassert>
 #include <iostream>
@@ -135,7 +140,7 @@ inode_state::inode_state() {
 }
 
 /**
- * Get the current promopt
+ * Get the current prompt
  * Input: None
  * Output: string prompt
  */
@@ -146,7 +151,7 @@ const string& inode_state::prompt() const { return prompt_; }
  * Input: string of the new promopt
  * Output: none
  */
-void inode_state::prompt(const string &newPrompt) {
+void inode_state::setPrompt(const string &newPrompt) {
    prompt_ = newPrompt;
 }
 
@@ -156,22 +161,69 @@ ostream& operator<< (ostream& out, const inode_state& state) {
    return out;
 }
 
-/* Get root of inode_state 
-Input: None
-Output: inode_ptr to class member root
-*/
+/**
+ * Get root of current state
+ * Input: None
+ * Output: inode_ptr to class member root
+ */
 inode_ptr inode_state::getRoot() const {
    return root;
 }
 
-/* Get cwd of inode_state 
-Input: None
-Output: inode_ptr to class member cwd
-*/
+/**
+ * Get cwd of current state
+ * Input: None
+ * Output: inode_ptr to class member cwd
+ */
 inode_ptr inode_state::getCwd() const {
    return cwd;
 }
 
+/**
+ * Get filepath of inode_state
+ * Input: None
+ * Output: string of the current path
+ */
+string inode_state::getFilepath() const {
+   string finalPathOutput = ""; // initiailize output path
+
+   // Check if filepath is currently at the root
+   if (filepath.empty()) {
+      finalPathOutput += "/";
+   } else {
+      // Loop through filePath iterator
+      for (vector<string>::const_iterator iter = filepath.begin(); 
+         iter != filepath.end(); ++iter) {
+         finalPathOutput += "/" + (*iter);
+      }      
+   }
+
+   return finalPathOutput;
+}
+
+/**
+ * Set the cwd
+ * Input: inode_ptr to pointer to
+ * Output: none
+ */
+void inode_state::setCwd(const inode_ptr& newPtr) {
+   cwd = newPtr;
+}
+
+/**
+ * Clear the filepath vector
+ * Input: None
+ * Output: None
+ */
+void inode_state::resetFilePath() {
+   filepath.clear();
+}
+
+/**
+ * Overloaded inode constructor
+ * Input: file type
+ * Output: None
+ */
 inode::inode(file_type type): inode_nr (next_inode_nr++) {
    switch (type) {
       case file_type::PLAIN_TYPE:
@@ -187,26 +239,29 @@ inode::inode(file_type type): inode_nr (next_inode_nr++) {
    DEBUGF ('i', "inode " << inode_nr << ", type = " << type);
 }
 
-/* Get inode number
-Input: None
-Output: size_t inode number
+/**
+ * Get inode number
+ * Input: None
+ * Output: size_t unique inode number
  */
 size_t inode::get_inode_nr() const {
    DEBUGF ('i', "inode = " << inode_nr);
    return inode_nr;
 }
 
-/* Get base_file_ptr contents
-Input: None
-output: base_file_ptr contents member
+/**
+ * Get base_file_ptr contents
+ * Input: None
+ * Output: base_file_ptr contents member
  */
 base_file_ptr inode::getContents() const {
    return contents;
 }
 
-/* Get file_type of contents 
-Input: None
-Output: file_type
+/**
+ * Get file_type of contents
+ * Input: None
+ * Output: file_type
  */
 file_type inode::getFileType() const {
    return fileType;
@@ -248,10 +303,10 @@ inode_ptr base_file::mkfile (const string&) {
    throw file_error ("is a " + error_file_type());
 }
 
-
-/* Get the size of plain_file wordvec data
-Input: None
-Output: number of characters in data
+/**
+ * Get the size of plain_file wordvec data
+ * Input: none
+ * Output: output of characters in data
  */
 size_t plain_file::size() const {
    // Initailize size
@@ -268,18 +323,20 @@ size_t plain_file::size() const {
    return size;
 }
 
-/* Return data
-Input: None
-Output: wordvec data (class member of plain_file) 
+/**
+ * Return data
+ * Input: none
+ * Output: wordvec data
  */
 const wordvec& plain_file::readfile() const {
    DEBUGF ('i', data);
    return data;
 }
 
-/* Replace the content of data
-Input: wordvec to replace current data
-Output: None
+/**
+ * Replace the content of data
+ * Input: wordvec to replace current data
+ * Output: none
  */
 void plain_file::writefile (const wordvec& words) {
    DEBUGF ('i', words);
@@ -390,6 +447,67 @@ inode_ptr directory::mkfile (const string& filename) {
    return filePtr;
 }
 
+@
+
+
+1.16
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: file_sys.cpp,v 1.15 2021-10-29 13:30:54-07 - - $
+d41 1
+a41 1
+ * Get the current promopt
+d52 1
+a52 1
+void inode_state::prompt(const string &newPrompt) {
+d62 5
+a66 4
+/* Get root of inode_state 
+Input: None
+Output: inode_ptr to class member root
+*/
+d71 5
+a75 4
+/* Get cwd of inode_state 
+Input: None
+Output: inode_ptr to class member cwd
+*/
+d80 45
+d140 4
+a143 3
+/* Get inode number
+Input: None
+Output: size_t inode number
+d150 4
+a153 3
+/* Get base_file_ptr contents
+Input: None
+output: base_file_ptr contents member
+d159 4
+a162 3
+/* Get file_type of contents 
+Input: None
+Output: file_type
+d204 4
+a207 4
+
+/* Get the size of plain_file wordvec data
+Input: None
+Output: number of characters in data
+d224 4
+a227 3
+/* Return data
+Input: None
+Output: wordvec data (class member of plain_file) 
+d234 4
+a237 3
+/* Replace the content of data
+Input: wordvec to replace current data
+Output: None
 @
 
 

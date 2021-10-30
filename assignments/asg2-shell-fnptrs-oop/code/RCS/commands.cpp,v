@@ -1,9 +1,14 @@
-head	1.28;
+head	1.29;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.29
+date	2021.10.30.00.35.41;	author -;	state -;
+branches;
+next	1.28;
 
 1.28
 date	2021.10.29.23.51.43;	author -;	state -;
@@ -150,12 +155,12 @@ desc
 @@
 
 
-1.28
+1.29
 log
 @-
 @
 text
-@// $Id: commands.cpp,v 1.27 2021-10-29 13:30:54-07 - - $
+@// $Id: commands.cpp,v 1.28 2021-10-29 16:51:43-07 - - $
 
 #include "commands.h"
 #include "debug.h"
@@ -254,6 +259,41 @@ void fn_cat (inode_state& state, const wordvec& words) {
 void fn_cd (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+
+   // Check that a directory is specified 
+   // (if not, use the root directory)
+   if (words.size() < 1) {
+      state.setCwd(state.getRoot());
+      // Reset the filepath
+      // throw command_error(words.at(0) + ": no directory specified");
+   }
+
+   // Check if more than one operand is given
+   if (words.size() > 2) {
+      throw command_error(words.at(0) + ": too many operands given");
+   }
+
+   // Check that the directory exists
+   map<string, inode_ptr> tempDirents =
+       state.getCwd()->getContents()->getDirents();
+   map<string, inode_ptr>::iterator iter =
+       tempDirents.find(words.at(1));
+
+   if (iter == tempDirents.end()) { // file wasn't found
+      throw command_error(words.at(1) + ": directory does not exist");
+   }
+
+   // If the directory was found, check that it is not a file
+   inode_ptr inodePtr = iter->second;
+   bool isFile = (inodePtr->getFileType() ==
+      file_type::PLAIN_TYPE) ? true : false;
+
+   if (isFile) {
+      throw command_error(words.at(1) + ": Not a directory");
+   }
+
+   // At this point, we have found the directory and confirmed that it 
+   // is a directory. Can now update the cwd
 }
 
 /* Echos words, which may be empty, to the standard output on a line
@@ -280,11 +320,7 @@ void fn_ls (inode_state& state, const wordvec& words) {
 
    // If no arguments are passed with the command, then dot is used as
    // its operand
-   if (words.size() < 1) {
-      cout << "/:" << endl;
-   } else {
-      cout << "/:" << endl;
-   }
+   cout << state.getFilepath() + ":" << endl;
 
    // Set a temporary var to class member dirents
    map<string, inode_ptr> tempDirEnts = 
@@ -379,7 +415,7 @@ void fn_prompt (inode_state& state, const wordvec& words) {
    }
 
    // Change the prompt
-   state.prompt(newPromptOutput);
+   state.setPrompt(newPromptOutput);
 }
 
 /* Prints the current working directory
@@ -391,13 +427,8 @@ void fn_pwd (inode_state& state, const wordvec& words) {
    DEBUGF ('c', words);   
    // initialize output string for the final path
    string outputPath = ""; 
-   // If cwd points to root, then we are at the root directory
-   if (state.getRoot()->get_inode_nr() == 1) {
-      outputPath += "/";
-   }
-   else {
 
-   }
+   outputPath = state.getFilepath();
    
    cout << outputPath << endl;
 }
@@ -419,6 +450,37 @@ void fn_rmr (inode_state& state, const wordvec& words) {
    DEBUGF ('c', words);
 }
 
+@
+
+
+1.28
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: commands.cpp,v 1.27 2021-10-29 13:30:54-07 - - $
+d100 35
+d161 1
+a161 5
+   if (words.size() < 1) {
+      cout << "/:" << endl;
+   } else {
+      cout << "/:" << endl;
+   }
+d256 1
+a256 1
+   state.prompt(newPromptOutput);
+a267 5
+   // If cwd points to root, then we are at the root directory
+   if (state.getRoot()->get_inode_nr() == 1) {
+      outputPath += "/";
+   }
+   else {
+d269 1
+a269 1
+   }
 @
 
 
