@@ -365,7 +365,7 @@ void fn_lsr (inode_state& state, const wordvec& words) {
    printDirectoryContent(directoryPath);
 
    /**
-    * RECURSION DRIVER IMPLEMENTATION, BUCKLE UP
+    * RECURSION DRIVER IMPLEMENTATION
     */
    
    // 3. Initialize a list of all directories in the current directory
@@ -435,6 +435,7 @@ void fn_make (inode_state& state, const wordvec& words) {
       throw command_error(words[0] + ": missing file name");
    }
 
+   // Initialize pointer to the cwd's directory
    inode_ptr directoryPath = state.getCwd();
 
    // Check to see if each pathname supplied is a single element
@@ -475,26 +476,50 @@ void fn_make (inode_state& state, const wordvec& words) {
  * Create a new directory. Two entries are automatically added to this
  * directory, namely dot (.) and dotdot (..).
  * Input: inode_state obj, wordvec, string vector
+ * words[0] = mkdir, words[1] = pathname
  * Output: none
  */
 void fn_mkdir (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
 
-   // Check to see if no arguments were provided
+   // Check if no arguments were provided
    if (words.size() < 2) {
       throw command_error(words[0] + ": missing directory name");
    }
 
-   // Check that additional arugments were provided
+   // Check if additional arguments were provided
    if (words.size() > 2) {
       throw command_error(words[0] + ": too many operands");
    }
-   
-   // Ensure that a duplicate folder will not be added
-   if (state.getCwd()->getContents()->mkdir(words[1]) == nullptr) {
-      throw command_error(words[1] + ": directory already exists");
+
+   // Initialize pointer to the cwd's directory
+   inode_ptr directoryPath = state.getCwd();
+
+   // Check if each pathname supplied is a single element
+   wordvec pathname = split(words.at(1), "/");
+   if (pathname.size() != 1) {
+      // Determine if the penultimate path is valid
+      pathname = wordvec(words.begin(), words.end());
+      directoryPath = validPath(directoryPath, pathname);
+
+      // Update pathname for parsing with determineFileType
+      pathname = split(words.at(1), "/");
    }
+
+   // Determine if ultimate path exists
+   map<string, inode_ptr> tempDirents = 
+      directoryPath->getContents()->getDirents();
+   map<string, inode_ptr>::iterator iter = 
+      tempDirents.find(pathname.back());
+
+   if (iter != tempDirents.end()) { // directory/file already exists
+      throw command_error
+         ("cannot create directory `" + words.at(1) + "`: File exists");
+   }
+
+   // Make the new directory
+   directoryPath->getContents()->mkdir(pathname.back());
 }
 
 /**

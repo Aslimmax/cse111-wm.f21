@@ -351,16 +351,11 @@ inode_ptr directory::mkdir (const string& dirname) {
    DEBUGF ('i', dirname);
    
    // Check if a directory or file called dirname already exists
-   map<string, inode_ptr>::iterator iter = dirents.find(dirname);
-   if (iter != dirents.end()) {
-      return nullptr;
-   }
-
-   /* TODO:
-   Add check for 'the complete pathname of the parent of this new
-   directory does not already exist' */
-   // Make a new inode_state obj
-   // inode_state directoryToAdd;
+   // map<string, inode_ptr>::iterator iter = dirents.find(dirname);
+   // if (iter != dirents.end()) {
+   //    return nullptr;
+   // }
+   map<string, inode_ptr>::iterator iter;
 
    // Get the inode ptr
    // inode_ptr tempPtr = directoryToAdd.getCwd();
