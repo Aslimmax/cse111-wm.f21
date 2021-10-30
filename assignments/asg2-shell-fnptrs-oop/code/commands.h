@@ -41,6 +41,7 @@ void fn_rmr    (inode_state& state, const wordvec& words);
 // helper functions
 inode_ptr validPath(inode_state& state, const wordvec& words);
 inode_ptr determineFileType(inode_ptr& inodePtr, const wordvec& words);
+static void printDirectoryContent(inode_ptr& inodePtr); 
 
 command_fn find_command_fn(const string &command);
 

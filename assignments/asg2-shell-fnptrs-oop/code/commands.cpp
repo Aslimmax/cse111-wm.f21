@@ -263,6 +263,7 @@ void fn_ls (inode_state& state, const wordvec& words) {
    // Initialize pathname to output depending on what path is specified
    string outputPath = "";
 
+   // Initailize a wordvec that stores the pathname specified
    wordvec pathname;
 
    // Check if a pathname was specified (if none was provided, use the
@@ -301,38 +302,9 @@ void fn_ls (inode_state& state, const wordvec& words) {
    // Print out the pathname of the directory that will have its
    // contents printed out
    cout << outputPath << endl;
-   
-   // Set a temporary var to class member dirents
-   map<string, inode_ptr> tempDirents = 
-      directoryPath->getContents()->getDirents();
-   // Loop through dirents
-   for (map<string, inode_ptr>::iterator iter = tempDirents.begin();
-        iter != tempDirents.end(); ++iter)
-   {
-      // Stores whether or not the element is a file or directory
-      bool isDirectory = true;
-      size_t inodeNum = iter->second->get_inode_nr();
-      string filePath = iter->first;
-      int fileSize = 0;
-      inode_ptr inodePtr = iter->second;
-            
-      // Determine file type
-      isDirectory = (inodePtr->getFileType() == 
-         file_type::DIRECTORY_TYPE) ? true : false; 
-      
-      if (isDirectory) {
-         fileSize = inodePtr->getContents()->getDirents().size();
-         filePath += "/";
-      } 
-      else { // Otherwise, the file is a PLAIN_TYPE
-         fileSize = dynamic_pointer_cast<plain_file>
-            (inodePtr->getContents())->size();
-      }
 
-      // Print out the completed line
-      cout << setw(6) << inodeNum << setw(6) << fileSize << "  "
-         << filePath << endl;
-   }
+   // Print out the contents of the directory
+   printDirectoryContent(directoryPath);
 }
 
 /**
@@ -343,7 +315,7 @@ void fn_lsr (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
 
-
+   
 }
 
 /**
@@ -619,4 +591,38 @@ inode_ptr determineFileType(inode_ptr& inodePtr, const wordvec &words) {
 
    // Return the ptr to the element
    return iter->second;
+}
+
+static void printDirectoryContent(inode_ptr &directoryPtr) {
+   // Set a temporary var to class member dirents
+   map<string, inode_ptr> tempDirents =
+       directoryPtr->getContents()->getDirents();
+   // Loop through dirents
+   for (map<string, inode_ptr>::iterator iter = tempDirents.begin();
+        iter != tempDirents.end(); ++iter)
+   {
+      // Stores whether or not the element is a file or directory
+      bool isDirectory = true;
+      size_t inodeNum = iter->second->get_inode_nr();
+      string filePath = iter->first;
+      int fileSize = 0;
+      inode_ptr inodePtr = iter->second;
+            
+      // Determine file type
+      isDirectory = (inodePtr->getFileType() == 
+         file_type::DIRECTORY_TYPE) ? true : false; 
+      
+      if (isDirectory) {
+         fileSize = inodePtr->getContents()->getDirents().size();
+         filePath += "/";
+      } 
+      else { // Otherwise, the file is a PLAIN_TYPE
+         fileSize = dynamic_pointer_cast<plain_file>
+            (inodePtr->getContents())->size();
+      }
+
+      // Print out the completed line
+      cout << setw(6) << inodeNum << setw(6) << fileSize << "  "
+         << filePath << endl;
+   }
 }
