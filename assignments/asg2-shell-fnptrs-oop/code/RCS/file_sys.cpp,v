@@ -1,9 +1,14 @@
-head	1.19;
+head	1.20;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.20
+date	2021.10.30.11.36.13;	author -;	state -;
+branches;
+next	1.19;
 
 1.19
 date	2021.10.30.08.14.20;	author -;	state -;
@@ -105,12 +110,12 @@ desc
 @@
 
 
-1.19
+1.20
 log
 @-
 @
 text
-@// $Id: file_sys.cpp,v 1.18 2021-10-29 23:28:45-07 - - $
+@// $Id: file_sys.cpp,v 1.19 2021-10-30 01:14:20-07 - - $
 
 #include <cassert>
 #include <iostream>
@@ -363,7 +368,10 @@ size_t plain_file::size() const {
    }
 
    // Calculate the number of characters in the file
-   size = size + numWords - 1;
+   if (numWords != 0) {
+      size = size + numWords - 1;
+
+   }
 
    DEBUGF ('i', "size = " << size);
    return size;
@@ -481,8 +489,8 @@ inode_ptr directory::mkdir (const string& dirname) {
    // Add . our new directory
    inodePtr->getContents()->addDirectoryContent(".", inodePtr);
 
-   // Get the inode_ptr of the root
-   iter = dirents.find("..");
+   // Get the inode_ptr of the cwd
+   iter = dirents.find(".");
    // Add .. to our new directory
    inodePtr->getContents()
       ->addDirectoryContent("..", iter->second);
@@ -515,6 +523,24 @@ inode_ptr directory::mkfile (const string& filename) {
    return filePtr;
 }
 
+@
+
+
+1.19
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: file_sys.cpp,v 1.18 2021-10-29 23:28:45-07 - - $
+d254 4
+a257 1
+   size = size + numWords - 1;
+d375 2
+a376 2
+   // Get the inode_ptr of the root
+   iter = dirents.find("..");
 @
 
 
