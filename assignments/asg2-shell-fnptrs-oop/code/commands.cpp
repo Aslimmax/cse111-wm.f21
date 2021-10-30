@@ -221,11 +221,15 @@ void fn_exit (inode_state& state, const wordvec& words) {
       // if a non-numeric argument was passed
       bool isNumeric = true;
       string exitArg = words.at(1);
+      int sizeOfArg = exitArg.length();
 
       // Determine if the input is non-numeric
-      for (int i = 0; i < static_cast<int>(exitArg.length()); i++) {
+      for (int i = 0; i < sizeOfArg; i++) {
          // If at least one digit is non-numeric, break the loop and set
          // isNumeric to false
+         if (exitArg[0] == '-' && sizeOfArg != 1) {
+            continue;
+         }
          if (isdigit(exitArg[i]) == false) {
             isNumeric = false;
             break;
@@ -234,8 +238,7 @@ void fn_exit (inode_state& state, const wordvec& words) {
 
       if (!isNumeric) {
          exec::status(127);
-      } else {
-         // const char* returnArg = exitArg;
+      } else { // DEBUG LATER
          exec::status(atoi(exitArg.c_str()));
       }
    }
@@ -254,18 +257,41 @@ void fn_ls (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
 
-   // If no arguments are passed with the command, then dot is used as
-   // its operand
-   // Print out the pathname specified
-   cout << state.getFilepath() + ":" << endl;
-
    // Initialize pointer to the cwd's directory
    inode_ptr directoryPath = state.getCwd();
 
-   // Check if a pathname was specified
-   if (words.size() > 1) {
-      directoryPath = validPath(state, words);
+   // Initialize pathname to output depending on what path is specified
+   string outputPath = "/";
+
+   // Check if a pathname was specified (if none was provided, use the
+   // current working directory)
+   if (words.size() != 1) {
+      // Check to see if the pathname supplied is a single element
+      wordvec pathname = split(words.at(1), "/");
+      if (pathname.size() != 1)
+      {
+         pathname = wordvec(words.begin(), words.end());
+
+         // Check to see if pathname is valid
+         directoryPath = validPath(state, pathname);
+
+         // Update pathname for parsing with determineFileType
+         pathname = wordvec(words.begin() + 1, words.end());
+      }
+
+      // Determine the file type of the last path
+      directoryPath = determineFileType(directoryPath, pathname);
+
+      // Update the output path name (NEED TO FIX)
+      outputPath += words.at(1) + ":";
+   } else {
+      // Update the output path name
+      outputPath += state.getFilepath() + ":";
    }
+
+   // Print out the pathname of the directory that will have its
+   // contents printed out
+   cout << outputPath << endl;
 
    // Set a temporary var to class member dirents
    map<string, inode_ptr> tempDirents = 
@@ -300,9 +326,15 @@ void fn_ls (inode_state& state, const wordvec& words) {
    }
 }
 
+/**
+ * Similar to ls, but does a recursive depth-first preorder traversal
+ * for subdirectories
+ */
 void fn_lsr (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+
+
 }
 
 /**
