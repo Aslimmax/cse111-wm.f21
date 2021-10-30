@@ -1,9 +1,14 @@
-head	1.20;
+head	1.21;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.21
+date	2021.10.30.21.21.03;	author -;	state -;
+branches;
+next	1.20;
 
 1.20
 date	2021.10.30.11.36.13;	author -;	state -;
@@ -110,12 +115,12 @@ desc
 @@
 
 
-1.20
+1.21
 log
 @-
 @
 text
-@// $Id: file_sys.cpp,v 1.19 2021-10-30 01:14:20-07 - - $
+@// $Id: file_sys.cpp,v 1.20 2021-10-30 04:36:13-07 - - $
 
 #include <cassert>
 #include <iostream>
@@ -510,6 +515,9 @@ inode_ptr directory::mkfile (const string& filename) {
    map<string, inode_ptr>::iterator iter = dirents.find(filename);
    if (iter != dirents.end()) { // Found the element
       // Ensure that the element is not a directory
+      if (iter->second->getFileType() == file_type::DIRECTORY_TYPE) {
+         return nullptr;
+      }
       return iter->second;
    }
    
@@ -523,6 +531,18 @@ inode_ptr directory::mkfile (const string& filename) {
    return filePtr;
 }
 
+@
+
+
+1.20
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: file_sys.cpp,v 1.19 2021-10-30 01:14:20-07 - - $
+d396 3
 @
 
 
