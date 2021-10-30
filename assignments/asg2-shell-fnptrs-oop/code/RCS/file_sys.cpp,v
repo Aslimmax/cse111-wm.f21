@@ -1,9 +1,14 @@
-head	1.21;
+head	1.22;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.22
+date	2021.10.30.23.15.19;	author -;	state -;
+branches;
+next	1.21;
 
 1.21
 date	2021.10.30.21.21.03;	author -;	state -;
@@ -115,12 +120,12 @@ desc
 @@
 
 
-1.21
+1.22
 log
 @-
 @
 text
-@// $Id: file_sys.cpp,v 1.20 2021-10-30 04:36:13-07 - - $
+@// $Id: file_sys.cpp,v 1.21 2021-10-30 14:21:03-07 - - $
 
 #include <cassert>
 #include <iostream>
@@ -473,16 +478,11 @@ inode_ptr directory::mkdir (const string& dirname) {
    DEBUGF ('i', dirname);
    
    // Check if a directory or file called dirname already exists
-   map<string, inode_ptr>::iterator iter = dirents.find(dirname);
-   if (iter != dirents.end()) {
-      return nullptr;
-   }
-
-   /* TODO:
-   Add check for 'the complete pathname of the parent of this new
-   directory does not already exist' */
-   // Make a new inode_state obj
-   // inode_state directoryToAdd;
+   // map<string, inode_ptr>::iterator iter = dirents.find(dirname);
+   // if (iter != dirents.end()) {
+   //    return nullptr;
+   // }
+   map<string, inode_ptr>::iterator iter;
 
    // Get the inode ptr
    // inode_ptr tempPtr = directoryToAdd.getCwd();
@@ -531,6 +531,29 @@ inode_ptr directory::mkfile (const string& filename) {
    return filePtr;
 }
 
+@
+
+
+1.21
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: file_sys.cpp,v 1.20 2021-10-30 04:36:13-07 - - $
+d354 5
+a358 10
+   map<string, inode_ptr>::iterator iter = dirents.find(dirname);
+   if (iter != dirents.end()) {
+      return nullptr;
+   }
+
+   /* TODO:
+   Add check for 'the complete pathname of the parent of this new
+   directory does not already exist' */
+   // Make a new inode_state obj
+   // inode_state directoryToAdd;
 @
 
 

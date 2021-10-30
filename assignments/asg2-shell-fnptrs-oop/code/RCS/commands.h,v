@@ -1,9 +1,14 @@
-head	1.14;
+head	1.15;
 access;
 symbols;
 locks;
 comment	@ * @;
 
+
+1.15
+date	2021.10.30.23.15.19;	author -;	state -;
+branches;
+next	1.14;
 
 1.14
 date	2021.10.30.21.21.03;	author -;	state -;
@@ -80,12 +85,12 @@ desc
 @@
 
 
-1.14
+1.15
 log
 @-
 @
 text
-@// $Id: commands.h,v 1.13 2021-10-30 01:14:20-07 - - $
+@// $Id: commands.h,v 1.14 2021-10-30 14:21:03-07 - - $
 
 #ifndef __COMMANDS_H__
 #define __COMMANDS_H__
@@ -126,7 +131,7 @@ void fn_rm     (inode_state& state, const wordvec& words);
 void fn_rmr    (inode_state& state, const wordvec& words);
 
 // helper functions
-inode_ptr validPath(inode_state& state, const wordvec& words);
+inode_ptr validPath(inode_ptr& directoryPtr, const wordvec& words);
 inode_ptr determineFileType(inode_ptr& inodePtr, const wordvec& words);
 static void printDirectoryContent(inode_ptr& inodePtr); 
 
@@ -141,6 +146,20 @@ class ysh_exit: public exception {};
 
 #endif
 
+@
+
+
+1.14
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: commands.h,v 1.13 2021-10-30 01:14:20-07 - - $
+d42 1
+a42 1
+inode_ptr validPath(inode_state& state, const wordvec& words);
 @
 
 
