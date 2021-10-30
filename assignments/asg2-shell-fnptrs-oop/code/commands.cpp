@@ -261,13 +261,15 @@ void fn_ls (inode_state& state, const wordvec& words) {
    inode_ptr directoryPath = state.getCwd();
 
    // Initialize pathname to output depending on what path is specified
-   string outputPath = "/";
+   string outputPath = "";
+
+   wordvec pathname;
 
    // Check if a pathname was specified (if none was provided, use the
    // current working directory)
    if (words.size() != 1) {
       // Check to see if the pathname supplied is a single element
-      wordvec pathname = split(words.at(1), "/");
+      pathname = split(words.at(1), "/");
       if (pathname.size() != 1)
       {
          pathname = wordvec(words.begin(), words.end());
@@ -283,16 +285,23 @@ void fn_ls (inode_state& state, const wordvec& words) {
       directoryPath = determineFileType(directoryPath, pathname);
 
       // Update the output path name (NEED TO FIX)
-      outputPath += words.at(1) + ":";
+      outputPath += "/" + words.at(1) + ":";
    } else {
       // Update the output path name
       outputPath += state.getFilepath() + ":";
    }
 
+   // Determine if the lastpath name specified is a file
+   if (directoryPath->getFileType() == file_type::PLAIN_TYPE) {
+      // Print out the name of the file and exit
+      cout << pathname.back() << endl;
+      return;
+   }
+
    // Print out the pathname of the directory that will have its
    // contents printed out
    cout << outputPath << endl;
-
+   
    // Set a temporary var to class member dirents
    map<string, inode_ptr> tempDirents = 
       directoryPath->getContents()->getDirents();
