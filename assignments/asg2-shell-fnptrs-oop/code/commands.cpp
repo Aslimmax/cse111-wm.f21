@@ -112,40 +112,56 @@ void fn_cd (inode_state& state, const wordvec& words) {
       throw command_error(words.at(0) + ": too many operands given");
    }
 
-   // Check that the directory exists
-   map<string, inode_ptr> tempDirents =
-       state.getCwd()->getContents()->getDirents();
-   map<string, inode_ptr>::iterator iter =
-       tempDirents.find(words.at(1));
+   // Process the path
+   wordvec path = split(words.at(1), "/");
+   // Initialize pointer to the cwd
+   inode_ptr tempPtr = state.getCwd();
 
-   if (iter == tempDirents.end()) { // file wasn't found
-      throw command_error(words.at(1) + ": directory does not exist");
-   }
+   // Loop through each path, throw an error if a path doesn't exist
+   for(wordvec::iterator wordIter = path.begin();
+      wordIter != path.end(); ++wordIter) {
+      // Get the dirents of the cwd
+      map<string, inode_ptr> tempDirents = 
+         tempPtr->getContents()->getDirents();
 
-   // If the directory was found, check that it is not a file
-   inode_ptr inodePtr = iter->second;
-   bool isFile = (inodePtr->getFileType() ==
-      file_type::PLAIN_TYPE) ? true : false;
+      // Look for the element based on the given path
+      map<string, inode_ptr>::iterator dirIter =
+          tempDirents.find((*wordIter));
 
-   if (isFile) {
-      throw command_error(words.at(1) + ": Not a directory");
+      if (dirIter == tempDirents.end()) { // file wasn't found
+         throw command_error(words.at(1) + 
+            ": directory does not exist");
+      }
+
+      // If the directory was found, check that it is not a file
+      inode_ptr dirPtr = dirIter->second;
+      bool isFile = (dirPtr->getFileType() ==
+         file_type::PLAIN_TYPE) ? true : false;
+
+      if (isFile) { // Throw an error if dirPtr is a file
+         throw command_error(words.at(1) + ": Not a directory");
+      }
+
+      // Update tempPtr and continue to loop through path
+      tempPtr = dirPtr;
    }
 
    // At this point, we have found the directory and confirmed that it 
    // is a directory. Can now update the cwd and filepath
-   wordvec path = split(words.at(1), "/");
 
    // Check if there are multiple paths specified
    if (path.size() == 1) {
       // Exit function is trying to cd into itself
       if (path.at(0) == ".") {
          return;
-      } // Don't push .. to the pathname
-      else if (path.at(0) != "..") {
+      } // Pop back last element in filepath if going to parent dir
+      else if (path.at(0) == "..") {
+         state.popFilepath();
+      } else {
          state.pushFilepath(path.at(0));
       }
    } else {
-      // Loop through path and push back to filepath
+      // Loop through path and push back to filepath to cwd
       for (wordvec::iterator pathIter = path.begin();
          pathIter != path.end(); ++pathIter) {
          state.pushFilepath((*pathIter));
@@ -153,7 +169,7 @@ void fn_cd (inode_state& state, const wordvec& words) {
    }
 
    // Update cwd
-   state.setCwd(inodePtr);
+   state.setCwd(tempPtr);
 }
 
 /* Echos words, which may be empty, to the standard output on a line
@@ -259,6 +275,11 @@ void fn_mkdir (inode_state& state, const wordvec& words) {
    }
 }
 
+/**
+ * Update the current terminal prompt
+ * Input: inode_state obj, wordvec string vector
+ * Output: none
+ */
 void fn_prompt (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
@@ -283,9 +304,10 @@ void fn_prompt (inode_state& state, const wordvec& words) {
    state.setPrompt(newPromptOutput);
 }
 
-/* Prints the current working directory
-Input: inode_state obj, words ([0] => name of command, [1] => arguments)
-Output: void function
+/**
+ * Prints the current working directory
+ * Input: inode_state obj, wordvec string vector
+ * Output: none
  */
 void fn_pwd (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);

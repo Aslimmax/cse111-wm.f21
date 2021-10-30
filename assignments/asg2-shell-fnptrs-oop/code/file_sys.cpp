@@ -149,7 +149,7 @@ void inode_state::resetFilePath() {
 }
 
 /**
- * Overloaded inode constructor
+ * Overloaded inode constructor 
  * Input: file type
  * Output: None
  */
@@ -240,14 +240,19 @@ inode_ptr base_file::mkfile (const string&) {
 size_t plain_file::size() const {
    // Initailize size
    size_t size = 0;
+   size_t numWords = 0; // initialze number of words counter
 
    // Loop through all elements in data
    for (wordvec::const_iterator iter = data.begin(); iter != data.end();
       ++iter) {
       // Increment size based on the length of the string in wordvec
       size += (*iter).length();
+      numWords++;
    }
-   
+
+   // Calculate the number of characters in the file
+   size = size + numWords - 1;
+
    DEBUGF ('i', "size = " << size);
    return size;
 }
@@ -272,10 +277,20 @@ void plain_file::writefile (const wordvec& words) {
    data = words;
 }
 
+/**
+ * Get data member of plain_file object
+ * Input: none
+ * Output: wordvec data
+ */
 wordvec plain_file::getData() const {
    return data;
 }
 
+/**
+ * Add new file/directory to dirents
+ * Input: string file/directory name, the cwd of that file/directory
+ * Output: none
+ */
 void directory::addDirectoryContent(const string& filename, 
    const inode_ptr& inodePtr) {
    // Create a tempPair obj to insert into dirents
@@ -298,12 +313,14 @@ Input: None
 Output: size_t number of entries in directory
  */
 size_t directory::size() const {
-   size_t size = 0; // initialize size to 0
-   for (map<string, inode_ptr>::iterator iter = getDirents().begin();
-         iter != getDirents().end(); ++iter) {
-      size++; // increment the size
-   }
+   size_t size = dirents.size();
+   // size_t size = 0; // initialize size to 0
+   // for (map<string, inode_ptr>::iterator iter = getDirents().begin();
+   //       iter != getDirents().end(); ++iter) {
+   //    size++; // increment the size
+   // }
    DEBUGF ('i', "size = " << size);
+   // return size;
    return size;
 }
 
