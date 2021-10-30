@@ -98,12 +98,13 @@ void fn_cd (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
 
-   // Check that a directory is specified 
-   // (if not, use the root directory)
-   if (words.size() < 1) {
+   // Check that a directory is specified (if not, use the root
+   // directory)
+   if (words.size() == 1) {
       state.setCwd(state.getRoot());
       // Reset the filepath
-      // throw command_error(words.at(0) + ": no directory specified");
+      state.resetFilePath();
+      return;
    }
 
    // Check if more than one operand is given
@@ -131,7 +132,28 @@ void fn_cd (inode_state& state, const wordvec& words) {
    }
 
    // At this point, we have found the directory and confirmed that it 
-   // is a directory. Can now update the cwd
+   // is a directory. Can now update the cwd and filepath
+   wordvec path = split(words.at(1), "/");
+
+   // Check if there are multiple paths specified
+   if (path.size() == 1) {
+      // Exit function is trying to cd into itself
+      if (path.at(0) == ".") {
+         return;
+      } // Don't push .. to the pathname
+      else if (path.at(0) != "..") {
+         state.pushFilepath(path.at(0));
+      }
+   } else {
+      // Loop through path and push back to filepath
+      for (wordvec::iterator pathIter = path.begin();
+         pathIter != path.end(); ++pathIter) {
+         state.pushFilepath((*pathIter));
+      }
+   }
+
+   // Update cwd
+   state.setCwd(inodePtr);
 }
 
 /* Echos words, which may be empty, to the standard output on a line
@@ -225,6 +247,11 @@ void fn_make (inode_state& state, const wordvec& words) {
 void fn_mkdir (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+
+   // Check to see if no arguments were provided
+   if (words.size() < 2) {
+      throw command_error(words[0] + ": missing directory name");
+   }
    
    // Ensure that a duplicate folder will not be added
    if (state.getCwd()->getContents()->mkdir(words[1]) == nullptr) {

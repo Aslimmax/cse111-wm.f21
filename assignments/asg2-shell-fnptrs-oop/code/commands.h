@@ -38,6 +38,11 @@ void fn_pwd    (inode_state& state, const wordvec& words);
 void fn_rm     (inode_state& state, const wordvec& words);
 void fn_rmr    (inode_state& state, const wordvec& words);
 
+// cwd helper functions
+void cwd_push(inode_state&state, const string path);
+void cwd_pop (inode_state&state);
+void cwd_get (inode_state&state);
+
 command_fn find_command_fn (const string& command);
 
 // exit_status_message -

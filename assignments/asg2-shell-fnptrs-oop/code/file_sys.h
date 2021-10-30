@@ -45,13 +45,16 @@ class inode_state {
       // Getters
       inode_ptr getRoot() const;
       inode_ptr getCwd() const;
-      string getFilepath() const;      
+      string getFilepath(); 
       const string& prompt() const;
       // Setters
       void setCwd(const inode_ptr& newPtr);
       void setPrompt(const string& newPrompt);
       // Helper functions
-      void resetFilePath();   
+      void resetFilePath();
+      void setFilepath(const string& newFilepath);
+      void pushFilepath(const string &newFilepath);
+      void popFilepath();
          
    friend class inode;
    friend class directory;
@@ -119,7 +122,8 @@ class base_file {
       virtual inode_ptr mkdir (const string& dirname);
       virtual inode_ptr mkfile (const string& filename);      
       // Helper function that adds filename and inodePtr to dirents
-      virtual void addDirectoryContent(const string &filename, const inode_ptr& inodePtr);
+      virtual void addDirectoryContent(const string &filename,
+         const inode_ptr& inodePtr);
       virtual map<string, inode_ptr> getDirents() const;
       virtual wordvec getData() const;
 };

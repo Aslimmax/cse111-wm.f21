@@ -82,7 +82,7 @@ inode_ptr inode_state::getCwd() const {
  * Input: None
  * Output: string of the current path
  */
-string inode_state::getFilepath() const {
+string inode_state::getFilepath() {
    string finalPathOutput = ""; // initiailize output path
 
    // Check if filepath is currently at the root
@@ -106,6 +106,37 @@ string inode_state::getFilepath() const {
  */
 void inode_state::setCwd(const inode_ptr& newPtr) {
    cwd = newPtr;
+}
+
+/**
+ * Set filepath
+ * Input: string new filepath
+ * Output: none
+ */
+void inode_state::setFilepath(const string& newFilepath) {
+   // Process the filepath string
+   wordvec path = split(newFilepath, "/");
+
+   // Copy words into filepath
+   filepath = path;
+}
+
+/**
+ * Push back a new path to filepath
+ * Input: string new path to add
+ * Output: none
+ */
+void inode_state::pushFilepath(const string& newFilepath) {
+   filepath.push_back(newFilepath);
+}
+
+/**
+ * Pop back the path at the end of filepath
+ * Input: none
+ * Output: none
+ */
+void inode_state::popFilepath() {
+   filepath.pop_back();
 }
 
 /**
