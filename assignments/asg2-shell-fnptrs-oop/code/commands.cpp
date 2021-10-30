@@ -61,48 +61,53 @@ void fn_cat (inode_state& state, const wordvec& words) {
       throw command_error(words.at(0) + ": no file specified");
    }
 
-   // Initialize pointer to the cwd's directory
-   inode_ptr directoryPath = state.getCwd();
+   // Determine the number of pathnames supplied
+   wordvec pathnames = wordvec(words.begin() + 1, words.end());
 
-   // Split the pathname into a wordvec
-   wordvec tempPath = split(words.at(1), "/");
+   inode_ptr directoryPath; // initailize directoryPath
+
+   // Loop through all pathnames specified and copy the contents of each
+   // file (if they exist) to the standard output
+   for (int i = 0; i < static_cast<int>(pathnames.size()); i++) {
+      // Reset directory path
+      directoryPath = state.getCwd();
+      // Check to see if each pathname supplied is a single element
+      wordvec pathname = split(words.at(i + 1), "/");
       
-   // Get the lastpath name
-   wordvec lastPath;
-   lastPath.push_back(tempPath.back());
+      if (pathname.size() != 1) {
+         pathname = wordvec(words.begin() + i, words.end());
 
-   // Check to see if the pathname is longer than one
-   if (tempPath.size() != 1) {
-      // Get the directory path minus the last pathname
-      tempPath = wordvec(tempPath.begin(), tempPath.end() - 1);
+         // Check to see if pathname is valid
+         directoryPath = validPath(state, pathname);
 
-      // Determine if subpath is valid
-      directoryPath = validPath(state, tempPath);
+         // Update pathname for parsing with determineFileType
+         pathname = wordvec(words.begin() + i + 1, words.end());
+      }
+
+      // Determine the file type of the last path
+      directoryPath = determineFileType(directoryPath, pathname);
+
+      // If the lastpath points to an element, determine if it's a file
+      // or directory
+      if (directoryPath->getFileType() == file_type::DIRECTORY_TYPE) {
+         throw command_error(words.at(i + 1) + ": Is a directory");
+      }
+
+      // Otherwise, element found is a plain_file class
+      string outputString = ""; // initialize output string of data
+      // Get the fileData
+      wordvec fileData = dynamic_pointer_cast<plain_file>
+         (directoryPath->getContents())->getData();
+      // Loop through plain_file data
+      for (wordvec::const_iterator wordIter = fileData.begin(); 
+         wordIter != fileData.end(); ++wordIter) {
+         outputString += (*wordIter) + " "; // build output string
+      }
+      // Remove the extra white space at the end of the string
+      outputString.pop_back();
+
+      cout << outputString << endl;
    }
-
-   // Determine the file type of the last path
-   directoryPath = determineFileType(directoryPath, lastPath);
-
-   // If the lastpath points to an element, determine if it's a file
-   // or directory
-   if (directoryPath->getFileType() == file_type::DIRECTORY_TYPE) {
-      throw command_error(words.at(1) + ": Is a directory");
-   }
-
-   // Otherwise, element found is a plain_file class
-   string outputString = ""; // initialize output string of data
-   // Get the fileData
-   wordvec fileData = dynamic_pointer_cast<plain_file>
-      (directoryPath->getContents())->getData();
-   // Loop through plain_file data
-   for (wordvec::const_iterator wordIter = fileData.begin(); 
-      wordIter != fileData.end(); ++wordIter) {
-      outputString += (*wordIter) + " "; // build output string
-   }
-   // Remove the extra white space at the end of the string
-   outputString.pop_back();
-
-   cout << outputString << endl;
 }
 
 /**
@@ -129,39 +134,56 @@ void fn_cd (inode_state& state, const wordvec& words) {
       throw command_error(words.at(0) + ": too many operands given");
    }
 
-   // Process the path
-   wordvec path = split(words.at(1), "/");
+   inode_ptr directoryPath = state.getCwd();
 
-   // Get the ptr to the directory specified
-   inode_ptr finalCwdPtr = validPath(state, path);
+   // Check to see if each pathname supplied is a single element
+   wordvec pathname = split(words.at(1), "/");
+   if (pathname.size() != 1) {
+      pathname = wordvec(words.begin(), words.end());
+
+      // Check to see if pathname is valid
+      directoryPath = validPath(state, pathname);
+
+      // Update pathname for parsing with determineFileType
+      pathname = wordvec(words.begin() + 1, words.end());
+   }
+
+   // Determine the file type of the last path
+   directoryPath = determineFileType(directoryPath, pathname);
+
+   // Check if the element is a valid directory
+   bool isFile = (directoryPath->getFileType() == file_type::PLAIN_TYPE)
+      ? true : false;
+
+   // Throw an error if directoryPath is a file
+   if (isFile) { 
+      throw command_error(words.at(1) + ": Not a directory");
+   }
 
    // At this point, we have found the directory and confirmed that it 
    // is a directory. Can now update the cwd and filepath
 
-   // Check if there are multiple paths specified
-   if (path.size() == 1) {
+   // Process the path
+   wordvec path = split(words.at(1), "/");
+   // Loop through the valid path and update the pathname accordingly
+   for (wordvec::iterator pathIter = path.begin();
+      pathIter != path.end(); ++pathIter) {
       // Exit function is trying to cd into itself
-      if (path.at(0) == ".") {
+      if ((*pathIter) == ".") {
          return;
       } // Pop back last element in filepath if going to parent dir
-      else if (path.at(0) == "..") {
+      else if ((*pathIter) == "..") {
          // Don't do anything if cwd == root
          if (state.getCwd() != state.getRoot()) {
             state.popFilepath();
          }
       } else { // Otherwise, udpate the filepath
-         state.pushFilepath(path.at(0));
-      }
-   } else {
-      // Loop through path and push back to filepath to cwd
-      for (wordvec::iterator pathIter = path.begin();
-         pathIter != path.end(); ++pathIter) {
          state.pushFilepath((*pathIter));
-      }
+      }  
    }
 
    // Update cwd
-   state.setCwd(finalCwdPtr);
+   state.setCwd(directoryPath);
 }
 
 /* Echos words, which may be empty, to the standard output on a line
@@ -292,6 +314,11 @@ void fn_mkdir (inode_state& state, const wordvec& words) {
    if (words.size() < 2) {
       throw command_error(words[0] + ": missing directory name");
    }
+
+   // Check that additional arugments were provided
+   if (words.size() > 2) {
+      throw command_error(words[0] + ": too many operands");
+   }
    
    // Ensure that a duplicate folder will not be added
    if (state.getCwd()->getContents()->mkdir(words[1]) == nullptr) {
@@ -417,10 +444,22 @@ inode_ptr validPath(inode_state& state, const wordvec& words) {
    // Initialize pointer to the cwd
    inode_ptr finalCwdPtr = state.getCwd();
 
+   // Split the pathname into a wordvec
+   wordvec tempPath = split(words.at(1), "/");
+
+   // Check to see if the pathname only contains one element
+   if (tempPath.size() != 1) {
+      tempPath = wordvec(tempPath.begin(), tempPath.end() - 1);
+   }
+
+   // Get the directory path minus the last pathname
+   // tempPath = wordvec(tempPath.begin(), tempPath.end() - 1);
+
    // Loop through each path, throw an error if a path doesn't exist
-   for (wordvec::const_iterator wordIter = words.begin();
-        wordIter != words.end(); ++wordIter)
+   for (wordvec::const_iterator wordIter = tempPath.begin();
+        wordIter != tempPath.end(); ++wordIter)
    {
+      // cout << (*wordIter) << endl;
       // Get the dirents of the cwd
       map<string, inode_ptr> tempDirents =
           finalCwdPtr->getContents()->getDirents();
@@ -431,7 +470,7 @@ inode_ptr validPath(inode_state& state, const wordvec& words) {
 
       if (dirIter == tempDirents.end())
       { // file wasn't found
-         throw command_error(words.at(0) +
+         throw command_error(words.at(1) +
                              ": directory does not exist");
       }
 
@@ -442,7 +481,7 @@ inode_ptr validPath(inode_state& state, const wordvec& words) {
       
       // Throw an error if dirPtr is a file
       if (isFile) { 
-         throw command_error(words.at(0) + ": Not a directory");
+         throw command_error(words.at(1) + ": Not a directory");
       }
 
       // Update finalCwdPtr and continue to loop through path
@@ -457,18 +496,20 @@ inode_ptr validPath(inode_state& state, const wordvec& words) {
  * Input: indoe_ptr to a directory, wordvec with a pathname
  * Output: inode_ptr to the file/directory
  */
-inode_ptr determineFileType(inode_ptr& inodePtr, 
-   const wordvec &words) {
+inode_ptr determineFileType(inode_ptr& inodePtr, const wordvec &words) {
    // Initialize return tuple with the inode_ptr to the file/directory
    // and the filetype of the tuple
    // tuple<inode_ptr, file_type> returnTuple;
+   
+   // Get the pathname
+   wordvec tempPath = split(words.at(0), "/");
 
    // Look for the specified element in dirents with the specified
    // inodePtr
    map<string, inode_ptr> tempDirents = inodePtr->getContents()
       ->getDirents();
    map<string, inode_ptr>::iterator iter =
-      tempDirents.find(words.at(0));
+      tempDirents.find(tempPath.back());
 
    if (iter == tempDirents.end()) { // file wasn't found
       throw command_error(words.at(0) + ": No such file or directory");

@@ -251,7 +251,10 @@ size_t plain_file::size() const {
    }
 
    // Calculate the number of characters in the file
-   size = size + numWords - 1;
+   if (numWords != 0) {
+      size = size + numWords - 1;
+
+   }
 
    DEBUGF ('i', "size = " << size);
    return size;
@@ -369,8 +372,8 @@ inode_ptr directory::mkdir (const string& dirname) {
    // Add . our new directory
    inodePtr->getContents()->addDirectoryContent(".", inodePtr);
 
-   // Get the inode_ptr of the root
-   iter = dirents.find("..");
+   // Get the inode_ptr of the cwd
+   iter = dirents.find(".");
    // Add .. to our new directory
    inodePtr->getContents()
       ->addDirectoryContent("..", iter->second);
