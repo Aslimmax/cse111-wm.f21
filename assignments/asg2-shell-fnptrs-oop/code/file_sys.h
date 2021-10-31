@@ -51,7 +51,6 @@ class inode_state {
       const string& prompt() const;
       // Setters
       void setCwd(const inode_ptr& newPtr);
-      void setRoot(const inode_ptr& newPtr);
       void setPrompt(const string& newPrompt);
       // Helper functions
       void resetFilePath();

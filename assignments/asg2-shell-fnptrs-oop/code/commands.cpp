@@ -199,7 +199,7 @@ void fn_echo (inode_state& state, const wordvec& words) {
 }
 
 /**
- * Exit the shell (STILL NEED TO CONFIGURE)
+ * Exit the shell
  * Input: inode_state obj, wordvec string vector
  * Output: none
  */
@@ -677,7 +677,7 @@ void fn_rmr (inode_state& state, const wordvec& words) {
    }
 
    // Call recursive remove function to remove files
-   recursiveRemove(directoryPath, words);
+   recursiveRemove(directoryPath);
 
    // Delete the left and right paths (directories)
    recursiveRemoveDir(directoryPath);
@@ -743,7 +743,7 @@ inode_ptr validPath(inode_ptr& directoryPath, const wordvec& words) {
 
 /**
  * Determines the file type
- * Input: indoe_ptr to a directory, wordvec with a pathname
+ * Input: inode_ptr to a directory, wordvec with a pathname
  * Output: inode_ptr to the file/directory
  */
 inode_ptr determineFileType(inode_ptr& inodePtr, const wordvec &words) {
@@ -773,7 +773,12 @@ inode_ptr determineFileType(inode_ptr& inodePtr, const wordvec &words) {
    return iter->second;
 }
 
-static void printDirectoryContent(inode_ptr &directoryPtr) {
+/**
+ * Prints out all content in the current working directory
+ * Input: inode_ptr to the current working directory
+ * Output: none
+ */
+void printDirectoryContent(inode_ptr &directoryPtr) {
    // Set a temporary var to class member dirents
    map<string, inode_ptr> tempDirents =
        directoryPtr->getContents()->getDirents();
@@ -807,7 +812,12 @@ static void printDirectoryContent(inode_ptr &directoryPtr) {
    }
 }
 
-void recursiveRemove(inode_ptr& directoryPtr, const wordvec& words) {
+/**
+ * Recursively removes all files from the given directoryPtr
+ * Input: inode_ptr obj, wordvec string vector
+ * Output: None
+ */
+void recursiveRemove(inode_ptr& directoryPtr) {
    // Get the directories from directoryPtr
    map<string, inode_ptr> directories = 
       directoryPtr->getContents()->getDirents();
@@ -842,12 +852,16 @@ void recursiveRemove(inode_ptr& directoryPtr, const wordvec& words) {
 
          // Check if a directory still has content
          if (dirIter->second->getContents()->getDirents().size() != 2) {
-            recursiveRemove(dirIter->second, words);
+            recursiveRemove(dirIter->second);
          }
       }
    }
 }
 
+/**
+ * Recursively removes all directories from the given directoryPtr
+ * Input: inode_ptr to the current working directory
+ */
 void recursiveRemoveDir(inode_ptr& directoryPtr) {
    // Get the directories from directoryPtr
    map<string, inode_ptr> directories = 

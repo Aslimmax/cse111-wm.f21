@@ -108,10 +108,6 @@ void inode_state::setCwd(const inode_ptr& newPtr) {
    cwd = newPtr;
 }
 
-void inode_state::setRoot(const inode_ptr& newPtr) {
-   root = newPtr;
-}
-
 /**
  * Set filepath
  * Input: string new filepath

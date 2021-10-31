@@ -41,9 +41,9 @@ void fn_rmr    (inode_state& state, const wordvec& words);
 // helper functions
 inode_ptr validPath(inode_ptr& directoryPtr, const wordvec& words);
 inode_ptr determineFileType(inode_ptr& inodePtr, const wordvec& words);
-static void printDirectoryContent(inode_ptr& inodePtr); 
+void printDirectoryContent(inode_ptr& inodePtr); 
 
-void recursiveRemove(inode_ptr& directoryPtr, const wordvec& words);
+void recursiveRemove(inode_ptr& directoryPtr);
 void recursiveRemoveDir(inode_ptr& directoryPtr);
 
 command_fn find_command_fn(const string &command);

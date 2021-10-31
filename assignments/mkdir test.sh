@@ -20,5 +20,10 @@ commands.h:44:13: warning: ‘void printDirectoryContent(inode_ptr&)’ declared
  static void printDirectoryContent(inode_ptr& inodePtr);
              ^~~~~~~~~~~~~~~~~~~~~
 
+Exit without making a folder
 ==4247==    definitely lost: 48 bytes in 1 blocks
 ==4247==    indirectly lost: 237 bytes in 5 blocks
+
+Exit while a folder has been created
+==4574==    definitely lost: 48 bytes in 1 blocks
+==4574==    indirectly lost: 607 bytes in 13 blocks
