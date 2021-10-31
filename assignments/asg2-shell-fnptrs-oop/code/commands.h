@@ -43,6 +43,9 @@ inode_ptr validPath(inode_ptr& directoryPtr, const wordvec& words);
 inode_ptr determineFileType(inode_ptr& inodePtr, const wordvec& words);
 static void printDirectoryContent(inode_ptr& inodePtr); 
 
+void recursiveRemove(inode_ptr& directoryPtr, const wordvec& words);
+void recursiveRemoveDir(inode_ptr& directoryPtr);
+
 command_fn find_command_fn(const string &command);
 
 // exit_status_message -

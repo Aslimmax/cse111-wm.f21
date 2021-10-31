@@ -108,6 +108,10 @@ void inode_state::setCwd(const inode_ptr& newPtr) {
    cwd = newPtr;
 }
 
+void inode_state::setRoot(const inode_ptr& newPtr) {
+   root = newPtr;
+}
+
 /**
  * Set filepath
  * Input: string new filepath
@@ -188,6 +192,15 @@ base_file_ptr inode::getContents() const {
 }
 
 /**
+ * Set base_file_ptr contents
+ * Input: base_file_ptr new contents
+ * Output: none
+ */
+void inode::setContents(base_file_ptr newContents) {
+   contents = newContents;
+}
+
+/**
  * Get file_type of contents
  * Input: None
  * Output: file_type
@@ -195,7 +208,7 @@ base_file_ptr inode::getContents() const {
 file_type inode::getFileType() const {
    return fileType;
 }
-
+
 file_error::file_error (const string& what):
             runtime_error (what) {
 }
@@ -338,8 +351,27 @@ void directory::remove (const string& filename) {
 
    // Find the file
    map<string, inode_ptr>::iterator iter = dirents.find(filename);
+   
+   // Check if the file is a directory
+   if (iter->second->getFileType() == file_type::DIRECTORY_TYPE) {
+      // Look inside of the directory
+      map<string, inode_ptr> tempDirents = 
+         iter->second->getContents()->getDirents();      
+      // Validate that the directory is empty
+      if (tempDirents.size() != 2) {
+         throw file_error(filename + ": cannot be removed, not empty");
+      }
 
-   dirents.erase(iter);
+      // Set root and cwd to null
+      tempDirents.find(".")->second->setContents(nullptr);
+      tempDirents.find(".")->second = nullptr;
+      // tempDirents.find(".")->second.reset();
+      tempDirents.erase(".");
+      tempDirents.erase("..");
+   }
+   // Erase the file/directory
+   // DOUBLE CHECK THIS
+   dirents.erase(iter);   
 }
 
 /**

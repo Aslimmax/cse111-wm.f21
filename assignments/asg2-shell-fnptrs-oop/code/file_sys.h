@@ -33,6 +33,7 @@ ostream& operator<< (ostream&, file_type);
 //    prompt.
 
 class inode_state {
+   friend class inode;
    friend ostream& operator<< (ostream& out, const inode_state&);
    private:
       inode_ptr root {nullptr};
@@ -50,15 +51,13 @@ class inode_state {
       const string& prompt() const;
       // Setters
       void setCwd(const inode_ptr& newPtr);
+      void setRoot(const inode_ptr& newPtr);
       void setPrompt(const string& newPrompt);
       // Helper functions
       void resetFilePath();
       void setFilepath(const string& newFilepath);
       void pushFilepath(const string &newFilepath);
       void popFilepath();
-         
-   friend class inode;
-   friend class directory;
 };
 
 // class inode -
@@ -75,6 +74,7 @@ class inode_state {
 //    
 
 class inode {
+   friend class inode_state;
    private:
       static size_t next_inode_nr;
       size_t inode_nr;
@@ -88,11 +88,8 @@ class inode {
       size_t get_inode_nr() const;
       // Helper function
       base_file_ptr getContents() const;
+      void setContents(base_file_ptr newContents);
       file_type getFileType() const;
-   
-   friend class inode_state;
-   friend class base_file;
-   friend class directory;
 }; 
 
 

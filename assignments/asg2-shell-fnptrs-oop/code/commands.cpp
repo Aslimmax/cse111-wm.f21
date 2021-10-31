@@ -243,6 +243,22 @@ void fn_exit (inode_state& state, const wordvec& words) {
       }
    }
 
+   // Initialize new words with only one command, rmr
+   wordvec clearShell;
+   clearShell.push_back("rmr");   
+   // Clear the shell
+   fn_rmr(state, clearShell);
+
+   // Get the directory content of the root
+   map<string, inode_ptr> tempDirents 
+      = state.getRoot()->getContents()->getDirents();
+   // Set the contents to null
+   state.getRoot()->setContents(nullptr);
+   // Set the root to null
+   tempDirents.find("..")->second = nullptr;
+   // Erase root from directory
+   tempDirents.erase("..");
+
    throw ysh_exit();
 }
 
@@ -572,13 +588,14 @@ void fn_pwd (inode_state& state, const wordvec& words) {
  * list of files and subdirectories). If the pathname is a directory,
  * it must be empty.
  * Input: inode_state obj, wordvec string vector
+ * words[0] = rm, words[1] = pathname
  * Output: none
  */
 void fn_rm (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
 
-   // Check if no arguemnts were provided
+   // Check if no arguments were provided
    if (words.size() < 2) {
       throw command_error(words[0] + ": missing operand");
    }
@@ -586,24 +603,22 @@ void fn_rm (inode_state& state, const wordvec& words) {
    // Initialize pointer to the cwd's directory
    inode_ptr directoryPath = state.getCwd();
 
-   // wordvec lastPath = words.end());
-   wordvec lastPath;
-   lastPath.push_back(words.back());
-   
-   // Check if a pathname was specified
-   if (words.size() > 2) {
-      // Get the directory path minus the last pathname
-      wordvec tempDir = wordvec(words.begin(), words.end() - 1);
+   // Check to see if each pathname supplied is a single element
+   wordvec pathname = split(words.at(1), "/");
+   if (pathname.size() != 1) {
+      // Determine if the penultimate path is valid
+      pathname = wordvec(words.begin(), words.end());
+      directoryPath = validPath(directoryPath, pathname);
 
-      // Determine if the subpath is valid
-      directoryPath = validPath(directoryPath, tempDir);
+      pathname = split(words.at(1), "/");
    }
    
-   // Check to see if the file/directory exists
+   // Check if the ultimate file/directory exists in the penultimate
+   // path
    map<string, inode_ptr> tempDirents = 
       directoryPath->getContents()->getDirents();
    map<string, inode_ptr>::iterator iter =
-      tempDirents.find(lastPath.at(0));
+      tempDirents.find(pathname.back());
    if (iter == tempDirents.end()) {
       throw command_error(words.at(1) + ": No such file or directory");
    }
@@ -623,12 +638,51 @@ void fn_rm (inode_state& state, const wordvec& words) {
    }
 
    // Remove the file/directory
-   directoryPath->getContents()->remove(lastPath.at(0));
+   directoryPath->getContents()->remove(pathname.back());
 }
 
+/**
+ * Recursive removal using depth-first post order traversal
+ * Input: inode_state obj, wordvec string vector
+ * Output: none
+ */
 void fn_rmr (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+
+   // Initialize pointer to the cwd's directory
+   inode_ptr directoryPath = state.getCwd();
+
+   // Initailize a wordvec that stores the pathname specified
+   wordvec pathname;
+
+   // Check if a pathname was specified (if none was provided, use the
+   // current working directory)
+   if (words.size() != 1) {
+      // Check to see if the pathname supplied is a single element
+      pathname = split(words.at(1), "/");
+      if (pathname.size() != 1)
+      {
+         pathname = wordvec(words.begin(), words.end());
+
+         // Check to see if pathname is valid
+         directoryPath = validPath(directoryPath, pathname);
+
+         // Update pathname for parsing with determineFileType
+         pathname = wordvec(words.begin() + 1, words.end());
+      }
+
+      // Determine the file type of the last path
+      directoryPath = determineFileType(directoryPath, pathname);
+   }
+
+   // Call recursive remove function to remove files
+   recursiveRemove(directoryPath, words);
+
+   // Delete the left and right paths (directories)
+   recursiveRemoveDir(directoryPath);
+   // Delete the root path (directories)
+   recursiveRemoveDir(directoryPath);
 }
 
 /**
@@ -719,7 +773,7 @@ inode_ptr determineFileType(inode_ptr& inodePtr, const wordvec &words) {
    return iter->second;
 }
 
-void printDirectoryContent(inode_ptr &directoryPtr) {
+static void printDirectoryContent(inode_ptr &directoryPtr) {
    // Set a temporary var to class member dirents
    map<string, inode_ptr> tempDirents =
        directoryPtr->getContents()->getDirents();
@@ -752,3 +806,83 @@ void printDirectoryContent(inode_ptr &directoryPtr) {
          << filePath << endl;
    }
 }
+
+void recursiveRemove(inode_ptr& directoryPtr, const wordvec& words) {
+   // Get the directories from directoryPtr
+   map<string, inode_ptr> directories = 
+      directoryPtr->getContents()->getDirents();
+   // Base condition
+   if (directories.size() == 2) {
+      return;
+   }
+
+   // Store a map of all files in current directory
+   map<string, inode_ptr> tempDirents = directories;
+   // Loop through all entires in dirents
+   for (map<string, inode_ptr>::iterator dirIter = tempDirents.begin();
+      dirIter != tempDirents.end(); ++dirIter) {
+      // Initialize tempPair to insert into updatedDirents
+      pair<string, inode_ptr> tempPair;
+
+      // Get file type
+      bool isDirectory = (dirIter->second->getFileType() ==
+         file_type::DIRECTORY_TYPE) ? true: false;
+
+      // Determine if it's a file and remove if it is
+      if (!isDirectory) {
+         directoryPtr->getContents()->remove(dirIter->first);
+         cout << "Remove file" << endl;
+         continue;
+      } // Otherwise, it is a directory
+      else {
+         // Ignore "." and "..""
+         if (dirIter->first == "." || dirIter->first == "..") { 
+            continue;
+         } 
+
+         // Check if a directory still has content
+         if (dirIter->second->getContents()->getDirents().size() != 2) {
+            recursiveRemove(dirIter->second, words);
+         }
+      }
+   }
+}
+
+void recursiveRemoveDir(inode_ptr& directoryPtr) {
+   // Get the directories from directoryPtr
+   map<string, inode_ptr> directories = 
+      directoryPtr->getContents()->getDirents();
+   // Base condition
+   if (directories.size() == 2) {
+      // Delete the directory
+      return;
+   }
+
+   // Store a map of all files in current directory
+   map<string, inode_ptr> tempDirents = directories;
+   // Loop through all entires in dirents
+   for (map<string, inode_ptr>::iterator dirIter = tempDirents.begin();
+      dirIter != tempDirents.end(); ++dirIter) {
+      // Initialize tempPair to insert into updatedDirents
+      pair<string, inode_ptr> tempPair;
+
+      // Ignore "." and ".."
+      if (dirIter->first == "." || dirIter->first == "..") { 
+         continue;
+      } 
+
+      // Store the size of the directory
+      int dirSize = dirIter->second->getContents()->getDirents().size();
+
+      // Check if a directory still has content
+      if (dirSize != 2) {
+         recursiveRemoveDir(dirIter->second);
+      }
+
+      // If a directory is empty, delete it
+      if (dirSize == 2) {
+         directoryPtr->getContents()->remove(dirIter->first);
+      }
+   }
+}
+
