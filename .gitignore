@@ -12,3 +12,9 @@ assignments/asg2-shell-fnptrs-oop/code/yshell
 assignments/asg2-shell-fnptrs-oop/RCS
 assignments/asg2-shell-fnptrs-oop/code/yshell
 assignments/asg2-shell-fnptrs-oop/code/Makefile.dep
+assignments/asg2-shell-fnptrs-oop/code/SCORE.pair
+
+# Assignment 3
+assignments/asg3-listmap-templates/dot.score/SCORE.pair
+assignments/asg3-listmap-templates/code/*.o
+assignments/asg3-listmap-templates/**/RCS
