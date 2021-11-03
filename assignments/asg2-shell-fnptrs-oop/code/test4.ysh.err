@@ -1,0 +1,2 @@
+yshell: this/mkdir/should/error/out: directory does not exist
+yshell: foo/bar: Not a file

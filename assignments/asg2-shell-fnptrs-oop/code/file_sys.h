@@ -1,4 +1,4 @@
-// $Id: file_sys.h,v 1.17 2021-10-30 01:14:20-07 - - $
+// $Id: file_sys.h,v 1.19 2021-10-31 02:01:41-07 - - $
 
 #ifndef __INODE_H__
 #define __INODE_H__
@@ -148,8 +148,6 @@ class plain_file: public base_file {
       virtual void writefile (const wordvec& newdata) override;
       // Helper functions
       virtual wordvec getData() const override;
-      // virtual void addDirectoryContent(const string &filename,
-         // const inode_ptr &inodePtr) override;
 };
 
 // class directory -

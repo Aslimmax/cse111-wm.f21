@@ -1,9 +1,39 @@
-head	1.34;
+head	1.40;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.40
+date	2021.10.31.09.01.41;	author -;	state -;
+branches;
+next	1.39;
+
+1.39
+date	2021.10.31.07.36.17;	author -;	state -;
+branches;
+next	1.38;
+
+1.38
+date	2021.10.31.07.23.10;	author -;	state -;
+branches;
+next	1.37;
+
+1.37
+date	2021.10.31.07.04.16;	author -;	state -;
+branches;
+next	1.36;
+
+1.36
+date	2021.10.31.06.54.52;	author -;	state -;
+branches;
+next	1.35;
+
+1.35
+date	2021.10.31.06.15.21;	author -;	state -;
+branches;
+next	1.34;
 
 1.34
 date	2021.10.30.23.15.19;	author -;	state -;
@@ -180,12 +210,12 @@ desc
 @@
 
 
-1.34
+1.40
 log
 @-
 @
 text
-@// $Id: commands.cpp,v 1.33 2021-10-30 14:21:03-07 - - $
+@// $Id: commands.cpp,v 1.39 2021-10-31 00:36:17-07 - - $
 
 #include "commands.h"
 #include "debug.h"
@@ -293,6 +323,7 @@ void fn_cat (inode_state& state, const wordvec& words) {
       // Remove the extra white space at the end of the string
       outputString.pop_back();
 
+      // Output file contents
       cout << outputString << endl;
    }
 }
@@ -309,18 +340,21 @@ void fn_cd (inode_state& state, const wordvec& words) {
 
    // Check that a directory is specified (if not, use the root
    // directory)
-   if (words.size() == 1) {
+   if (words.size() == 1 || 
+      (words.size() == 2 && 
+      words.at(1).length() == 1 && words.at(1)[0] == '/')) {
       state.setCwd(state.getRoot());
       // Reset the filepath
       state.resetFilePath();
       return;
-   } 
+   }
 
    // Check if more than one operand is given
    if (words.size() > 2) {
       throw command_error(words.at(0) + ": too many operands given");
    }
 
+   // Initialize pointer to the cwd's directory
    inode_ptr directoryPath = state.getCwd();
 
    // Check to see if each pathname supplied is a single element
@@ -386,7 +420,7 @@ void fn_echo (inode_state& state, const wordvec& words) {
 }
 
 /**
- * Exit the shell (STILL NEED TO CONFIGURE)
+ * Exit the shell
  * Input: inode_state obj, wordvec string vector
  * Output: none
  */
@@ -423,12 +457,29 @@ void fn_exit (inode_state& state, const wordvec& words) {
          }
       }
 
+      // Exit with status 127 if a non-numeric argument was passed
       if (!isNumeric) {
          exec::status(127);
-      } else { // DEBUG LATER
+      } else {
          exec::status(atoi(exitArg.c_str()));
       }
    }
+
+   // Initialize new words with only one command, rmr
+   wordvec clearShell;
+   clearShell.push_back("rmr");   
+   // Clear the shell
+   fn_rmr(state, clearShell);
+
+   // Get the directory content of the root
+   map<string, inode_ptr> tempDirents 
+      = state.getRoot()->getContents()->getDirents();
+   // Set the contents to null
+   state.getRoot()->setContents(nullptr);
+   // Set the root to null
+   tempDirents.find("..")->second = nullptr;
+   // Erase root from directory
+   tempDirents.erase("..");
 
    throw ysh_exit();
 }
@@ -453,13 +504,31 @@ void fn_ls (inode_state& state, const wordvec& words) {
    // Initailize a wordvec that stores the pathname specified
    wordvec pathname;
 
+   // Check to see if the root directory was passed
+   if (words.size() != 1) {
+      if (words.at(1).length() == 1 && words.at(1)[0] == '/') {
+         directoryPath = state.getRoot();
+         outputPath = "/:";
+
+         // Print out the pathname of the directory that will have its
+         // contents printed out
+         cout << outputPath << endl;
+
+         // Print out the contents of the directory
+         printDirectoryContent(directoryPath);
+
+         return;
+      }
+   }
+
    // Check if a pathname was specified (if none was provided, use the
    // current working directory)
    if (words.size() != 1) {
       // Check to see if the pathname supplied is a single element
       pathname = split(words.at(1), "/");
-      if (pathname.size() != 1)
-      {
+
+
+      if (pathname.size() != 1) {
          pathname = wordvec(words.begin(), words.end());
 
          // Check to see if pathname is valid
@@ -472,7 +541,7 @@ void fn_ls (inode_state& state, const wordvec& words) {
       // Determine the file type of the last path
       directoryPath = determineFileType(directoryPath, pathname);
 
-      // Update the output path name (NEED TO FIX)
+      // Update the output path name
       outputPath += "/" + words.at(1) + ":";
    } else {
       // Update the output path name
@@ -497,114 +566,18 @@ void fn_ls (inode_state& state, const wordvec& words) {
 /**
  * Similar to ls, but does a recursive depth-first preorder traversal
  * for subdirectories
+ * Input: inode_state obj, wordvec string vector
+ * Output: none
  */
 void fn_lsr (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
 
-  // Initialize pointer to the cwd's directory
+   // Initialize pointer to the cwd's directory
    inode_ptr directoryPath = state.getCwd();
 
-   // Initialize pathname to output depending on what path is specified
-   string outputPath = "";
-
-   // Initailize a wordvec that stores the pathname specified
-   wordvec pathname;
-
-   // Check if a pathname was specified (if none was provided, use the
-   // current working directory)
-   if (words.size() != 1) {
-      // Check to see if the pathname supplied is a single element
-      pathname = split(words.at(1), "/");
-      if (pathname.size() != 1)
-      {
-         pathname = wordvec(words.begin(), words.end());
-
-         // Check to see if pathname is valid
-         directoryPath = validPath(directoryPath, pathname);
-
-         // Update pathname for parsing with determineFileType
-         pathname = wordvec(words.begin() + 1, words.end());
-      }
-
-      // Determine the file type of the last path
-      directoryPath = determineFileType(directoryPath, pathname);
-
-      // Update the output path name (NEED TO FIX)
-      outputPath += "/" + words.at(1) + ":";
-   } else {
-      // Update the output path name
-      outputPath += state.getFilepath() + ":";
-   }
-
-   // Determine if the lastpath name specified is a file
-   if (directoryPath->getFileType() == file_type::PLAIN_TYPE) {
-      // Print out the name of the file and exit
-      cout << pathname.back() << endl;
-      return;
-   }
-
-   // Print out the pathname of the directory that will have its
-   // contents printed out
-   cout << outputPath << endl;
-
-   // Print out the contents of the directory
-   printDirectoryContent(directoryPath);
-
-   /**
-    * RECURSION DRIVER IMPLEMENTATION
-    */
-   
-   // 3. Initialize a list of all directories in the current directory
-   map<string, inode_ptr> directoryList;
-
-   // Get the dirents of the cwd
-   map<string, inode_ptr> tempDirents =
-       directoryPath->getContents()->getDirents();
-   // Loop through dirents and look for all directories in the cwd
-   for (map<string, inode_ptr>::iterator iter = tempDirents.begin();
-        iter != tempDirents.end(); ++iter) {
-      // Get the inodePtr of the current element that iter points to
-      string directoryName = iter->first;
-      inode_ptr inodePtr = iter->second;
-      
-      // Found a directory
-      if (inodePtr->getFileType() == file_type::DIRECTORY_TYPE) {
-         // Make sure they aren't "." and ".."
-         if (directoryName != "." && directoryName != "..") {
-            // Insert directory into directoryList
-            directoryList.insert((*iter));            
-         }
-      }
-   }
-
-   // If the only elements in the directory are "." and "..", break
-   // out of recursive call
-   if (directoryList.size() == 0) {
-      return;
-   }
-
-   // Loop through directoryList and make recursive calls to print
-   // out more elements
-   for (map<string, inode_ptr>::iterator iter = directoryList.begin();
-      iter != directoryList.end(); ++iter) {
-      // Initialize the next path to traverse through
-      wordvec recursivePath = words;
-      // Get the directory name
-      string updatedPath = iter->first;
-
-      // If words only had one argument (lsr) add the next directory
-      // to traverse
-      if (recursivePath.size() == 1) {
-         recursivePath.push_back(updatedPath);
-      } // Otherwise, append the next path to search
-      else {
-         recursivePath.at(1).append("/" + updatedPath);
-      }
-
-      // Make recursive call with updated path
-      fn_lsr(state, recursivePath);
-   }
+   // Call the recursive function
+   recursiveLs(state, directoryPath, words);
 }
 
 /**
@@ -632,9 +605,7 @@ void fn_make (inode_state& state, const wordvec& words) {
       // Determine if the penultimate path is valid
       pathname = wordvec(words.begin(), words.end());
 
-      // cout << "Before" << endl;
       directoryPath = validPath(directoryPath, pathname);
-      // cout << "After" << endl;
 
       pathname = split(words.at(1), "/");
    }
@@ -759,13 +730,14 @@ void fn_pwd (inode_state& state, const wordvec& words) {
  * list of files and subdirectories). If the pathname is a directory,
  * it must be empty.
  * Input: inode_state obj, wordvec string vector
+ * words[0] = rm, words[1] = pathname
  * Output: none
  */
 void fn_rm (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
 
-   // Check if no arguemnts were provided
+   // Check if no arguments were provided
    if (words.size() < 2) {
       throw command_error(words[0] + ": missing operand");
    }
@@ -773,24 +745,22 @@ void fn_rm (inode_state& state, const wordvec& words) {
    // Initialize pointer to the cwd's directory
    inode_ptr directoryPath = state.getCwd();
 
-   // wordvec lastPath = words.end());
-   wordvec lastPath;
-   lastPath.push_back(words.back());
-   
-   // Check if a pathname was specified
-   if (words.size() > 2) {
-      // Get the directory path minus the last pathname
-      wordvec tempDir = wordvec(words.begin(), words.end() - 1);
+   // Check to see if each pathname supplied is a single element
+   wordvec pathname = split(words.at(1), "/");
+   if (pathname.size() != 1) {
+      // Determine if the penultimate path is valid
+      pathname = wordvec(words.begin(), words.end());
+      directoryPath = validPath(directoryPath, pathname);
 
-      // Determine if the subpath is valid
-      directoryPath = validPath(directoryPath, tempDir);
+      pathname = split(words.at(1), "/");
    }
    
-   // Check to see if the file/directory exists
+   // Check if the ultimate file/directory exists in the penultimate
+   // path
    map<string, inode_ptr> tempDirents = 
       directoryPath->getContents()->getDirents();
    map<string, inode_ptr>::iterator iter =
-      tempDirents.find(lastPath.at(0));
+      tempDirents.find(pathname.back());
    if (iter == tempDirents.end()) {
       throw command_error(words.at(1) + ": No such file or directory");
    }
@@ -810,12 +780,51 @@ void fn_rm (inode_state& state, const wordvec& words) {
    }
 
    // Remove the file/directory
-   directoryPath->getContents()->remove(lastPath.at(0));
+   directoryPath->getContents()->remove(pathname.back());
 }
 
+/**
+ * Recursive removal using depth-first post order traversal
+ * Input: inode_state obj, wordvec string vector
+ * Output: none
+ */
 void fn_rmr (inode_state& state, const wordvec& words) {
    DEBUGF ('c', state);
    DEBUGF ('c', words);
+
+   // Initialize pointer to the cwd's directory
+   inode_ptr directoryPath = state.getCwd();
+
+   // Initailize a wordvec that stores the pathname specified
+   wordvec pathname;
+
+   // Check if a pathname was specified (if none was provided, use the
+   // current working directory)
+   if (words.size() != 1) {
+      // Check to see if the pathname supplied is a single element
+      pathname = split(words.at(1), "/");
+      if (pathname.size() != 1)
+      {
+         pathname = wordvec(words.begin(), words.end());
+
+         // Check to see if pathname is valid
+         directoryPath = validPath(directoryPath, pathname);
+
+         // Update pathname for parsing with determineFileType
+         pathname = wordvec(words.begin() + 1, words.end());
+      }
+
+      // Determine the file type of the last path
+      directoryPath = determineFileType(directoryPath, pathname);
+   }
+
+   // Call recursive remove function to remove files
+   recursiveRemove(directoryPath);
+
+   // Delete the left and right paths (directories)
+   recursiveRemoveDir(directoryPath);
+   // Delete the root path (directories)
+   recursiveRemoveDir(directoryPath);
 }
 
 /**
@@ -825,7 +834,6 @@ void fn_rmr (inode_state& state, const wordvec& words) {
  */
 inode_ptr validPath(inode_ptr& directoryPath, const wordvec& words) {
    // Initialize pointer to the cwd
-   // inode_ptr finalCwdPtr = state.getCwd();
    inode_ptr finalCwdPtr = directoryPath;
 
    // Split the pathname into a wordvec
@@ -835,9 +843,6 @@ inode_ptr validPath(inode_ptr& directoryPath, const wordvec& words) {
    if (tempPath.size() != 1) {
       tempPath = wordvec(tempPath.begin(), tempPath.end() - 1);
    }
-
-   // Get the directory path minus the last pathname
-   // tempPath = wordvec(tempPath.begin(), tempPath.end() - 1);
 
    // Loop through each path, throw an error if a path doesn't exist
    for (wordvec::const_iterator wordIter = tempPath.begin();
@@ -854,7 +859,7 @@ inode_ptr validPath(inode_ptr& directoryPath, const wordvec& words) {
       if (dirIter == tempDirents.end())
       { // file wasn't found
          throw command_error(words.at(1) +
-                             ": directory does not exist");
+            ": directory does not exist");
       }
 
       // If the directory was found, check that it is not a file
@@ -876,14 +881,10 @@ inode_ptr validPath(inode_ptr& directoryPath, const wordvec& words) {
 
 /**
  * Determines the file type
- * Input: indoe_ptr to a directory, wordvec with a pathname
+ * Input: inode_ptr to a directory, wordvec with a pathname
  * Output: inode_ptr to the file/directory
  */
 inode_ptr determineFileType(inode_ptr& inodePtr, const wordvec &words) {
-   // Initialize return tuple with the inode_ptr to the file/directory
-   // and the filetype of the tuple
-   // tuple<inode_ptr, file_type> returnTuple;
-   
    // Get the pathname
    wordvec tempPath = split(words.at(0), "/");
 
@@ -898,14 +899,15 @@ inode_ptr determineFileType(inode_ptr& inodePtr, const wordvec &words) {
       throw command_error(words.at(0) + ": No such file or directory");
    }
 
-   // If the element is found, update the returnTuple
-   // get<0>(returnTuple) = iter->second;
-   // get<1>(returnTuple) = iter->second->getFileType();
-
    // Return the ptr to the element
    return iter->second;
 }
 
+/**
+ * Prints out all content in the current working directory
+ * Input: inode_ptr to the current working directory
+ * Output: none
+ */
 void printDirectoryContent(inode_ptr &directoryPtr) {
    // Set a temporary var to class member dirents
    map<string, inode_ptr> tempDirents =
@@ -939,6 +941,570 @@ void printDirectoryContent(inode_ptr &directoryPtr) {
          << filePath << endl;
    }
 }
+
+/**
+ * Recursively removes all files from the given directoryPtr
+ * Input: inode_ptr obj, wordvec string vector
+ * Output: none
+ */
+void recursiveRemove(inode_ptr& directoryPtr) {
+   // Get the directories from directoryPtr
+   map<string, inode_ptr> directories = 
+      directoryPtr->getContents()->getDirents();
+   // Base condition
+   if (directories.size() == 2) {
+      return;
+   }
+
+   // Store a map of all files in current directory
+   map<string, inode_ptr> tempDirents = directories;
+   // Loop through all entires in dirents
+   for (map<string, inode_ptr>::iterator dirIter = tempDirents.begin();
+      dirIter != tempDirents.end(); ++dirIter) {
+      // Initialize tempPair to insert into updatedDirents
+      pair<string, inode_ptr> tempPair;
+
+      // Get file type
+      bool isDirectory = (dirIter->second->getFileType() ==
+         file_type::DIRECTORY_TYPE) ? true: false;
+
+      // Determine if it's a file and remove if it is
+      if (!isDirectory) {
+         directoryPtr->getContents()->remove(dirIter->first);
+         continue;
+      } // Otherwise, it is a directory
+      else {
+         // Ignore "." and "..""
+         if (dirIter->first == "." || dirIter->first == "..") { 
+            continue;
+         } 
+
+         // Check if a directory still has content
+         if (dirIter->second->getContents()->getDirents().size() != 2) {
+            recursiveRemove(dirIter->second);
+         }
+      }
+   }
+}
+
+/**
+ * Recursively removes all directories from the given directoryPtr
+ * Input: inode_ptr to the current working directory
+ * Output: none
+ */
+void recursiveRemoveDir(inode_ptr& directoryPtr) {
+   // Get the directories from directoryPtr
+   map<string, inode_ptr> directories = 
+      directoryPtr->getContents()->getDirents();
+   // Base condition
+   if (directories.size() == 2) {
+      // Delete the directory
+      return;
+   }
+
+   // Store a map of all files in current directory
+   map<string, inode_ptr> tempDirents = directories;
+   // Loop through all entires in dirents
+   for (map<string, inode_ptr>::iterator dirIter = tempDirents.begin();
+      dirIter != tempDirents.end(); ++dirIter) {
+      // Initialize tempPair to insert into updatedDirents
+      pair<string, inode_ptr> tempPair;
+
+      // Ignore "." and ".."
+      if (dirIter->first == "." || dirIter->first == "..") { 
+         continue;
+      } 
+
+      // Store the size of the directory
+      int dirSize = dirIter->second->getContents()->getDirents().size();
+
+      // Check if a directory still has content
+      if (dirSize != 2) {
+         recursiveRemoveDir(dirIter->second);
+      }
+
+      // If a directory is empty, delete it
+      if (dirSize == 2) {
+         directoryPtr->getContents()->remove(dirIter->first);
+      }
+   }
+}
+
+/**
+ * Recursively traverse through all directories and print out contents
+ * Input: inode_ptr to current working directory, wordvec string vector
+ * Output: none
+ */
+void recursiveLs(inode_state& state, inode_ptr& directoryPtr, 
+   const wordvec& words) {
+   // Initialize pathname to output depending on what path is specified
+   string outputPath = "";
+
+   // Initailize a wordvec that stores the pathname specified
+   wordvec pathname;
+
+   // Initialize seen root to false
+   bool rootDir = false;
+
+   // Check to see if the root directory was passed
+   if (words.size() != 1) {
+      if (words.at(1).length() == 1 && words.at(1)[0] == '/') {
+         directoryPtr = state.getRoot();
+         outputPath = "/:";
+         rootDir = true;
+
+         // Print out the pathname of the directory that will have its
+         // contents printed out
+         cout << outputPath << endl;
+
+         // Print out the contents of the directory
+         printDirectoryContent(directoryPtr);
+      }
+   } 
+   // If root directory was not passed
+   if (!rootDir) {
+      // Check if a pathname was specified (if none was provided, use 
+      // the current working directory)
+      if (words.size() != 1) {
+         // Check to see if the pathname supplied is a single element
+         pathname = split(words.at(1), "/");
+         if (pathname.size() != 1)
+         {
+            pathname = wordvec(words.begin(), words.end());
+
+            // Check to see if pathname is valid
+            directoryPtr = validPath(directoryPtr, pathname);
+
+            // Update pathname for parsing with determineFileType
+            pathname = wordvec(words.begin() + 1, words.end());
+         }
+
+         // Determine the file type of the last path
+         directoryPtr = determineFileType(directoryPtr, pathname);
+
+         // Update the output path name 
+         outputPath += "/" + words.at(1) + ":";
+      } else {
+         // Update the output path name
+         outputPath += state.getFilepath() + ":";
+      }
+
+      // Determine if the lastpath name specified is a file
+      if (directoryPtr->getFileType() == file_type::PLAIN_TYPE) {
+         // Print out the name of the file and exit
+         cout << pathname.back() << endl;
+         return;
+      }
+
+      // Print out the pathname of the directory that will have its
+      // contents printed out
+      cout << outputPath << endl;
+
+      // Print out the contents of the directory
+      printDirectoryContent(directoryPtr);
+   }
+
+   // Initialize a list of all directories in the current directory
+   map<string, inode_ptr> directoryList;
+
+   // Get the dirents of the cwd
+   map<string, inode_ptr> tempDirents =
+       directoryPtr->getContents()->getDirents();
+   // Loop through dirents and look for all directories in the cwd
+   for (map<string, inode_ptr>::iterator iter = tempDirents.begin();
+        iter != tempDirents.end(); ++iter) {
+      // Get the inodePtr of the current element that iter points to
+      string directoryName = iter->first;
+      inode_ptr inodePtr = iter->second;
+      
+      // Found a directory
+      if (inodePtr->getFileType() == file_type::DIRECTORY_TYPE) {
+         // Make sure they aren't "." and ".."
+         if (directoryName != "." && directoryName != "..") {
+            // Insert directory into directoryList
+            directoryList.insert((*iter));            
+         }
+      }
+   }
+
+   // If the only elements in the directory are "." and "..", break
+   // out of recursive call
+   if (directoryList.size() == 0) {
+      return;
+   }
+
+   // Loop through directoryList and make recursive calls to print
+   // out more elements
+   for (map<string, inode_ptr>::iterator iter = directoryList.begin();
+      iter != directoryList.end(); ++iter) {
+      // Initialize the next path to traverse through
+      wordvec recursivePath = words;
+      // Get the directory name
+      string updatedPath = iter->first;
+
+      // Check if root directory was passed in
+      if (rootDir) {
+         // Remove "/" from words
+         recursivePath.pop_back();
+      }
+
+      // Reset directoryPtr
+      directoryPtr = state.getRoot();
+      
+      // If words only had one argument (lsr) add the next directory
+      // to traverse
+      if (recursivePath.size() == 1) {
+         recursivePath.push_back(updatedPath);
+      } // Otherwise, append the next path to search
+      else {
+         recursivePath.at(1).append("/" + updatedPath);
+      }
+
+      // Make recursive call with updated path
+      recursiveLs(state, directoryPtr, recursivePath);
+   }
+}
+@
+
+
+1.39
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: commands.cpp,v 1.38 2021-10-31 00:23:10-07 - - $
+d109 1
+d140 1
+d243 1
+d246 1
+a246 1
+      } else { // DEBUG LATER
+d327 1
+a327 1
+      // Update the output path name (NEED TO FIX)
+d362 2
+a363 127
+   // Initialize pathname to output depending on what path is specified
+   string outputPath = "";
+
+   // Initailize a wordvec that stores the pathname specified
+   wordvec pathname;
+
+   bool rootDir = false;
+
+   // Check to see if the root directory was passed
+   if (words.size() != 1) {
+      if (words.at(1).length() == 1 && words.at(1)[0] == '/') {
+         directoryPath = state.getRoot();
+         outputPath = "/:";
+         rootDir = true;
+
+         // Print out the pathname of the directory that will have its
+         // contents printed out
+         cout << outputPath << endl;
+
+         // Print out the contents of the directory
+         printDirectoryContent(directoryPath);
+      }
+   } 
+   // If root directory was not passed
+   if (!rootDir) {
+      // Check if a pathname was specified (if none was provided, use 
+      // the current working directory)
+      if (words.size() != 1) {
+         // Check to see if the pathname supplied is a single element
+         pathname = split(words.at(1), "/");
+         if (pathname.size() != 1)
+         {
+            pathname = wordvec(words.begin(), words.end());
+
+            // Check to see if pathname is valid
+            directoryPath = validPath(directoryPath, pathname);
+
+            // Update pathname for parsing with determineFileType
+            pathname = wordvec(words.begin() + 1, words.end());
+         }
+
+         // Determine the file type of the last path
+         directoryPath = determineFileType(directoryPath, pathname);
+
+         // Update the output path name (NEED TO FIX)
+         outputPath += "/" + words.at(1) + ":";
+      } else {
+         // Update the output path name
+         outputPath += state.getFilepath() + ":";
+         // cout << state.getFilepath() << endl;
+      }
+
+      // Determine if the lastpath name specified is a file
+      if (directoryPath->getFileType() == file_type::PLAIN_TYPE) {
+         // Print out the name of the file and exit
+         cout << pathname.back() << endl;
+         return;
+      }
+
+      // Print out the pathname of the directory that will have its
+      // contents printed out
+      cout << outputPath << endl;
+
+      // Print out the contents of the directory
+      printDirectoryContent(directoryPath);
+   }
+
+   /**
+    * RECURSION DRIVER IMPLEMENTATION
+    */
+   
+   // 3. Initialize a list of all directories in the current directory
+   map<string, inode_ptr> directoryList;
+
+   // Get the dirents of the cwd
+   map<string, inode_ptr> tempDirents =
+       directoryPath->getContents()->getDirents();
+   // Loop through dirents and look for all directories in the cwd
+   for (map<string, inode_ptr>::iterator iter = tempDirents.begin();
+        iter != tempDirents.end(); ++iter) {
+      // Get the inodePtr of the current element that iter points to
+      string directoryName = iter->first;
+      inode_ptr inodePtr = iter->second;
+      
+      // Found a directory
+      if (inodePtr->getFileType() == file_type::DIRECTORY_TYPE) {
+         // Make sure they aren't "." and ".."
+         if (directoryName != "." && directoryName != "..") {
+            // Insert directory into directoryList
+            directoryList.insert((*iter));            
+         }
+      }
+   }
+
+   // If the only elements in the directory are "." and "..", break
+   // out of recursive call
+   if (directoryList.size() == 0) {
+      return;
+   }
+
+   // Loop through directoryList and make recursive calls to print
+   // out more elements
+   for (map<string, inode_ptr>::iterator iter = directoryList.begin();
+      iter != directoryList.end(); ++iter) {
+      // Initialize the next path to traverse through
+      wordvec recursivePath = words;
+      // Get the directory name
+      string updatedPath = iter->first;
+
+      // Check if root directory was passed in
+      if (rootDir) {
+         // Remove "/" from words
+         recursivePath.pop_back();
+      }
+
+      // If words only had one argument (lsr) add the next directory
+      // to traverse
+      if (recursivePath.size() == 1) {
+         recursivePath.push_back(updatedPath);
+      } // Otherwise, append the next path to search
+      else {
+         recursivePath.at(1).append("/" + updatedPath);
+      }
+
+      // Make recursive call with updated path
+      fn_lsr(state, recursivePath);
+   }
+a629 3
+   // Get the directory path minus the last pathname
+   // tempPath = wordvec(tempPath.begin(), tempPath.end() - 1);
+
+d645 1
+a645 1
+                             ": directory does not exist");
+a670 4
+   // Initialize return tuple with the inode_ptr to the file/directory
+   // and the filetype of the tuple
+   // tuple<inode_ptr, file_type> returnTuple;
+   
+a684 4
+   // If the element is found, update the returnTuple
+   // get<0>(returnTuple) = iter->second;
+   // get<1>(returnTuple) = iter->second->getFileType();
+
+d731 1
+a731 1
+ * Output: None
+d776 1
+d816 134
+@
+
+
+1.38
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: commands.cpp,v 1.37 2021-10-31 00:04:16-07 - - $
+d408 1
+d468 6
+a512 1
+      // cout << "Before" << endl;
+a513 1
+      // cout << "After" << endl;
+a889 1
+         cout << "Remove file" << endl;
+@
+
+
+1.37
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: commands.cpp,v 1.35 2021-10-30 23:15:21-07 - - $
+d365 2
+d372 1
+d381 3
+a383 1
+   } else {
+a423 2
+
+
+@
+
+
+1.36
+log
+@-
+@
+text
+@d125 3
+a127 1
+   if (words.size() == 1) {
+d132 1
+a132 1
+   } 
+a287 1
+
+d349 2
+d356 1
+a356 1
+  // Initialize pointer to the cwd's directory
+d365 1
+a365 2
+   // Check if a pathname was specified (if none was provided, use the
+   // current working directory)
+d367 27
+a393 5
+      // Check to see if the pathname supplied is a single element
+      pathname = split(words.at(1), "/");
+      if (pathname.size() != 1)
+      {
+         pathname = wordvec(words.begin(), words.end());
+d395 2
+a396 2
+         // Check to see if pathname is valid
+         directoryPath = validPath(directoryPath, pathname);
+d398 5
+a402 2
+         // Update pathname for parsing with determineFileType
+         pathname = wordvec(words.begin() + 1, words.end());
+d405 6
+a410 2
+      // Determine the file type of the last path
+      directoryPath = determineFileType(directoryPath, pathname);
+d412 3
+a414 6
+      // Update the output path name (NEED TO FIX)
+      outputPath += "/" + words.at(1) + ":";
+   } else {
+      // Update the output path name
+      outputPath += state.getFilepath() + ":";
+   }
+d416 2
+a417 5
+   // Determine if the lastpath name specified is a file
+   if (directoryPath->getFileType() == file_type::PLAIN_TYPE) {
+      // Print out the name of the file and exit
+      cout << pathname.back() << endl;
+      return;
+a419 3
+   // Print out the pathname of the directory that will have its
+   // contents printed out
+   cout << outputPath << endl;
+a420 2
+   // Print out the contents of the directory
+   printDirectoryContent(directoryPath);
+@
+
+
+1.35
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: commands.cpp,v 1.34 2021-10-30 16:15:19-07 - - $
+d285 18
+d308 3
+a310 2
+      if (pathname.size() != 1)
+      {
+a713 1
+   // inode_ptr finalCwdPtr = state.getCwd();
+@
+
+
+1.34
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: commands.cpp,v 1.33 2021-10-30 14:21:03-07 - - $
+d202 1
+a202 1
+ * Exit the shell (STILL NEED TO CONFIGURE)
+d246 16
+d591 1
+d598 1
+a598 1
+   // Check if no arguemnts were provided
+d606 6
+a611 8
+   // wordvec lastPath = words.end());
+   wordvec lastPath;
+   lastPath.push_back(words.back());
+   
+   // Check if a pathname was specified
+   if (words.size() > 2) {
+      // Get the directory path minus the last pathname
+      wordvec tempDir = wordvec(words.begin(), words.end() - 1);
+d613 1
+a613 2
+      // Determine if the subpath is valid
+      directoryPath = validPath(directoryPath, tempDir);
+d616 2
+a617 1
+   // Check to see if the file/directory exists
+d621 1
+a621 1
+      tempDirents.find(lastPath.at(0));
+d641 1
+a641 1
+   directoryPath->getContents()->remove(lastPath.at(0));
+d644 5
+d652 34
+d746 1
+a746 1
+ * Input: indoe_ptr to a directory, wordvec with a pathname
+d776 5
+d814 89
 @
 
 

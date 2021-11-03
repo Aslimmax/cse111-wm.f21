@@ -1,4 +1,4 @@
-// $Id: commands.h,v 1.15 2021-10-30 16:15:19-07 - - $
+// $Id: commands.h,v 1.17 2021-10-31 02:01:41-07 - - $
 
 #ifndef __COMMANDS_H__
 #define __COMMANDS_H__
@@ -45,6 +45,8 @@ void printDirectoryContent(inode_ptr& inodePtr);
 
 void recursiveRemove(inode_ptr& directoryPtr);
 void recursiveRemoveDir(inode_ptr& directoryPtr);
+void recursiveLs(inode_state& state, inode_ptr& directoryPtr, 
+   const wordvec& words);
 
 command_fn find_command_fn(const string &command);
 

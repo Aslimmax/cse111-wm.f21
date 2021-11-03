@@ -1,9 +1,19 @@
-head	1.22;
+head	1.24;
 access;
 symbols;
 locks;
 comment	@// @;
 
+
+1.24
+date	2021.10.31.09.22.12;	author -;	state -;
+branches;
+next	1.23;
+
+1.23
+date	2021.10.31.06.15.21;	author -;	state -;
+branches;
+next	1.22;
 
 1.22
 date	2021.10.30.23.15.19;	author -;	state -;
@@ -120,12 +130,12 @@ desc
 @@
 
 
-1.22
+1.24
 log
 @-
 @
 text
-@// $Id: file_sys.cpp,v 1.21 2021-10-30 14:21:03-07 - - $
+@// $Id: file_sys.cpp,v 1.23 2021-10-30 23:15:21-07 - - $
 
 #include <cassert>
 #include <iostream>
@@ -315,6 +325,15 @@ base_file_ptr inode::getContents() const {
 }
 
 /**
+ * Set base_file_ptr contents
+ * Input: base_file_ptr new contents
+ * Output: none
+ */
+void inode::setContents(base_file_ptr newContents) {
+   contents = newContents;
+}
+
+/**
  * Get file_type of contents
  * Input: None
  * Output: file_type
@@ -322,7 +341,7 @@ base_file_ptr inode::getContents() const {
 file_type inode::getFileType() const {
    return fileType;
 }
-
+
 file_error::file_error (const string& what):
             runtime_error (what) {
 }
@@ -445,11 +464,7 @@ map<string, inode_ptr> directory::getDirents() const {
  */
 size_t directory::size() const {
    size_t size = dirents.size();
-   // size_t size = 0; // initialize size to 0
-   // for (map<string, inode_ptr>::iterator iter = getDirents().begin();
-   //       iter != getDirents().end(); ++iter) {
-   //    size++; // increment the size
-   // }
+
    DEBUGF ('i', "size = " << size);
    // return size;
    return size;
@@ -465,8 +480,25 @@ void directory::remove (const string& filename) {
 
    // Find the file
    map<string, inode_ptr>::iterator iter = dirents.find(filename);
+   
+   // Check if the file is a directory
+   if (iter->second->getFileType() == file_type::DIRECTORY_TYPE) {
+      // Look inside of the directory
+      map<string, inode_ptr> tempDirents = 
+         iter->second->getContents()->getDirents();      
+      // Validate that the directory is empty
+      if (tempDirents.size() != 2) {
+         throw file_error(filename + ": cannot be removed, not empty");
+      }
 
-   dirents.erase(iter);
+      // Set root and cwd to null
+      tempDirents.find(".")->second->setContents(nullptr);
+      tempDirents.find(".")->second = nullptr;
+      tempDirents.erase(".");
+      tempDirents.erase("..");
+   }
+   // Erase the file/directory
+   dirents.erase(iter);   
 }
 
 /**
@@ -477,11 +509,6 @@ void directory::remove (const string& filename) {
 inode_ptr directory::mkdir (const string& dirname) {
    DEBUGF ('i', dirname);
    
-   // Check if a directory or file called dirname already exists
-   // map<string, inode_ptr>::iterator iter = dirents.find(dirname);
-   // if (iter != dirents.end()) {
-   //    return nullptr;
-   // }
    map<string, inode_ptr>::iterator iter;
 
    // Get the inode ptr
@@ -531,6 +558,53 @@ inode_ptr directory::mkfile (const string& filename) {
    return filePtr;
 }
 
+@
+
+
+1.23
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: file_sys.cpp,v 1.22 2021-10-30 16:15:19-07 - - $
+d330 1
+a330 5
+   // size_t size = 0; // initialize size to 0
+   // for (map<string, inode_ptr>::iterator iter = getDirents().begin();
+   //       iter != getDirents().end(); ++iter) {
+   //    size++; // increment the size
+   // }
+a359 1
+      // tempDirents.find(".")->second.reset();
+a363 1
+   // DOUBLE CHECK THIS
+a374 5
+   // Check if a directory or file called dirname already exists
+   // map<string, inode_ptr>::iterator iter = dirents.find(dirname);
+   // if (iter != dirents.end()) {
+   //    return nullptr;
+   // }
+@
+
+
+1.22
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: file_sys.cpp,v 1.21 2021-10-30 14:21:03-07 - - $
+d191 9
+d207 1
+a207 1
+
+d350 21
+a370 2
+
+   dirents.erase(iter);
 @
 
 
