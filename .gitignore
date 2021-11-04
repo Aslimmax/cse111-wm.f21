@@ -18,3 +18,8 @@ assignments/asg2-shell-fnptrs-oop/code/SCORE.pair
 assignments/asg3-listmap-templates/dot.score/SCORE.pair
 assignments/asg3-listmap-templates/code/*.o
 assignments/asg3-listmap-templates/**/RCS
+assignments/asg3-listmap-templates/sample-output/test1.in
+assignments/asg3-listmap-templates/sample-output/test2.in
+assignments/asg3-listmap-templates/sample-output/test3.in
+assignments/asg3-listmap-templates/sample-output/keyvalue
+assignments/asg3-listmap-templates/sample-output/mk.tests
