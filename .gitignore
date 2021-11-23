@@ -23,3 +23,11 @@ assignments/asg3-listmap-templates/sample-output/test2.in
 assignments/asg3-listmap-templates/sample-output/test3.in
 assignments/asg3-listmap-templates/sample-output/keyvalue
 assignments/asg3-listmap-templates/sample-output/mk.tests
+
+# Assignment 4
+assignments/asg4-client-server/wk08a-sockets
+assignments/asg4-client-server/dot.score
+assignments/asg4-client-server/misc
+assignments/asg4-client-server/RCS
+assignments/asg4-client-server/code/RCS
+assignments/asg4-client-server/code/*.o
