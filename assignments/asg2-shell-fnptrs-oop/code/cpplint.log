@@ -1,5 +1,1 @@
-Done processing commands.cpp
-Done processing debug.cpp
-Done processing file_sys.cpp
-Done processing main.cpp
-Done processing util.cpp
+./mk.build: /afs/cats.ucsc.edu/courses/cse111-wm/bin/cpplint.py.perl: /usr/bin/perl: bad interpreter: Permission denied
