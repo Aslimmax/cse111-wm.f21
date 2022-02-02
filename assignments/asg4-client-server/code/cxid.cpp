@@ -1,13 +1,17 @@
 // $Id: cxid.cpp,v 1.10 2021-11-16 16:11:40-08 - - $
+// Andrew Lim (ansclim@ucsc.edu)
+// Cody Yiu   (coyiu@ucsc.edu)
 
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 using namespace std;
 
 #include <libgen.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <sys/stat.h>
 
 #include "debug.h"
 #include "logstream.h"
@@ -39,11 +43,124 @@ void reply_ls (accepted_socket& client_sock, cxi_header& header) {
    header.nbytes = htonl (ls_output.size());
    memset (header.filename, 0, FILENAME_SIZE);
    DEBUGF ('h', "sending header " << header);
+   // Send header object back to client
    send_packet (client_sock, &header, sizeof header);
+   // Send payload object back to client
    send_packet (client_sock, ls_output.c_str(), ls_output.size());
    DEBUGF ('h', "sent " << ls_output.size() << " bytes");
 }
 
+void reply_get (accepted_socket& client_sock, cxi_header& header) {
+   // Process the filename from the header and get its information with
+   // stat
+   const char* filename = header.filename;
+   struct stat stat_buf;
+   int status = stat (filename, &stat_buf);
+
+   // Check if the filename passed exists
+   if (status != 0) {
+      // Output error message to server
+      outlog << "get " << filename << ": " << strerror (errno) << endl;
+      header.command = cxi_command::NAK;
+      header.nbytes = htonl (errno);
+      // Send header to client with error fields
+      send_packet (client_sock, &header, sizeof header);
+      return;
+   }
+   int filesize = stat_buf.st_size;
+   // Output a success error message to the server
+   outlog << "file '" << filename << "' of size " << filesize 
+      << " bytes exists" << endl;
+   
+   // At this point, the filename passed exists in the server. We can 
+   // process and send the new header and potential payload back
+   // to the client
+
+   // Populate header fields to send back to the client
+   header.command = cxi_command::FILEOUT; 
+   header.nbytes = htonl (filesize);      
+   // Clear header filename before populating
+   // memset (header.filename, 0, FILENAME_SIZE);
+
+   DEBUGF ('h', "sending header in reply_get " << header);
+   // Send header object back to client
+   send_packet (client_sock, &header, sizeof header);   
+
+   // If the file is empty, don't send a payload back to the client
+   if (filesize != 0) {
+      // Initialize a buffer to store the contents of filename
+      char* buffer = new char [filesize];
+
+      // Read filename's contents into buffer
+      bool fileStatus = true;
+      readFile (buffer, filename, filesize, fileStatus);
+
+      // Send payload object back to client
+      send_packet (client_sock, buffer, filesize);
+
+      // Free memory
+      delete[] buffer;   
+   }
+
+   DEBUGF ('h', "sent " << filesize << "bytes");
+}
+
+void reply_rm (accepted_socket& client_sock, cxi_header& header) {
+   // Process the filename from header
+   const char* filename = header.filename;
+   struct stat stat_buf;
+   int status = stat (filename, &stat_buf);
+
+   // Check if filename exists in the server
+   if (status != 0) {
+      // Output error message to server
+      outlog << "rm " << filename << ": " << strerror(errno) << endl;
+      header.command = cxi_command::NAK;
+      header.nbytes = htonl (errno);
+      // Send header to client with error fields
+      send_packet (client_sock, &header, sizeof header);
+      return;
+   }
+
+   // Remove the file from the server
+   unlink(filename);
+   outlog << filename << ": successfully deleted" << endl;
+
+   // Set success header and send header back to the client
+   header.command = cxi_command::ACK;
+   send_packet (client_sock, &header, sizeof header);
+}
+
+void reply_put (accepted_socket& client_sock, cxi_header& header) {
+   // Initialize filename passed from header   
+   string filename(header.filename);
+
+   // Initialize a buffer to store the contents of filename
+   char* buffer = new char [header.nbytes];
+
+   // Check if a payload was sent from the client
+   if (header.nbytes > 0) {
+      recv_packet (client_sock, buffer, ntohl(header.nbytes));
+   }
+
+   // Create the file on the server
+   bool fileStatus = true;
+   writeFile(buffer, filename, ntohl(header.nbytes), fileStatus);
+
+   // Free memory
+   delete[] buffer;
+
+   // Send packet back to client
+   if (fileStatus) {      
+      outlog << filename << ": successfully created" << endl;
+      header.command = cxi_command::ACK;
+   } else {
+      outlog << filename << ": " << strerror (errno) << endl;
+      header.command = cxi_command::NAK;
+      header.nbytes = htonl (errno);
+   }
+   send_packet (client_sock, &header, sizeof header);
+}
 
 void run_server (accepted_socket& client_sock) {
    outlog.execname (outlog.execname() + "*");
@@ -53,9 +170,19 @@ void run_server (accepted_socket& client_sock) {
          cxi_header header; 
          recv_packet (client_sock, &header, sizeof header);
          DEBUGF ('h', "received header " << header);
+         // TODO(ansclim, coyiu): Add additional cases
          switch (header.command) {
             case cxi_command::LS: 
                reply_ls (client_sock, header);
+               break;
+            case cxi_command::GET:
+               reply_get (client_sock, header);
+               break;
+            case cxi_command::PUT:
+               reply_put (client_sock, header);
+               break;
+            case cxi_command::RM:
+               reply_rm (client_sock, header);
                break;
             default:
                outlog << "invalid client header:" << header << endl;

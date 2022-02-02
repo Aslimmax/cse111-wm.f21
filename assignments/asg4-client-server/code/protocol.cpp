@@ -1,10 +1,13 @@
 // $Id: protocol.cpp,v 1.17 2021-05-18 01:32:29-07 - - $
+// Andrew Lim (ansclim@ucsc.edu)
+// Cody Yiu   (coyiu@ucsc.edu)
 
 #include <iomanip>
 #include <iostream>
 #include <limits>
 #include <string>
 #include <unordered_map>
+#include <fstream>
 using namespace std;
 
 #include "protocol.h"
@@ -50,6 +53,43 @@ void recv_packet (base_socket& socket, void* buffer, size_t bufsize) {
       bufptr += nbytes;
       ntorecv -= nbytes;
    }while (ntorecv > 0);
+}
+
+void readFile (char*& buffer, const char* filename, int filesize, 
+   bool &success) {
+   // Initialize an ifstream obj for filename
+   ifstream is(filename, ifstream::binary);
+
+   // Check if is was able to open filename
+   if (is.is_open()) {
+      // Read data as a block
+      is.read (buffer, filesize);     
+      success = true;  
+   } else {
+      success = false;
+   }
+
+   // Close input stream
+   is.close();
+}
+
+void writeFile (void* buffer, string filename, size_t bufsize, 
+   bool &success) {
+   char* bufptr = static_cast<char*>(buffer);
+   // Initialize an ofstream obj for filename
+   ofstream os(filename, ofstream::binary);
+
+   // Check if os was able to link to filename
+   if (os.is_open()) {
+      // Write the data from buffer into filename
+      os.write (bufptr, bufsize);
+      success = true;      
+   } else {
+      success = false;
+   }
+
+   // Close output stream
+   os.close();
 }
 
 

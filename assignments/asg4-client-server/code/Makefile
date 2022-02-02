@@ -1,4 +1,6 @@
 # $Id: Makefile,v 1.22 2021-11-08 00:01:44-08 - - $
+# Andrew Lim (ansclim@ucsc.edu)
+# Cody Yiu   (coyiu@ucsc.edu)
 
 MKFILE      = Makefile
 DEPFILE     = ${MKFILE}.dep

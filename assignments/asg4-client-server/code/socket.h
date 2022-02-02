@@ -1,4 +1,6 @@
 // $Id: socket.h,v 1.4 2021-11-16 13:28:07-08 - - $
+// Andrew Lim (ansclim@ucsc.edu)
+// Cody Yiu   (coyiu@ucsc.edu)
 
 #ifndef __SOCKET_H__
 #define __SOCKET_H__

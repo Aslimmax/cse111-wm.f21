@@ -1,4 +1,6 @@
 // $Id: debug.cpp,v 1.3 2021-11-08 00:01:44-08 - - $
+// Andrew Lim (ansclim@ucsc.edu)
+// Cody Yiu   (coyiu@ucsc.edu)
 
 #include <climits>
 #include <iostream>

@@ -1,4 +1,6 @@
 // $Id: protocol.h,v 1.12 2021-05-18 01:32:29-07 - - $
+// Andrew Lim (ansclim@ucsc.edu)
+// Cody Yiu   (coyiu@ucsc.edu)
 
 #ifndef __PROTOCOL__H__
 #define __PROTOCOL__H__
@@ -27,6 +29,12 @@ void send_packet (base_socket& socket,
                   const void* buffer, size_t bufsize);
 
 void recv_packet (base_socket& socket, void* buffer, size_t bufsize);
+
+void readFile (char*& buffer, const char* filename, int filesize, 
+   bool &success);
+
+void writeFile (void* buffer, string filename, size_t bufsize, 
+   bool &success);
 
 ostream& operator<< (ostream& out, const cxi_header& header);
 

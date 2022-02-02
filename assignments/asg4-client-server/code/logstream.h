@@ -1,4 +1,6 @@
 // $Id: logstream.h,v 1.6 2021-02-24 15:29:53-08 - - $
+// Andrew Lim (ansclim@ucsc.edu)
+// Cody Yiu   (coyiu@ucsc.edu)
 
 //
 // class logstream
